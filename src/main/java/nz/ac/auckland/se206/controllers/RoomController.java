@@ -3,12 +3,12 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameStateContext;
+import nz.ac.auckland.se206.Timer;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
@@ -22,11 +22,10 @@ public class RoomController {
   @FXML private Rectangle rectPerson2;
   @FXML private Rectangle rectPerson3;
   @FXML private Rectangle rectWaitress;
-  @FXML private Label lblProfession;
-  @FXML private Button btnGuess;
 
   private static boolean isFirstTimeInit = true;
   private static GameStateContext context = new GameStateContext();
+  @FXML private Label lblTimer;
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -34,13 +33,14 @@ public class RoomController {
    */
   @FXML
   public void initialize() {
+    Timer timer = Timer.getInstance(120);
+    lblTimer.setText(timer.getLabel().getText());
+    lblTimer.textProperty().bind(timer.getLabel().textProperty());
+    timer.start();
     if (isFirstTimeInit) {
-      TextToSpeech.speak(
-          "Chat with the three customers, and guess who is the "
-              + context.getProfessionToGuess());
+      TextToSpeech.speak("Click on characters to learn their perspective. ");
       isFirstTimeInit = false;
     }
-    lblProfession.setText(context.getProfessionToGuess());
   }
 
   /**
@@ -72,7 +72,9 @@ public class RoomController {
   @FXML
   private void handleRectangleClick(MouseEvent event) throws IOException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
-    context.handleRectangleClick(event, clickedRectangle.getId());
+    String rectangleId = clickedRectangle.getId();
+
+    context.handleRectangleClick(event, rectangleId);
   }
 
   /**

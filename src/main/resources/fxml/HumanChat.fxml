@@ -13,7 +13,7 @@
   <children>
       <ImageView fitHeight="650.0" fitWidth="1006.0" layoutX="-3.0" layoutY="-109.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/dinner_resize.png" />
+            <Image url="@../images/mayor.png" />
          </image>
       </ImageView>
     <TextArea fx:id="txtaChat" editable="false" layoutX="-2.0" layoutY="497.0" prefHeight="154.0" prefWidth="1006.0" wrapText="true" />

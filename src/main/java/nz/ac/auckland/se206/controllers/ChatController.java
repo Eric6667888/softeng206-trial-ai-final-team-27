@@ -3,21 +3,28 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
-import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest.Model;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
 import nz.ac.auckland.apiproxy.chat.openai.Choice;
-import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Timer;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
  * Controller class for the chat view. Handles user interactions and communication with the GPT
@@ -28,6 +35,9 @@ public class ChatController {
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
+  @FXML private Button btnViewImage;
+  @FXML private Label lblTimer;
+  @FXML private Label fbLabel;
 
   private ChatCompletionRequest chatCompletionRequest;
   private String profession;
@@ -39,7 +49,10 @@ public class ChatController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-    // Any required initialization code can be placed here
+    Timer timer = Timer.getInstance(120);
+    lblTimer.setText(timer.getLabel().getText());
+    lblTimer.textProperty().bind(timer.getLabel().textProperty());
+    timer.start();
   }
 
   /**
@@ -60,11 +73,22 @@ public class ChatController {
    */
   public void setProfession(String profession) {
     this.profession = profession;
+
     try {
-      ApiProxyConfig config = ApiProxyConfig.readConfig();
-      chatCompletionRequest =
-          new ChatCompletionRequest(config).setN(1).setModel(Model.GPT_5_NANO).setMaxTokens(2000);
-      runGpt(new ChatMessage("system", getSystemPrompt()));
+      ConversationManager manager = ConversationManager.getInstance();
+
+      // Get or create chat request for this profession
+      chatCompletionRequest = manager.getChatRequest(profession);
+
+      // Restore chat history to UI
+      txtaChat.setText(manager.getChatHistory(profession));
+
+      // Send introduction only if first time
+      if (!manager.hasIntroduced(profession)) {
+        runGpt(new ChatMessage("system", getSystemPrompt()));
+        manager.markAsIntroduced(profession);
+      }
+
     } catch (ApiProxyException e) {
       e.printStackTrace();
     }
@@ -76,7 +100,11 @@ public class ChatController {
    * @param msg the chat message to append
    */
   private void appendChatMessage(ChatMessage msg) {
-    txtaChat.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
+    String messageText = msg.getRole() + ": " + msg.getContent() + "\n\n";
+    txtaChat.appendText(messageText);
+
+    // Store in conversation manager
+    ConversationManager.getInstance().appendToHistory(profession, messageText);
   }
 
   /**
@@ -86,19 +114,41 @@ public class ChatController {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+  private void runGpt(ChatMessage msg) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
-    try {
-      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      Choice result = chatCompletionResult.getChoices().iterator().next();
-      chatCompletionRequest.addMessage(result.getChatMessage());
-      appendChatMessage(result.getChatMessage());
-      TextToSpeech.speak(result.getChatMessage().getContent());
-      return result.getChatMessage();
-    } catch (ApiProxyException e) {
-      e.printStackTrace();
-      return null;
-    }
+    Task<ChatMessage> gptTask =
+        new Task<ChatMessage>() {
+          @Override
+          protected ChatMessage call() throws Exception {
+            chatCompletionRequest.addMessage(msg);
+            ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+            Choice result = chatCompletionResult.getChoices().iterator().next();
+            chatCompletionRequest.addMessage(result.getChatMessage());
+            return result.getChatMessage();
+          }
+
+          @Override
+          protected void succeeded() {
+            Platform.runLater(
+                () -> {
+                  ChatMessage response = getValue();
+                  appendChatMessage(response);
+                });
+          }
+
+          @Override
+          protected void failed() {
+            Platform.runLater(
+                () -> {
+                  System.err.println("ChatGPT API call failed: " + getException().getMessage());
+                  getException().printStackTrace();
+                });
+          }
+        };
+
+    Thread thread = new Thread(gptTask);
+    thread.setDaemon(true);
+    thread.start();
   }
 
   /**
@@ -114,10 +164,48 @@ public class ChatController {
     if (message.isEmpty()) {
       return;
     }
+
     txtInput.clear();
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
-    runGpt(msg);
+
+    btnSend.setDisable(true);
+
+    Task<ChatMessage> gptTask =
+        new Task<ChatMessage>() {
+          @Override
+          protected ChatMessage call() throws Exception {
+            chatCompletionRequest.addMessage(msg);
+            ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+            Choice result = chatCompletionResult.getChoices().iterator().next();
+            chatCompletionRequest.addMessage(result.getChatMessage());
+            return result.getChatMessage();
+          }
+
+          @Override
+          protected void succeeded() {
+            Platform.runLater(
+                () -> {
+                  ChatMessage response = getValue();
+                  appendChatMessage(response);
+                  btnSend.setDisable(false);
+                });
+          }
+
+          @Override
+          protected void failed() {
+            Platform.runLater(
+                () -> {
+                  btnSend.setDisable(false);
+                  System.err.println("ChatGPT API call failed: " + getException().getMessage());
+                  getException().printStackTrace();
+                });
+          }
+        };
+
+    Thread thread = new Thread(gptTask);
+    thread.setDaemon(true);
+    thread.start();
   }
 
   /**
@@ -130,5 +218,31 @@ public class ChatController {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     App.setRoot("room");
+  }
+
+  @FXML
+  private void onViewImage(ActionEvent event) {
+    try {
+
+      Stage imageStage = new Stage();
+      imageStage.setTitle("Evidence");
+      imageStage.initModality(Modality.APPLICATION_MODAL);
+
+      Image image = new Image(getClass().getResourceAsStream("/images/evidence.png"));
+      ImageView imageView = new ImageView(image);
+      imageView.setFitWidth(400);
+      imageView.setFitHeight(300);
+      imageView.setPreserveRatio(true);
+
+      VBox layout = new VBox();
+      layout.getChildren().add(imageView);
+
+      Scene scene = new Scene(layout);
+      imageStage.setScene(scene);
+      imageStage.show();
+
+    } catch (Exception e) {
+      System.err.println("Error showing image: " + e.getMessage());
+    }
   }
 }

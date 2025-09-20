@@ -13,7 +13,7 @@
   <children>
       <ImageView fitHeight="650.0" fitWidth="1006.0" layoutX="-3.0" layoutY="-109.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/dinner_resize.png" />
+            <Image url="@../images/aiwit.png" />
          </image>
       </ImageView>
     <TextArea fx:id="txtaChat" editable="false" layoutX="-2.0" layoutY="497.0" prefHeight="154.0" prefWidth="1006.0" wrapText="true" />
@@ -23,6 +23,12 @@
       <Label fx:id="lblTimer" layoutX="14.0" layoutY="18.0" text="Label" textFill="WHITE">
          <font>
             <Font size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnViewImage" layoutX="572.0" layoutY="375.0" mnemonicParsing="false" onAction="#onViewImage" rotate="6.3" text="View Image" />
+      <Label fx:id="fbLabel" layoutX="390.0" layoutY="17.0" text="Click the button to view evidence" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
          </font>
       </Label>
   </children>
