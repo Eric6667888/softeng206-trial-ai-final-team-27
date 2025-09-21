@@ -14,6 +14,7 @@ import javafx.util.Duration;
 public final class VerdictTimer {
   private final IntegerProperty secondsLeft = new SimpleIntegerProperty();
   private final Timeline timeline = new Timeline();
+  private boolean running = false;
   private Runnable onExpire = () -> {};
 
   public VerdictTimer(int totalSeconds) {
@@ -35,22 +36,32 @@ public final class VerdictTimer {
   }
 
   public void reset(int totalSeconds) {
-    secondsLeft.set(totalSeconds);
+    timeline.stop();
+    running = false;
+    secondsLeft.set(Math.max(0, totalSeconds));
   }
 
   public void start() {
+    if (secondsLeft.get() <= 0) {
+      return; // Do not start if time is already up
+    }
     timeline.playFromStart();
   }
 
   public void stop() {
+    running = false;
     timeline.stop();
   }
 
   private void tick() {
+    if (!running) {
+      return; // Skip the first tick to ensure accurate timing
+    }
     int s = secondsLeft.get();
-    if (s <= 0) {
+    if (s > 1) {
       secondsLeft.set(s - 1);
-    } else {
+    } else if (s == 1) {
+      secondsLeft.set(0);
       stop();
       onExpire.run();
     }

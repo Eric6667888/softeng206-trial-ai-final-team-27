@@ -42,17 +42,15 @@ public class RoomController {
         .textProperty()
         .bind(
             Bindings.createStringBinding(
-                () ->
-                    String.format(
-                        "%02d:%02d",
-                        session.getRoundTimer().getSecondsLeft() / 60,
-                        session.getRoundTimer().getSecondsLeft() % 60),
+                () -> format(session.getRoundTimer().getSecondsLeft()),
                 session.getRoundTimer().secondsLeftProperty()));
 
     if (isFirstTimeInit) {
       TextToSpeech.speak("Click on characters to learn their perspective. ");
       isFirstTimeInit = false;
     }
+
+    session.getRoundTimer().reset(300);
 
     // Start the round timer and set up the end-of-round behavior (5 minutes, then 1 minute)
     session.startRound(
@@ -78,6 +76,12 @@ public class RoomController {
                 }
               });
         });
+  }
+
+  private static String format(int totalSec) {
+    int minutes = totalSec / 60;
+    int seconds = totalSec % 60;
+    return String.format("%02d:%02d", minutes, seconds);
   }
 
   /**

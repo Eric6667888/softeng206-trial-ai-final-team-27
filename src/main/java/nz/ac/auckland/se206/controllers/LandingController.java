@@ -16,7 +16,13 @@ public class LandingController {
 
   @FXML
   private void onPlay(ActionEvent event) throws ApiProxyException, IOException {
-    GameStateContext.setSession(new GameSession());
+    GameSession old = GameStateContext.getSession();
+    if (old != null) {
+      old.stopAll();
+    }
+    GameSession session = new GameSession();
+    GameStateContext.setSession(session);
+    session.getRoundTimer().reset(300);
     App.setRoot("room");
   }
 }
