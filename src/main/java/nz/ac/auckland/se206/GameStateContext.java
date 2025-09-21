@@ -28,6 +28,7 @@ public class GameStateContext {
   private final Guessing guessingState;
   private final GameOver gameOverState;
   private GameState gameState;
+  private static GameSession session;
 
   /** Constructs a new GameStateContext and initializes the game states and professions. */
   public GameStateContext() {
@@ -153,5 +154,17 @@ public class GameStateContext {
    */
   public void handleGuessClick() throws IOException {
     gameState.handleGuessClick();
+  }
+
+  public static void setSession(GameSession s) {
+    session = s;
+  }
+
+  public static GameSession getSession() {
+    return session;
+  }
+
+  public static void clearSession() {
+    session = null;
   }
 }

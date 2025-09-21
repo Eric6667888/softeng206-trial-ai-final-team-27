@@ -1,14 +1,15 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
-import nz.ac.auckland.se206.Timer;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
@@ -33,13 +34,28 @@ public class RoomController {
    */
   @FXML
   public void initialize() {
-    Timer timer = Timer.getInstance(120);
-    lblTimer.setText(timer.getLabel().getText());
-    lblTimer.textProperty().bind(timer.getLabel().textProperty());
-    timer.start();
+    GameSession session = GameStateContext.getSession();
+    lblTimer.textProperty().unbind();
+    lblTimer
+        .textProperty()
+        .bind(
+            Bindings.createStringBinding(
+                () ->
+                    String.format(
+                        "%02d:%02d",
+                        session.getRoundTimer().getSecondsLeft() / 60,
+                        session.getRoundTimer().getSecondsLeft() % 60),
+                session.getRoundTimer().secondsLeftProperty()));
+
     if (isFirstTimeInit) {
       TextToSpeech.speak("Click on characters to learn their perspective. ");
       isFirstTimeInit = false;
+    }
+
+    if (!session.getRoundTimer().isRunning()
+        && session.getRoundTimer().getSecondsLeft() > 0
+        && session.isRoundStarted()) {
+      session.getRoundTimer().start();
     }
   }
 
