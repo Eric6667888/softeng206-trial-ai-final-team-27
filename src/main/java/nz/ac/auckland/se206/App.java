@@ -56,8 +56,27 @@ public class App extends Application {
    * @param profession the profession to set in the chat controller
    * @throws IOException if the FXML file is not found
    */
-  public static void openChat(MouseEvent event, String profession) throws IOException {
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/chat.fxml"));
+  public static void openChat(MouseEvent event, String profession, String rectangleId)
+      throws IOException {
+    String sceneName;
+    switch (rectangleId) {
+      case "rectPerson1":
+        sceneName = "chat";
+        profession = "AI defendant";
+        break;
+      case "rectPerson2":
+        sceneName = "AIWitnessChat";
+        profession = "AI witness";
+        break;
+      case "rectPerson3":
+        sceneName = "HumanChat";
+        profession = "Human witness";
+        break;
+      default:
+        sceneName = "chat";
+        break;
+    }
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + sceneName + ".fxml"));
     Parent root = loader.load();
 
     ChatController chatController = loader.getController();
@@ -77,7 +96,7 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    Parent root = loadFxml("room");
+    Parent root = loadFxml("landing");
     scene = new Scene(root);
     stage.setScene(scene);
     stage.show();

@@ -142,6 +142,7 @@ public class GameStateContext {
    * @throws IOException if there is an I/O error
    */
   public void handleRectangleClick(MouseEvent event, String rectangleId) throws IOException {
+
     gameState.handleRectangleClick(event, rectangleId);
   }
 
