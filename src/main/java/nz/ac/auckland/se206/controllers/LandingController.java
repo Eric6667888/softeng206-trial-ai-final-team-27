@@ -28,7 +28,7 @@ public class LandingController {
                 () -> {
                   try {
                     App.setRoot("MakeGuess");
-                    session.startVerdictWindow(
+                    session.transitionToVerdict(
                         () ->
                             Platform.runLater(
                                 () -> {
@@ -43,7 +43,7 @@ public class LandingController {
                   }
                 }));
     GameStateContext.setSession(session);
-    session.resetAndStartNewRound(5); // Reset timer to 5 minutes
+    session.resetAndStartNewRound(300); // Reset timer to 5 minutes
     // If you want to test the timer, only change the line above
     App.setRoot("room");
   }

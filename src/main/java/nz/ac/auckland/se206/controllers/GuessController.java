@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -17,13 +18,26 @@ public class GuessController {
   public void initialize() throws ApiProxyException {
     GameSession session = GameStateContext.getSession();
 
+    if (session.getVerdictTimer() == null) {
+      session.startVerdictWindow(
+          () ->
+              Platform.runLater(
+                  () -> {
+                    try {
+                      App.setRoot("NotGuilty");
+                    } catch (IOException e) {
+                      e.printStackTrace();
+                    }
+                  }));
+    }
+
     lblTimer.textProperty().unbind();
     lblTimer
         .textProperty()
         .bind(
             Bindings.createStringBinding(
-                () -> format(session.getRoundTimer().getSecondsLeft()),
-                session.getRoundTimer().secondsLeftProperty()));
+                () -> format(session.getVerdictTimer().getSecondsLeft()),
+                session.getVerdictTimer().secondsLeftProperty()));
   }
 
   @FXML
