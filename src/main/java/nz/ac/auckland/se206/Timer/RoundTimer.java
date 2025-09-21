@@ -47,12 +47,10 @@ public final class RoundTimer {
 
   public void start() {
     if (secondsLeft.get() <= 0) {
-      System.out.println("[RoundTimer.start] secondsLeft <= 0, not starting");
       return; // Do not start if time is already up
     }
 
     running = true;
-    System.out.println("[RoundTimer.start] start playing, seconds=" + secondsLeft.get());
     timeline.playFromStart();
   }
 
@@ -66,7 +64,6 @@ public final class RoundTimer {
       return; // Skip the first tick to ensure accurate timing
     }
     int s = secondsLeft.get();
-    System.out.println("tick, secondsLeft=" + s);
     if (s > 1) {
       secondsLeft.set(s - 1);
     } else if (s == 1) {
