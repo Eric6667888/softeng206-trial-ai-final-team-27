@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,8 +22,29 @@ public class LandingController {
       old.stopAll();
     }
     GameSession session = new GameSession();
+    session.configureRoundExpire(
+        () ->
+            Platform.runLater(
+                () -> {
+                  try {
+                    App.setRoot("MakeGuess");
+                    session.startVerdictWindow(
+                        () ->
+                            Platform.runLater(
+                                () -> {
+                                  try {
+                                    App.setRoot("NotGuilty");
+                                  } catch (IOException e) {
+                                    e.printStackTrace();
+                                  }
+                                }));
+                  } catch (IOException e) {
+                    e.printStackTrace();
+                  }
+                }));
     GameStateContext.setSession(session);
-    session.getRoundTimer().reset(300);
+    session.resetAndStartNewRound(5); // Reset timer to 5 minutes
+    // If you want to test the timer, only change the line above
     App.setRoot("room");
   }
 }

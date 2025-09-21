@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -42,7 +40,11 @@ public class RoomController {
         .textProperty()
         .bind(
             Bindings.createStringBinding(
-                () -> format(session.getRoundTimer().getSecondsLeft()),
+                () ->
+                    String.format(
+                        "%02d:%02d",
+                        session.getRoundTimer().getSecondsLeft() / 60,
+                        session.getRoundTimer().getSecondsLeft() % 60),
                 session.getRoundTimer().secondsLeftProperty()));
 
     if (isFirstTimeInit) {
@@ -50,38 +52,11 @@ public class RoomController {
       isFirstTimeInit = false;
     }
 
-    session.getRoundTimer().reset(300);
-
-    // Start the round timer and set up the end-of-round behavior (5 minutes, then 1 minute)
-    session.startRound(
-        () -> {
-          Platform.runLater(
-              () -> {
-                try {
-                  App.setRoot("MakeGuess");
-                  session.startVerdictWindow(
-                      () -> {
-                        Platform.runLater(
-                            () -> {
-                              try {
-                                App.setRoot("NotGuilty");
-                              } catch (IOException e) {
-                                e.printStackTrace();
-                              }
-                            });
-                      });
-
-                } catch (IOException e) {
-                  e.printStackTrace();
-                }
-              });
-        });
-  }
-
-  private static String format(int totalSec) {
-    int minutes = totalSec / 60;
-    int seconds = totalSec % 60;
-    return String.format("%02d:%02d", minutes, seconds);
+    if (!session.getRoundTimer().isRunning()
+        && session.getRoundTimer().getSecondsLeft() > 0
+        && session.isRoundStarted()) {
+      session.getRoundTimer().start();
+    }
   }
 
   /**

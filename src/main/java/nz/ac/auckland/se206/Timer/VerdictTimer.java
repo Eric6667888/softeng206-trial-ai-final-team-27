@@ -45,6 +45,7 @@ public final class VerdictTimer {
     if (secondsLeft.get() <= 0) {
       return; // Do not start if time is already up
     }
+    running = true;
     timeline.playFromStart();
   }
 
