@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.Timer;
+package nz.ac.auckland.se206.timer;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +24,8 @@ import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
 import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.Timer;
+import nz.ac.auckland.se206.GameSession;
+import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 
 /**
@@ -49,10 +51,22 @@ public class ChatController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-    Timer timer = Timer.getInstance(120);
-    lblTimer.setText(timer.getLabel().getText());
-    lblTimer.textProperty().bind(timer.getLabel().textProperty());
-    timer.start();
+    GameSession session = GameStateContext.getSession();
+    lblTimer.textProperty().unbind();
+    lblTimer
+        .textProperty()
+        .bind(
+            Bindings.createStringBinding(
+                () -> format(session.getRoundTimer().getSecondsLeft()),
+                session.getRoundTimer().secondsLeftProperty()));
+
+    session.getRoundTimer().start();
+  }
+
+  private static String format(int totalSeconds) {
+    int minutes = totalSeconds / 60;
+    int seconds = totalSeconds % 60;
+    return String.format("%02d:%02d", minutes, seconds);
   }
 
   /**
