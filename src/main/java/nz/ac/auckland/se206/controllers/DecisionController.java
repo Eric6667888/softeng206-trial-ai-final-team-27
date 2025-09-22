@@ -9,11 +9,10 @@ import nz.ac.auckland.se206.GameStateContext;
 public class DecisionController {
   @FXML
   public void onReturnClicked() throws IOException {
-    GameSession session = GameStateContext.getSession();
-    if (session != null) {
-      session.stopAll();
+    GameSession s = GameStateContext.getSession();
+    if (s != null) {
+      s.stopAll();
     }
-    GameStateContext.clearSession();
     App.setRoot("landing");
   }
 }

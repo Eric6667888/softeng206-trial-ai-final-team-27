@@ -17,18 +17,16 @@ public class LandingController {
 
   @FXML
   private void onPlay(ActionEvent event) throws ApiProxyException, IOException {
-    GameSession old = GameStateContext.getSession();
-    if (old != null) {
-      old.stopAll();
-    }
-    GameSession session = new GameSession();
-    session.configureRoundExpire(
+    GameSession s = GameStateContext.getSession();
+
+    s.resetAndStartNewRound(300); // If you want to test the timer, only change the line above
+    s.configureRoundExpire(
         () ->
             Platform.runLater(
                 () -> {
                   try {
                     App.setRoot("MakeGuess");
-                    session.transitionToVerdict(
+                    s.transitionToVerdict(
                         () ->
                             Platform.runLater(
                                 () -> {
@@ -42,9 +40,7 @@ public class LandingController {
                     e.printStackTrace();
                   }
                 }));
-    GameStateContext.setSession(session);
-    session.resetAndStartNewRound(300); // Reset timer to 5 minutes
-    // If you want to test the timer, only change the line above
+
     App.setRoot("room");
   }
 }

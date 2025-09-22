@@ -14,9 +14,9 @@
             <Image url="@../images/court.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="290.0" layoutX="363.0" layoutY="163.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="259.0" />
-      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="190.0" layoutX="704.0" layoutY="259.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-      <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="202.0" layoutX="142.0" layoutY="243.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
+      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="290.0" layoutX="363.0" layoutY="163.0" onMouseClicked="#handleRectangleClick" opacity="0.0" pickOnBounds="true" stroke="BLACK" strokeType="INSIDE" width="259.0" userData="0"/>
+      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="190.0" layoutX="704.0" layoutY="259.0" onMouseClicked="#handleRectangleClick" opacity="0.0" pickOnBounds="true" stroke="BLACK" strokeType="INSIDE" width="230.0" userData="2"/>
+      <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="202.0" layoutX="142.0" layoutY="243.0" onMouseClicked="#handleRectangleClick" opacity="0.0" pickOnBounds="true" stroke="BLACK" strokeType="INSIDE" width="159.0" userData="1"/>
       <Label layoutX="424.0" layoutY="133.0" text="AI Defendant" textFill="WHITE">
          <font>
             <Font size="25.0" />

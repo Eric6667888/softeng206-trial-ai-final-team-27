@@ -90,15 +90,23 @@ public class RoomController {
   private void handleRectangleClick(MouseEvent event) throws IOException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
     String rectangleId = clickedRectangle.getId();
-    GameSession session = GameStateContext.getSession();
-    int pId = Integer.parseInt(rectangleId.substring(rectangleId.length() - 1));
+    // Extract the ID number
+    int pid = Integer.parseInt(clickedRectangle.getUserData().toString());
+    System.out.println("Clicked on rectangle: " + rectangleId + ", pid=" + pid); // test log
 
-    session.setCurrentPersonId(pId);
-    if (!session.isFlashbackPlayed(pId)) {
+    if (pid < 0 || pid >= 3) {
+      System.err.println("[Room] invalid pid=" + pid + ", rectangleId=" + rectangleId);
+      return;
+    }
+
+    GameSession session = GameStateContext.getSession();
+    session.setCurrentFlashbackPid(pid);
+    session.loadFlashbacksIfNeeded();
+    if (!session.isFlashbackPlayed(pid)) {
       App.setRoot("Flashback");
     } else {
-      App.setRoot("Memory_" + pId); // Memory under development, delete after finished
-      context.handleRectangleClick(event, rectangleId);
+      App.setRoot("Memory_" + pid); // Memory under development, delete after finished
+      context.handleRectangleClick(event, rectangleId); //
     }
   }
 
