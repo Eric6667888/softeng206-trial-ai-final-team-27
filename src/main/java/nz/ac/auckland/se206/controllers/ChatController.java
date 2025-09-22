@@ -235,7 +235,7 @@ public class ChatController {
   }
 
   @FXML
-  private void onViewImage(ActionEvent event) {
+  private void onViewEvidence(ActionEvent event) {
     try {
 
       Stage imageStage = new Stage();
