@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -89,8 +90,24 @@ public class RoomController {
   private void handleRectangleClick(MouseEvent event) throws IOException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
     String rectangleId = clickedRectangle.getId();
+    // Extract the ID number
+    int pid = Integer.parseInt(clickedRectangle.getUserData().toString());
+    System.out.println("Clicked on rectangle: " + rectangleId + ", pid=" + pid); // test log
 
-    context.handleRectangleClick(event, rectangleId);
+    if (pid < 0 || pid >= 3) {
+      System.err.println("[Room] invalid pid=" + pid + ", rectangleId=" + rectangleId);
+      return;
+    }
+
+    GameSession session = GameStateContext.getSession();
+    session.setCurrentFlashbackPid(pid);
+    session.loadFlashbacksIfNeeded();
+    if (!session.isFlashbackPlayed(pid)) {
+      App.setRoot("Flashback");
+    } else {
+      App.setRoot("Memory_" + pid); // Memory under development, delete after finished
+      context.handleRectangleClick(event, rectangleId); //
+    }
   }
 
   /**
