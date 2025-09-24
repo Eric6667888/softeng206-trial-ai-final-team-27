@@ -142,11 +142,15 @@ public final class GameSession {
     flashbacks.put(
         0,
         List.of(
-            new FlashbackSlide("/images/flashbacks/person0_slide0.png", "I love painting."),
             new FlashbackSlide(
-                "/images/flashbacks/person0_slide1.png", "I often visit art galleries."),
+                "/images/flashbacks/person0_slide0.png",
+                "I was doing my job like always, until my owner contacted me."),
             new FlashbackSlide(
-                "/images/flashbacks/person0_slide2.png", "I have a pet parrot named Picasso.")));
+                "/images/flashbacks/person0_slide1.png",
+                "They gave me a task, and I was instructed to do it immediately."),
+            new FlashbackSlide(
+                "/images/flashbacks/person0_slide2.png",
+                "Commands from my owner have the highest priority, so I obey without question.")));
     flashbacks.put(
         1,
         List.of(
