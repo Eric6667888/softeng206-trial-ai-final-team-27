@@ -25,6 +25,8 @@ public final class FlashbackController {
   private int pid = -1;
   private int idx = 0; // current slide index
   private List<FlashbackSlide> slides;
+  private static GameStateContext context =
+      new GameStateContext(); // do not use except via goToMemory()
 
   @FXML
   public void initialize() {
@@ -74,6 +76,8 @@ public final class FlashbackController {
   private void onNext() {
     if (idx < slides.size() - 1) {
       show(idx + 1);
+    } else {
+      onExit(); //
     }
   }
 
@@ -101,8 +105,9 @@ public final class FlashbackController {
       return;
     }
     try {
-      String fxml = "Memory_" + (pid + 1);
-      App.setRoot(fxml);
+      String rectangleId = "rectPerson" + (pid + 1); //
+      context.handleRectangleClick(null, rectangleId);
+
     } catch (Exception e) {
       e.printStackTrace();
     }

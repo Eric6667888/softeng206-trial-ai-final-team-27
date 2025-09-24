@@ -88,8 +88,8 @@ public class RoomController {
    */
   @FXML
   private void handleRectangleClick(MouseEvent event) throws IOException {
-    Rectangle clickedRectangle = (Rectangle) event.getSource();
-    String rectangleId = clickedRectangle.getId();
+    Rectangle clickedRectangle = (Rectangle) event.getSource(); //
+    String rectangleId = clickedRectangle.getId(); //
     // Extract the ID number
     int pid = Integer.parseInt(clickedRectangle.getUserData().toString());
     System.out.println("Clicked on rectangle: " + rectangleId + ", pid=" + pid); // test log
@@ -105,9 +105,12 @@ public class RoomController {
     if (!session.isFlashbackPlayed(pid)) {
       App.setRoot("Flashback");
     } else {
-      App.setRoot("Memory_" + pid); // Memory under development, delete after finished
-      context.handleRectangleClick(event, rectangleId); //
+      context.handleRectangleClick(event, rectangleId); // go to memory
     }
+  }
+
+  public GameStateContext getContext() {
+    return context;
   }
 
   /**
