@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +21,7 @@ import nz.ac.auckland.se206.GameStateContext;
 public final class FlashbackController {
   @FXML private ImageView imageView;
   @FXML private Button btnNext, btnPrevious, btnExit;
-  @FXML private Label lblCaption, lblProgress;
+  @FXML private Label lblCaption, lblProgress, lblTimer;
 
   private int pid = -1;
   private int idx = 0; // current slide index
@@ -31,6 +32,15 @@ public final class FlashbackController {
   @FXML
   public void initialize() {
     GameSession session = GameStateContext.getSession();
+    lblTimer.textProperty().unbind();
+    lblTimer
+        .textProperty()
+        .bind(
+            Bindings.createStringBinding(
+                () -> format(session.getRoundTimer().getSecondsLeft()),
+                session.getRoundTimer().secondsLeftProperty()));
+
+    session.getRoundTimer().start();
     this.pid = session.getCurrentFlashbackPid();
     // session.loadFlashbacksIfNeeded();
     this.slides = session.getFlashback(pid);
@@ -69,6 +79,12 @@ public final class FlashbackController {
                     });
               }
             });
+  }
+
+  private static String format(int totalSeconds) {
+    int minutes = totalSeconds / 60;
+    int seconds = totalSeconds % 60;
+    return String.format("%02d:%02d", minutes, seconds);
   }
 
   // Button handlers
