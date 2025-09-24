@@ -100,12 +100,15 @@ public class RoomController {
     }
 
     GameSession session = GameStateContext.getSession();
-    session.setCurrentFlashbackPid(pid);
-    session.loadFlashbacksIfNeeded();
+
     if (!session.isFlashbackPlayed(pid)) {
+      session.setCurrentFlashbackPid(pid);
+      session.loadFlashbacksIfNeeded();
       App.setRoot("Flashback");
     } else {
       context.handleRectangleClick(event, rectangleId); // go to memory
+      session.setInteractedWithPerson(pid);
+      session.setCurrentMemoryPid(pid);
     }
   }
 

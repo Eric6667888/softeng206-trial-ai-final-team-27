@@ -194,10 +194,14 @@ public class ChatController {
    */
   @FXML
   private void onSendMessage() throws ApiProxyException, IOException {
+    GameSession session = GameStateContext.getSession();
     String message = txtInput.getText().trim();
     if (message.isEmpty()) {
       return;
     }
+
+    int pid = session.getCurrentMemoryPid();
+    session.setInteractedWithPerson(pid); // mark as interacted
 
     txtInput.clear();
     ChatMessage msg = new ChatMessage("user", message);

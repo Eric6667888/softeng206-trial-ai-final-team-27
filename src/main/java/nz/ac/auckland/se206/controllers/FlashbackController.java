@@ -120,6 +120,8 @@ public final class FlashbackController {
       System.err.println("[Flashback] Invalid personId=" + pid);
       return;
     }
+    GameSession session = GameStateContext.getSession();
+    session.setCurrentMemoryPid(pid);
     try {
       String rectangleId = "rectPerson" + (pid + 1); //
       context.handleRectangleClick(null, rectangleId);
