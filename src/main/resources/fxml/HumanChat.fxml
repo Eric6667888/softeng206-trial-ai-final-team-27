@@ -25,5 +25,6 @@
             <Font size="30.0" />
          </font>
       </Label>
+      <Button fx:id="btnViewEvidence3" layoutX="824.0" layoutY="380.0" mnemonicParsing="false" onAction="#onViewEvidence" text="View Evidence" />
   </children>
 </AnchorPane>
