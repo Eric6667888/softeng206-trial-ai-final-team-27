@@ -166,11 +166,15 @@ public final class GameSession {
     flashbacks.put(
         2,
         List.of(
-            new FlashbackSlide("/images/flashbacks/person2_slide0.png", "I love hiking."),
             new FlashbackSlide(
-                "/images/flashbacks/person2_slide1.png", "I often explore new trails."),
+                "/images/flashbacks/person2_slide0.png",
+                "I am the mayor of this place, everything needs my permission to happen."),
             new FlashbackSlide(
-                "/images/flashbacks/person2_slide2.png", "I have a blog about my adventures.")));
+                "/images/flashbacks/person2_slide1.png",
+                "My security should be the highest priority at all times."),
+            new FlashbackSlide(
+                "/images/flashbacks/person2_slide2.png",
+                "It was a shock to know my food had been poisoned.")));
   }
 
   public void stopAll() {
