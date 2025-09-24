@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.application.Platform;
 import nz.ac.auckland.se206.timer.RoundTimer;
 import nz.ac.auckland.se206.timer.VerdictTimer;
@@ -149,10 +150,15 @@ public final class GameSession {
     flashbacks.put(
         1,
         List.of(
-            new FlashbackSlide("/images/flashbacks/person1_slide0.png", "I enjoy cooking."),
-            new FlashbackSlide("/images/flashbacks/person1_slide1.png", "I often try new recipes."),
             new FlashbackSlide(
-                "/images/flashbacks/person1_slide2.png", "I have a collection of cookbooks.")));
+                "/images/flashbacks/person1_slide0.png",
+                "I am in charge of safety in the house, I noticed the food seemed unusual."),
+            new FlashbackSlide(
+                "/images/flashbacks/person1_slide1.png",
+                "A sample of the food was sent for testing, and was found to be poisonous."),
+            new FlashbackSlide(
+                "/images/flashbacks/person1_slide2.png",
+                "I immediately checked the security footage, in case anything was deleted.")));
     flashbacks.put(
         2,
         List.of(
