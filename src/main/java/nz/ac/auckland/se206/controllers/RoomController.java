@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +25,7 @@ public class RoomController {
   @FXML private Rectangle rectPerson2;
   @FXML private Rectangle rectPerson3;
   @FXML private Rectangle rectWaitress;
+  @FXML private Rectangle rectVerdict;
 
   private static boolean isFirstTimeInit = true;
   private static GameStateContext context = new GameStateContext();
@@ -36,6 +38,7 @@ public class RoomController {
   @FXML
   public void initialize() {
     GameSession session = GameStateContext.getSession();
+    updateVerdictState(session.haveAllThreeTalked()); // Enable verdict if all three have talked
     lblTimer.textProperty().unbind();
     lblTimer
         .textProperty()
@@ -58,6 +61,10 @@ public class RoomController {
         && session.isRoundStarted()) {
       session.getRoundTimer().start();
     }
+  }
+
+  private void updateVerdictState(boolean canclick) {
+    rectVerdict.setDisable(!canclick);
   }
 
   /**
@@ -114,6 +121,25 @@ public class RoomController {
 
   public GameStateContext getContext() {
     return context;
+  }
+
+  @FXML
+  private void onVerdictClicked(MouseEvent event) {
+    GameSession session = GameStateContext.getSession();
+    if (!session.haveAllThreeTalked()) {
+      System.out.println("[Room] Cannot click verdict before talking to all three.");
+      return;
+    }
+    session.transitionToVerdict(
+        () ->
+            Platform.runLater(
+                () -> {
+                  try {
+                    App.setRoot("MakeGuess");
+                  } catch (IOException e) {
+                    e.printStackTrace();
+                  }
+                }));
   }
 
   /**

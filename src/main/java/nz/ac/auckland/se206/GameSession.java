@@ -64,6 +64,8 @@ public final class GameSession {
     System.out.println("[GameSession] resetForNewGame");
     Arrays.fill(flashbackPlayed, false);
     Arrays.fill(interactedWithPerson, false);
+    allThreeTalked = false;
+    verdictStarted = false;
 
     resetAndStartNewRound(totalSeconds);
   }

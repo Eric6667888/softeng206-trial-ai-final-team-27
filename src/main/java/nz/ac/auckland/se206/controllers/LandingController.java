@@ -37,7 +37,7 @@ public class LandingController {
                             Platform.runLater(
                                 () -> {
                                   try {
-                                    App.setRoot("NotGuilty");
+                                    App.setRoot("GameOver");
                                   } catch (IOException e) {
                                     e.printStackTrace();
                                   }
