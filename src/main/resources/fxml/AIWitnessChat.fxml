@@ -25,7 +25,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Button fx:id="btnViewImage" layoutX="572.0" layoutY="375.0" mnemonicParsing="false" onAction="#onViewEvidence" rotate="6.3" text="View Image" />
+      <Button fx:id="btnViewEvidence2" layoutX="572.0" layoutY="375.0" mnemonicParsing="false" onAction="#onViewEvidence" rotate="6.3" text="View Evidence" />
       <Label fx:id="fbLabel" layoutX="390.0" layoutY="17.0" text="Click the button to view evidence" textFill="WHITE">
          <font>
             <Font size="16.0" />

@@ -19,19 +19,25 @@ public class LandingController {
   private void onPlay(ActionEvent event) throws ApiProxyException, IOException {
     GameSession s = GameStateContext.getSession();
 
-    s.resetAndStartNewRound(300); // If you want to test the timer, only change the line above
+    s.resetForNewGame(300); // If you want to test the timer, only change the line above
     s.configureRoundExpire(
         () ->
             Platform.runLater(
                 () -> {
                   try {
+                    GameSession session = GameStateContext.getSession();
+                    if (!session.haveAllThreeTalked()) {
+                      App.setRoot("GameOver");
+                      return;
+                    }
+
                     App.setRoot("MakeGuess");
                     s.transitionToVerdict(
                         () ->
                             Platform.runLater(
                                 () -> {
                                   try {
-                                    App.setRoot("NotGuilty");
+                                    App.setRoot("GameOver");
                                   } catch (IOException e) {
                                     e.printStackTrace();
                                   }

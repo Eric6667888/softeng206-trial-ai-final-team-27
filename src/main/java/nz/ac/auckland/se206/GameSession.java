@@ -14,12 +14,15 @@ public final class GameSession {
   private final RoundTimer roundTimer = new RoundTimer(300);
   private final boolean[] flashbackPlayed = new boolean[4]; // Index 0 unused, only 1,2,3 used
   // personId 1,2,3
+  private final boolean[] interactedWithPerson = new boolean[3];
   private final Map<Integer, List<FlashbackSlide>> flashbacks = new HashMap<>();
   private VerdictTimer verdictTimer;
   private boolean roundStarted = false;
+  private boolean allThreeTalked = false;
   private Runnable onRoundExpire;
   private boolean verdictStarted = false;
   private int currentFlashbackPid = -1;
+  private int currentMemoryPid = -1;
 
   public RoundTimer getRoundTimer() {
     return roundTimer;
@@ -60,6 +63,9 @@ public final class GameSession {
     currentFlashbackPid = -1;
     System.out.println("[GameSession] resetForNewGame");
     Arrays.fill(flashbackPlayed, false);
+    Arrays.fill(interactedWithPerson, false);
+    allThreeTalked = false;
+    verdictStarted = false;
 
     resetAndStartNewRound(totalSeconds);
   }
@@ -105,6 +111,14 @@ public final class GameSession {
     return roundTimer;
   }
 
+  public int getCurrentMemoryPid() {
+    return currentMemoryPid;
+  }
+
+  public void setCurrentMemoryPid(int personId) {
+    currentMemoryPid = personId;
+  }
+
   public boolean isFlashbackPlayed(int personId) {
     return flashbackPlayed[personId];
   }
@@ -115,6 +129,27 @@ public final class GameSession {
       return;
     }
     flashbackPlayed[personId] = true;
+  }
+
+  public boolean isInteractedWithPerson(int personId) {
+    if (personId < 0 || personId >= interactedWithPerson.length) {
+      System.err.println("[GameSession] isInteractedWithPerson invalid personId=" + personId);
+      return false;
+    }
+    return interactedWithPerson[personId];
+  }
+
+  public void setInteractedWithPerson(int personId) {
+    if (personId < 0 || personId >= interactedWithPerson.length) {
+      System.err.println("[GameSession] setInteractedWithPerson invalid personId=" + personId);
+      return;
+    }
+    interactedWithPerson[personId] = true;
+  }
+
+  public boolean haveAllThreeTalked() { // Check if all three persons have been interacted with
+    allThreeTalked = interactedWithPerson[0] && interactedWithPerson[1] && interactedWithPerson[2];
+    return allThreeTalked;
   }
 
   public List<FlashbackSlide> getFlashback(int pid) {
@@ -168,5 +203,6 @@ public final class GameSession {
     if (verdictTimer != null) {
       verdictTimer.stop();
     }
+    verdictTimer = null;
   }
 }
