@@ -63,6 +63,24 @@ public class ChatController {
                 session.getRoundTimer().secondsLeftProperty()));
 
     session.getRoundTimer().start();
+
+    txtInput
+        .sceneProperty()
+        .addListener(
+            (observable, oldScene, newScene) -> {
+              if (newScene != null) {
+                newScene.setOnKeyPressed(
+                    e -> {
+                      if (e.getCode().toString().equals("ENTER")) {
+                        try {
+                          onSendMessage();
+                        } catch (ApiProxyException | IOException ex) {
+                          ex.printStackTrace();
+                        }
+                      }
+                    });
+              }
+            });
   }
 
   private static String format(int totalSeconds) {
@@ -175,7 +193,7 @@ public class ChatController {
    * @throws IOException if there is an I/O error
    */
   @FXML
-  private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+  private void onSendMessage() throws ApiProxyException, IOException {
     String message = txtInput.getText().trim();
     if (message.isEmpty()) {
       return;
