@@ -58,6 +58,11 @@ public class DecisionController implements Initializable {
     if (s != null) {
       s.stopAll();
     }
+
+    ConversationManager.getInstance().clearAllConversations();
+
+    GuessController.resetForNewGame();
+
     App.setRoot("landing");
   }
 }

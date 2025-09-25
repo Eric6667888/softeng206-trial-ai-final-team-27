@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest.Model;
+import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 
@@ -21,7 +22,6 @@ public class ConversationManager {
     return instance;
   }
 
-  // Get the conversation
   public ChatCompletionRequest getChatRequest(String profession) throws ApiProxyException {
     if (!chatRequests.containsKey(profession)) {
       ApiProxyConfig config = ApiProxyConfig.readConfig();
@@ -37,7 +37,49 @@ public class ConversationManager {
       chatHistories.put(profession, new StringBuilder());
       introductionStatus.put(profession, false);
     }
+
     return chatRequests.get(profession);
+  }
+
+  // Get cross-chat context message to add before user messages
+  public ChatMessage getCrossChatContextMessage(String currentProfession) {
+    String crossChatContext = buildCrossChatContext(currentProfession);
+    if (!crossChatContext.isEmpty()) {
+      return new ChatMessage("system", crossChatContext);
+    }
+    return null;
+  }
+
+  // Build context from all other conversations for cross-chat memory
+  private String buildCrossChatContext(String currentProfession) {
+    StringBuilder contextBuilder = new StringBuilder();
+
+    if (!chatHistories.isEmpty()) {
+      contextBuilder.append("PREVIOUS CONVERSATIONS CONTEXT:\n");
+      contextBuilder.append(
+          "You have access to information from previous conversations with other characters. ");
+      contextBuilder.append(
+          "Use this context to reference what happened in other chats when asked.\n\n");
+
+      for (Map.Entry<String, StringBuilder> entry : chatHistories.entrySet()) {
+        String profession = entry.getKey();
+        String history = entry.getValue().toString();
+
+        if (!profession.equals(currentProfession) && !history.trim().isEmpty()) {
+          contextBuilder
+              .append("=== CONVERSATION WITH ")
+              .append(profession.toUpperCase())
+              .append(" ===\n");
+          contextBuilder.append(history).append("\n\n");
+        }
+      }
+
+      contextBuilder.append("END OF PREVIOUS CONVERSATIONS CONTEXT\n");
+      contextBuilder.append(
+          "You can reference information from these conversations when relevant.\n\n");
+    }
+
+    return contextBuilder.toString();
   }
 
   public String getChatHistory(String profession) {
@@ -54,5 +96,11 @@ public class ConversationManager {
 
   public void markAsIntroduced(String profession) {
     introductionStatus.put(profession, true);
+  }
+
+  public void clearAllConversations() {
+    chatRequests.clear();
+    chatHistories.clear();
+    introductionStatus.clear();
   }
 }

@@ -46,6 +46,12 @@ public class GuessController implements Initializable {
     return userDecision;
   }
 
+  // Reset static fields for new games
+  public static void resetForNewGame() {
+    gptFeedbackResponse = "Analyzing your decision...";
+    userDecision = "";
+  }
+
   private String[] options = {"Guilty", "Not Guilty"};
 
   private GameSession session = GameStateContext.getSession();
