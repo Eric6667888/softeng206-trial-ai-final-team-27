@@ -5,10 +5,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DecisionController">
    <children>
-      <Label layoutX="263.0" layoutY="187.0" text="GAME OVER">
+      <Label layoutX="263.0" layoutY="187.0" text="Time is Over">
          <font>
             <Font size="70.0" />
          </font>

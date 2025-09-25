@@ -63,7 +63,7 @@ public class GuessController implements Initializable {
               Platform.runLater(
                   () -> {
                     try {
-                      App.setRoot("NotGuilty");
+                      App.setRoot("GameOver");
                     } catch (IOException e) {
                       e.printStackTrace();
                     }
@@ -134,10 +134,10 @@ public class GuessController implements Initializable {
 
       // Determine if user chose AI to be guilty or not guilty
       String aiVerdict = "";
-      if (userDecision.toLowerCase().contains("guilty")) {
-        aiVerdict = "The user chose that the AI is GUILTY.";
-      } else {
+      if (userDecision.toLowerCase().contains("not guilty")) {
         aiVerdict = "The user chose that the AI is NOT GUILTY.";
+      } else {
+        aiVerdict = "The user chose that the AI is GUILTY.";
       }
 
       String analysisMessage =
