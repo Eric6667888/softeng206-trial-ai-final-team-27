@@ -1,7 +1,7 @@
 User has inputted reasoning for why they think AI is guilty or not guilty. You need to provide feedback on their reasoning.
 Their reasoning should include this things: 
-AI is guilty
 AI poisoned mayor's food
 AI did it because owner told it to
 AI still guilty because it followed orders
 AI was caught on camera doing suspicious activity
+Finally for your last statement, state whether the rationale is strong or weak.

@@ -117,16 +117,28 @@ public class GuessController implements Initializable {
       }
 
       // Create analysis message with current decision and rationale
+      String userDecision = (guess != null ? guess : "No decision made");
+      String userReasoning =
+          (rationale != null && !rationale.trim().isEmpty() ? rationale : "No reasoning provided");
+
+      // Determine if user chose AI to be guilty or not guilty
+      String aiVerdict = "";
+      if (userDecision.toLowerCase().contains("guilty")) {
+        aiVerdict = "The user chose that the AI is GUILTY.";
+      } else {
+        aiVerdict = "The user chose that the AI is NOT GUILTY.";
+      }
+
       String analysisMessage =
           feedbackPrompt
               + "\n\n"
-              + "User's Decision: "
-              + (guess != null ? guess : "No decision made")
+              + aiVerdict
+              + "\n"
+              + "User's Full Decision: "
+              + userDecision
               + "\n"
               + "User's Reasoning: "
-              + (rationale != null && !rationale.trim().isEmpty()
-                  ? rationale
-                  : "No reasoning provided");
+              + userReasoning;
 
       ChatMessage userMessage = new ChatMessage("user", analysisMessage);
       chatCompletionRequest.addMessage(userMessage);
@@ -152,11 +164,6 @@ public class GuessController implements Initializable {
 
                     // Update the DecisionController if it's loaded
                     DecisionController.updateGptFeedback(response.getContent());
-
-                    // Print GPT feedback to terminal
-                    System.out.println("=== GPT FEEDBACK ===");
-                    System.out.println(response.getContent());
-                    System.out.println("==================");
                   });
             }
 
