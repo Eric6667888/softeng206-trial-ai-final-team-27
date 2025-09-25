@@ -72,9 +72,9 @@ public final class GameSession {
 
   public void startVerdictWindow(Runnable onVerdictExpire) {
     if (verdictTimer == null) {
-      verdictTimer = new VerdictTimer(60);
+      verdictTimer = new VerdictTimer(5);
     } else {
-      verdictTimer.reset(60);
+      verdictTimer.reset(5);
     }
     verdictTimer.setOnExpire(onVerdictExpire);
     verdictTimer.start();
@@ -91,7 +91,8 @@ public final class GameSession {
           try {
 
             if (verdictTimer == null) {
-              verdictTimer = new VerdictTimer(60);
+              verdictTimer =
+                  new VerdictTimer(60); // If you want to test the timer, only change the line above
             } else {
               verdictTimer.reset(60);
             }

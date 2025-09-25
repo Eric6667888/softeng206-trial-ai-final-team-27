@@ -25,6 +25,7 @@ public final class RoundTimer {
 
   public void setOnExpire(Runnable onExpire) {
     this.onExpire = (onExpire != null) ? onExpire : () -> {};
+    System.out.println("[RoundTimer] onExpire set: " + this.onExpire);
   }
 
   public IntegerProperty secondsLeftProperty() {
@@ -40,12 +41,15 @@ public final class RoundTimer {
   }
 
   public void reset(int totalSeconds) {
+    System.out.println("[RoundTimer] reset to " + totalSeconds);
     timeline.stop();
     running = false;
     secondsLeft.set(Math.max(0, totalSeconds));
   }
 
   public void start() {
+    System.out.println(
+        "[RoundTimer] start @" + System.identityHashCode(this) + ", left=" + secondsLeft.get());
     if (secondsLeft.get() <= 0) {
       return; // Do not start if time is already up
     }
@@ -55,6 +59,7 @@ public final class RoundTimer {
   }
 
   public void stop() {
+    System.out.println("[RoundTimer] stop @" + System.identityHashCode(this));
     running = false;
     timeline.stop();
   }
@@ -70,6 +75,7 @@ public final class RoundTimer {
       secondsLeft.set(0);
       stop();
       onExpire.run();
+      System.out.println("[RoundTimer] reached zero, stop, onExpire=" + onExpire);
     }
   }
 }

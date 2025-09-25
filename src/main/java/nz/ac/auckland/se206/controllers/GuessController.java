@@ -57,7 +57,18 @@ public class GuessController implements Initializable {
     choiceBox.getItems().addAll(options);
     choiceBox.setOnAction(this::getOptions);
 
-    //
+    if (session.getVerdictTimer() == null) {
+      session.startVerdictWindow(
+          () ->
+              Platform.runLater(
+                  () -> {
+                    try {
+                      App.setRoot("GameOver");
+                    } catch (IOException e) {
+                      e.printStackTrace();
+                    }
+                  }));
+    }
 
     lblTimer.textProperty().unbind();
     lblTimer
