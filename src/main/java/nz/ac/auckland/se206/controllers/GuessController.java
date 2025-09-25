@@ -33,9 +33,17 @@ public class GuessController implements Initializable {
   // Static field to store GPT feedback for the DecisionController
   private static String gptFeedbackResponse = "Analyzing your decision...";
 
+  // Static field to store user's decision for the DecisionController
+  private static String userDecision = "";
+
   // Getter method for the GPT feedback
   public static String getGptFeedback() {
     return gptFeedbackResponse;
+  }
+
+  // Getter method for the user's decision
+  public static String getUserDecision() {
+    return userDecision;
   }
 
   private String[] options = {"Guilty", "Not Guilty"};
@@ -78,6 +86,9 @@ public class GuessController implements Initializable {
   public void submit(ActionEvent event) {
     String rationale = textField.getText();
     String guess = this.decision;
+
+    // Store the user's decision for the DecisionController
+    userDecision = guess;
 
     System.out.println("Sending to GPT - Guess: " + guess + ", Rationale: " + rationale);
 

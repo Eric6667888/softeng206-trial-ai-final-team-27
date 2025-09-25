@@ -22,6 +22,16 @@ public class DecisionController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     currentInstance = this;
 
+    // Set the result label based on user's decision
+    String userChoice = GuessController.getUserDecision();
+    if ("Guilty".equals(userChoice)) {
+      result.setText("You are CORRECT");
+    } else if ("Not Guilty".equals(userChoice)) {
+      result.setText("You are INCORRECT");
+    } else {
+      result.setText("You are CORRECT"); // Default fallback
+    }
+
     // Display the GPT feedback
     String feedback = GuessController.getGptFeedback();
     gptFeedback.setText(feedback);
