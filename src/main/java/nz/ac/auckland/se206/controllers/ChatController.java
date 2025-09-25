@@ -207,12 +207,19 @@ public class ChatController {
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
 
+    ConversationManager manager = ConversationManager.getInstance();
+    ChatMessage crossChatContext = manager.getCrossChatContextMessage(profession);
+
     btnSend.setDisable(true);
 
     Task<ChatMessage> gptTask =
         new Task<ChatMessage>() {
           @Override
           protected ChatMessage call() throws Exception {
+            if (crossChatContext != null) {
+              chatCompletionRequest.addMessage(crossChatContext);
+            }
+
             chatCompletionRequest.addMessage(msg);
             ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
             Choice result = chatCompletionResult.getChoices().iterator().next();
