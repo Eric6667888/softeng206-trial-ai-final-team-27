@@ -17,9 +17,9 @@
             <Font size="70.0" />
          </font>
       </Label>
-      <Label fx:id="gptFeedback" alignment="TOP_LEFT" layoutX="270.0" layoutY="182.0" prefHeight="265.0" prefWidth="451.0" text="Label">
+      <Label fx:id="gptFeedback" alignment="TOP_LEFT" layoutX="270.0" layoutY="182.0" prefHeight="323.0" prefWidth="451.0" text="Label">
          <font>
-            <Font size="23.0" />
+            <Font size="20.0" />
          </font>
       </Label>
    </children>

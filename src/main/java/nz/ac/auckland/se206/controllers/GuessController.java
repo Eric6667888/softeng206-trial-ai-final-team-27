@@ -30,6 +30,14 @@ public class GuessController implements Initializable {
   @FXML private TextArea textField;
   private String decision;
 
+  // Static field to store GPT feedback for the DecisionController
+  private static String gptFeedbackResponse = "Analyzing your decision...";
+
+  // Getter method for the GPT feedback
+  public static String getGptFeedback() {
+    return gptFeedbackResponse;
+  }
+
   private String[] options = {"Guilty", "Not Guilty"};
 
   private GameSession session = GameStateContext.getSession();
@@ -138,6 +146,12 @@ public class GuessController implements Initializable {
               Platform.runLater(
                   () -> {
                     ChatMessage response = getValue();
+
+                    // Store GPT feedback for the DecisionController
+                    gptFeedbackResponse = response.getContent();
+
+                    // Update the DecisionController if it's loaded
+                    DecisionController.updateGptFeedback(response.getContent());
 
                     // Print GPT feedback to terminal
                     System.out.println("=== GPT FEEDBACK ===");
