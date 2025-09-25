@@ -272,6 +272,7 @@ public class ChatController {
       switch (buttonId) {
         case "btnViewEvidence1": // rectPerson1, AI defendant, chat.fxml
           image = new Image(getClass().getResourceAsStream("/images/evidence1.png"));
+          txtaChat.appendText("assistant: This is the substance provided by my owner.\n\n");
           break;
         case "btnViewEvidence2": // rectPerson2, AI witness, AIWitnessChat.fxml
           image = new Image(getClass().getResourceAsStream("/images/evidence2.png"));
