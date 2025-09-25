@@ -21,7 +21,9 @@ public class LandingController {
 
     ConversationManager.getInstance().clearAllConversations();
 
-    s.resetForNewGame(300); // If you want to test the timer, only change the line above
+    GuessController.resetForNewGame();
+
+    s.resetForNewGame(50); // If you want to test the timer, only change the line above
 
     s.configureRoundExpire(
         () ->
