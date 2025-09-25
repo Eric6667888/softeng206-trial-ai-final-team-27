@@ -18,7 +18,9 @@ public class LandingController {
   @FXML
   private void onPlay(ActionEvent event) throws ApiProxyException, IOException {
     GameSession s = GameStateContext.getSession();
-    
+
+    ConversationManager.getInstance().clearAllConversations();
+
     s.resetForNewGame(300); // If you want to test the timer, only change the line above
 
     s.configureRoundExpire(

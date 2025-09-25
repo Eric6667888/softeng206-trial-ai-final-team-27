@@ -97,4 +97,10 @@ public class ConversationManager {
   public void markAsIntroduced(String profession) {
     introductionStatus.put(profession, true);
   }
+
+  public void clearAllConversations() {
+    chatRequests.clear();
+    chatHistories.clear();
+    introductionStatus.clear();
+  }
 }

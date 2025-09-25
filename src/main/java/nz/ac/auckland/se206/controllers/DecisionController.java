@@ -54,6 +54,9 @@ public class DecisionController implements Initializable {
     if (s != null) {
       s.stopAll();
     }
+
+    ConversationManager.getInstance().clearAllConversations();
+
     App.setRoot("landing");
   }
 }
