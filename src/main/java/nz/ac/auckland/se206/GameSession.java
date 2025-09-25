@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javafx.application.Platform;
 import nz.ac.auckland.se206.timer.RoundTimer;
 import nz.ac.auckland.se206.timer.VerdictTimer;
@@ -90,7 +89,7 @@ public final class GameSession {
     Platform.runLater(
         () -> {
           try {
-            App.setRoot("MakeGuess");
+
             if (verdictTimer == null) {
               verdictTimer = new VerdictTimer(60);
             } else {
@@ -98,6 +97,7 @@ public final class GameSession {
             }
             verdictTimer.setOnExpire(onVerdictExpire);
             verdictTimer.start();
+            App.setRoot("MakeGuess");
           } catch (IOException e) {
             e.printStackTrace();
           }
