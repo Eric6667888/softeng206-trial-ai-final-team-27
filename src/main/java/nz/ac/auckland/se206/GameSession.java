@@ -209,7 +209,7 @@ public final class GameSession {
                 "My security should be the highest priority at all times."),
             new FlashbackSlide(
                 "/images/flashbacks/person2_slide2.png",
-                "It was a shock to know my food had been poisoned.")));
+                "It was a shock to know my food had been touched.")));
   }
 
   public void stopAll() {
