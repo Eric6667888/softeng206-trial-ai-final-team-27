@@ -276,9 +276,15 @@ public class ChatController {
           break;
         case "btnViewEvidence2": // rectPerson2, AI witness, AIWitnessChat.fxml
           image = new Image(getClass().getResourceAsStream("/images/evidence2.png"));
+          txtaChat.appendText(
+              "assistant: I have checked the footage, and it clearly shows who tampered with the"
+                  + " food.\n\n");
           break;
         case "btnViewEvidence3": // rectPerson3, Human witness, HumanChat.fxml
           image = new Image(getClass().getResourceAsStream("/images/evidence3.png"));
+          txtaChat.appendText(
+              "assistant: I can't imagine who would do such a thing, what do they want from"
+                  + " me?\n\n");
           break;
         default:
           break;
