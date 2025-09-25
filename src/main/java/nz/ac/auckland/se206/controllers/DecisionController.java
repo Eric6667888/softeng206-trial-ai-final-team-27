@@ -30,7 +30,7 @@ public class DecisionController implements Initializable {
       } else if ("Not Guilty".equals(userChoice)) {
         result.setText("You are INCORRECT");
       } else {
-        result.setText("You are CORRECT"); // Default fallback
+        result.setText("You haven't made a decision"); // Default fallback
       }
     }
 

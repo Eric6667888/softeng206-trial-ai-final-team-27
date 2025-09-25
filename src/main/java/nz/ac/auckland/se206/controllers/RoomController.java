@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,6 +49,16 @@ public class RoomController {
                         session.getRoundTimer().getSecondsLeft() / 60,
                         session.getRoundTimer().getSecondsLeft() % 60),
                 session.getRoundTimer().secondsLeftProperty()));
+
+    if (rectVerdict != null) {
+      rectVerdict.setMouseTransparent(!session.haveAllThreeTalked());
+      session
+          .haveAllThreeTalkedProperty()
+          .addListener(
+              (obs, oldV, newV) -> {
+                rectVerdict.setMouseTransparent(!newV);
+              });
+    }
 
     if (isFirstTimeInit) {
       TextToSpeech.speak("Click on characters to learn their perspective. ");
@@ -130,16 +139,7 @@ public class RoomController {
       System.out.println("[Room] Cannot click verdict before talking to all three.");
       return;
     }
-    session.transitionToVerdict(
-        () ->
-            Platform.runLater(
-                () -> {
-                  try {
-                    App.setRoot("MakeGuess");
-                  } catch (IOException e) {
-                    e.printStackTrace();
-                  }
-                }));
+    session.transitionToVerdict(null);
   }
 
   /**

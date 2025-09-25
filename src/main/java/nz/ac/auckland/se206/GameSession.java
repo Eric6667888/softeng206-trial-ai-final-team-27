@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import nz.ac.auckland.se206.timer.RoundTimer;
 import nz.ac.auckland.se206.timer.VerdictTimer;
 
@@ -19,10 +22,20 @@ public final class GameSession {
   private VerdictTimer verdictTimer;
   private boolean roundStarted = false;
   private boolean allThreeTalked = false;
+  private BooleanProperty haveAllThreeTalked = new SimpleBooleanProperty(false);
   private Runnable onRoundExpire;
+  private Runnable autoSubmitAction;
   private boolean verdictStarted = false;
   private int currentFlashbackPid = -1;
   private int currentMemoryPid = -1;
+
+  public void setVerdictStarted(boolean started) {
+    this.verdictStarted = started;
+  }
+
+  public boolean isVerdictStarted() {
+    return verdictStarted;
+  }
 
   public RoundTimer getRoundTimer() {
     return roundTimer;
@@ -59,6 +72,7 @@ public final class GameSession {
   public void resetForNewGame(int totalSeconds) {
 
     stopAll();
+    haveAllThreeTalked.set(false);
 
     currentFlashbackPid = -1;
     System.out.println("[GameSession] resetForNewGame");
@@ -71,10 +85,15 @@ public final class GameSession {
   }
 
   public void startVerdictWindow(Runnable onVerdictExpire) {
+    if (verdictStarted) {
+      return;
+    }
+    verdictStarted = true;
+    roundTimer.stop();
     if (verdictTimer == null) {
-      verdictTimer = new VerdictTimer(60);
+      verdictTimer = new VerdictTimer(5);
     } else {
-      verdictTimer.reset(60);
+      verdictTimer.reset(5);
     }
     verdictTimer.setOnExpire(onVerdictExpire);
     verdictTimer.start();
@@ -92,11 +111,15 @@ public final class GameSession {
 
             if (verdictTimer == null) {
               verdictTimer =
-                  new VerdictTimer(60); // If you want to test the timer, only change the line above
+                  new VerdictTimer(5); // If you want to test the timer, only change the line above
             } else {
-              verdictTimer.reset(60);
+              verdictTimer.reset(5);
             }
-            verdictTimer.setOnExpire(onVerdictExpire);
+            verdictTimer.setOnExpire(
+                () -> {
+                  System.out.println("[VerdictTimer] expired");
+                  triggerAutoSubmit();
+                });
             verdictTimer.start();
             App.setRoot("MakeGuess");
           } catch (IOException e) {
@@ -147,11 +170,17 @@ public final class GameSession {
       return;
     }
     interactedWithPerson[personId] = true;
+    haveAllThreeTalked.set(
+        interactedWithPerson[0] && interactedWithPerson[1] && interactedWithPerson[2]);
   }
 
   public boolean haveAllThreeTalked() { // Check if all three persons have been interacted with
     allThreeTalked = interactedWithPerson[0] && interactedWithPerson[1] && interactedWithPerson[2];
     return allThreeTalked;
+  }
+
+  public ReadOnlyBooleanProperty haveAllThreeTalkedProperty() {
+    return haveAllThreeTalked;
   }
 
   public List<FlashbackSlide> getFlashback(int pid) {
@@ -211,6 +240,19 @@ public final class GameSession {
             new FlashbackSlide(
                 "/images/flashbacks/person2_slide2.png",
                 "It was a shock to know my food had been touched.")));
+  }
+
+  // auto submit
+  public void setAutoSubmitAction(Runnable action) {
+    this.autoSubmitAction = action;
+  }
+
+  public void triggerAutoSubmit() {
+    if (autoSubmitAction != null) {
+      autoSubmitAction.run();
+    } else {
+      System.err.println("[GameSession] No autoSubmitAction defined.");
+    }
   }
 
   public void stopAll() {

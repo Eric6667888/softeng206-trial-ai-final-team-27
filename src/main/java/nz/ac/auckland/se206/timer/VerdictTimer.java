@@ -71,7 +71,10 @@ public final class VerdictTimer {
       secondsLeft.set(0);
       System.out.println("[VerdictTimer] reached zero, stop, onExpire=" + onExpire);
       stop();
-      onExpire.run();
+      if (onExpire != null) {
+        System.out.println("[VerdictTimer] expire fired");
+        onExpire.run();
+      }
     }
   }
 }

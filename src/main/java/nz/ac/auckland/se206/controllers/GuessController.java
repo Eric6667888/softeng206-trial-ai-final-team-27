@@ -63,19 +63,6 @@ public class GuessController implements Initializable {
     choiceBox.getItems().addAll(options);
     choiceBox.setOnAction(this::getOptions);
 
-    if (session.getVerdictTimer() == null) {
-      session.startVerdictWindow(
-          () ->
-              Platform.runLater(
-                  () -> {
-                    try {
-                      App.setRoot("GameOver");
-                    } catch (IOException e) {
-                      e.printStackTrace();
-                    }
-                  }));
-    }
-
     lblTimer.textProperty().unbind();
     lblTimer
         .textProperty()
@@ -83,6 +70,19 @@ public class GuessController implements Initializable {
             Bindings.createStringBinding(
                 () -> format(session.getVerdictTimer().getSecondsLeft()),
                 session.getVerdictTimer().secondsLeftProperty()));
+
+    session.setAutoSubmitAction(
+        () -> {
+          Platform.runLater(
+              () -> {
+                try {
+                  System.out.println("[AutoSubmit] decision due to timer expiry.");
+                  submit(null);
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+              });
+        });
   }
 
   public void getOptions(ActionEvent event) {
@@ -99,7 +99,16 @@ public class GuessController implements Initializable {
     System.out.println("Sending to GPT - Guess: " + guess + ", Rationale: " + rationale);
 
     // Send to GPT for analysis
-    sendToGpt(rationale, guess);
+    new Thread(
+            () -> {
+              try {
+                sendToGpt(rationale, guess);
+              } catch (Exception e) {
+                System.err.println("Error sending to GPT: " + e.getMessage());
+                e.printStackTrace();
+              }
+            })
+        .start();
 
     // Navigate to guilty page after submitting
     try {
