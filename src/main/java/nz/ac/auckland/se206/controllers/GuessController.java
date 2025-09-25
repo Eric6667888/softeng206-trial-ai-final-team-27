@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
@@ -17,6 +18,7 @@ import nz.ac.auckland.se206.GameStateContext;
 public class GuessController implements Initializable {
   @FXML private Label lblTimer;
   @FXML private ChoiceBox<String> choiceBox;
+  @FXML private TextArea textField;
   private String decision;
 
   private String[] options = {"Guilty", "Not Guilty"};
@@ -54,7 +56,10 @@ public class GuessController implements Initializable {
 
   public void getOptions(ActionEvent event) {
     this.decision = choiceBox.getValue();
-    System.out.println(decision);
+  }
+
+  public void submit(ActionEvent event) {
+    String text = textField.getText();
   }
 
   @FXML
