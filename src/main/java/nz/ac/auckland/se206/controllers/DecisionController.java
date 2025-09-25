@@ -24,13 +24,13 @@ public class DecisionController implements Initializable {
 
     // Set the result label based on user's decision
     String userChoice = GuessController.getUserDecision();
-    if (userChoice != null && result != null) {
-      if ("Guilty".equals(userChoice)) {
-        result.setText("You are CORRECT");
+    if (result != null) {
+      if (GuessController.isNoDecision()) {
+        result.setText("You haven't made a decision");
       } else if ("Not Guilty".equals(userChoice)) {
         result.setText("You are INCORRECT");
       } else {
-        result.setText("You haven't made a decision"); // Default fallback
+        result.setText("You are CORRECT"); // "Guilty".equals(userChoice)
       }
     }
 

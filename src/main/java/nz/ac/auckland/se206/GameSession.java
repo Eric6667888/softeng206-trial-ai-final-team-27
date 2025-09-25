@@ -91,9 +91,9 @@ public final class GameSession {
     verdictStarted = true;
     roundTimer.stop();
     if (verdictTimer == null) {
-      verdictTimer = new VerdictTimer(5);
+      verdictTimer = new VerdictTimer(60);
     } else {
-      verdictTimer.reset(5);
+      verdictTimer.reset(60);
     }
     verdictTimer.setOnExpire(onVerdictExpire);
     verdictTimer.start();
@@ -111,9 +111,9 @@ public final class GameSession {
 
             if (verdictTimer == null) {
               verdictTimer =
-                  new VerdictTimer(5); // If you want to test the timer, only change the line above
+                  new VerdictTimer(60); // If you want to test the timer, only change the line above
             } else {
-              verdictTimer.reset(5);
+              verdictTimer.reset(60);
             }
             verdictTimer.setOnExpire(
                 () -> {
