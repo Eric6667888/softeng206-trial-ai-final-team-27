@@ -25,6 +25,7 @@ public final class VerdictTimer {
 
   public void setOnExpire(Runnable onExpire) {
     this.onExpire = (onExpire != null) ? onExpire : () -> {};
+    System.out.println("[RoundTimer] onExpire set: " + this.onExpire);
   }
 
   public IntegerProperty secondsLeftProperty() {
@@ -36,12 +37,16 @@ public final class VerdictTimer {
   }
 
   public void reset(int totalSeconds) {
+    System.out.println("[VerdictTimer] reset to " + totalSeconds);
     timeline.stop();
     running = false;
     secondsLeft.set(Math.max(0, totalSeconds));
   }
 
   public void start() {
+    System.out.println("[VerdictTimer] started"); // testing log
+    System.out.println(
+        "[VerdictTimer] start @" + System.identityHashCode(this) + ", left=" + secondsLeft.get());
     if (secondsLeft.get() <= 0) {
       return; // Do not start if time is already up
     }
@@ -50,6 +55,7 @@ public final class VerdictTimer {
   }
 
   public void stop() {
+    System.out.println("[VerdictTimer] stop @" + System.identityHashCode(this));
     running = false;
     timeline.stop();
   }
@@ -63,6 +69,7 @@ public final class VerdictTimer {
       secondsLeft.set(s - 1);
     } else if (s == 1) {
       secondsLeft.set(0);
+      System.out.println("[VerdictTimer] reached zero, stop, onExpire=" + onExpire);
       stop();
       onExpire.run();
     }
