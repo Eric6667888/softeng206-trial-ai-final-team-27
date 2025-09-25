@@ -20,7 +20,7 @@ public class LandingController {
     GameSession s = GameStateContext.getSession();
 
     s.resetAndStartNewRound(
-        3); // If you want to test the timer, only change the line above change to 300 once done
+        300); // If you want to test the timer, only change the line above change to 300 once done
     s.configureRoundExpire(
         () ->
             Platform.runLater(
