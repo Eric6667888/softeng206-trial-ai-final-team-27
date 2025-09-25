@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.application.Platform;
 import nz.ac.auckland.se206.timer.RoundTimer;
 import nz.ac.auckland.se206.timer.VerdictTimer;
@@ -14,12 +15,15 @@ public final class GameSession {
   private final RoundTimer roundTimer = new RoundTimer(300);
   private final boolean[] flashbackPlayed = new boolean[4]; // Index 0 unused, only 1,2,3 used
   // personId 1,2,3
+  private final boolean[] interactedWithPerson = new boolean[3];
   private final Map<Integer, List<FlashbackSlide>> flashbacks = new HashMap<>();
   private VerdictTimer verdictTimer;
   private boolean roundStarted = false;
+  private boolean allThreeTalked = false;
   private Runnable onRoundExpire;
   private boolean verdictStarted = false;
   private int currentFlashbackPid = -1;
+  private int currentMemoryPid = -1;
 
   public RoundTimer getRoundTimer() {
     return roundTimer;
@@ -60,6 +64,9 @@ public final class GameSession {
     currentFlashbackPid = -1;
     System.out.println("[GameSession] resetForNewGame");
     Arrays.fill(flashbackPlayed, false);
+    Arrays.fill(interactedWithPerson, false);
+    allThreeTalked = false;
+    verdictStarted = false;
 
     resetAndStartNewRound(totalSeconds);
   }
@@ -105,6 +112,14 @@ public final class GameSession {
     return roundTimer;
   }
 
+  public int getCurrentMemoryPid() {
+    return currentMemoryPid;
+  }
+
+  public void setCurrentMemoryPid(int personId) {
+    currentMemoryPid = personId;
+  }
+
   public boolean isFlashbackPlayed(int personId) {
     return flashbackPlayed[personId];
   }
@@ -115,6 +130,27 @@ public final class GameSession {
       return;
     }
     flashbackPlayed[personId] = true;
+  }
+
+  public boolean isInteractedWithPerson(int personId) {
+    if (personId < 0 || personId >= interactedWithPerson.length) {
+      System.err.println("[GameSession] isInteractedWithPerson invalid personId=" + personId);
+      return false;
+    }
+    return interactedWithPerson[personId];
+  }
+
+  public void setInteractedWithPerson(int personId) {
+    if (personId < 0 || personId >= interactedWithPerson.length) {
+      System.err.println("[GameSession] setInteractedWithPerson invalid personId=" + personId);
+      return;
+    }
+    interactedWithPerson[personId] = true;
+  }
+
+  public boolean haveAllThreeTalked() { // Check if all three persons have been interacted with
+    allThreeTalked = interactedWithPerson[0] && interactedWithPerson[1] && interactedWithPerson[2];
+    return allThreeTalked;
   }
 
   public List<FlashbackSlide> getFlashback(int pid) {
@@ -141,26 +177,39 @@ public final class GameSession {
     flashbacks.put(
         0,
         List.of(
-            new FlashbackSlide("/images/flashbacks/person0_slide0.png", "I love painting."),
             new FlashbackSlide(
-                "/images/flashbacks/person0_slide1.png", "I often visit art galleries."),
+                "/images/flashbacks/person0_slide0.png",
+                "I was doing my job like always, until my owner contacted me."),
             new FlashbackSlide(
-                "/images/flashbacks/person0_slide2.png", "I have a pet parrot named Picasso.")));
+                "/images/flashbacks/person0_slide1.png",
+                "They gave me a task, and I was instructed to do it immediately."),
+            new FlashbackSlide(
+                "/images/flashbacks/person0_slide2.png",
+                "Commands from my owner have the highest priority, so I obey without question.")));
     flashbacks.put(
         1,
         List.of(
-            new FlashbackSlide("/images/flashbacks/person1_slide0.png", "I enjoy cooking."),
-            new FlashbackSlide("/images/flashbacks/person1_slide1.png", "I often try new recipes."),
             new FlashbackSlide(
-                "/images/flashbacks/person1_slide2.png", "I have a collection of cookbooks.")));
+                "/images/flashbacks/person1_slide0.png",
+                "I am in charge of safety in the house, I noticed the food seemed unusual."),
+            new FlashbackSlide(
+                "/images/flashbacks/person1_slide1.png",
+                "A sample of the food was sent for testing, and was found to be poisonous."),
+            new FlashbackSlide(
+                "/images/flashbacks/person1_slide2.png",
+                "I immediately checked the security footage, in case anything was deleted.")));
     flashbacks.put(
         2,
         List.of(
-            new FlashbackSlide("/images/flashbacks/person2_slide0.png", "I love hiking."),
             new FlashbackSlide(
-                "/images/flashbacks/person2_slide1.png", "I often explore new trails."),
+                "/images/flashbacks/person2_slide0.png",
+                "I am the mayor of this place, everything needs my permission to happen."),
             new FlashbackSlide(
-                "/images/flashbacks/person2_slide2.png", "I have a blog about my adventures.")));
+                "/images/flashbacks/person2_slide1.png",
+                "My security should be the highest priority at all times."),
+            new FlashbackSlide(
+                "/images/flashbacks/person2_slide2.png",
+                "It was a shock to know my food had been poisoned.")));
   }
 
   public void stopAll() {
@@ -168,5 +217,6 @@ public final class GameSession {
     if (verdictTimer != null) {
       verdictTimer.stop();
     }
+    verdictTimer = null;
   }
 }

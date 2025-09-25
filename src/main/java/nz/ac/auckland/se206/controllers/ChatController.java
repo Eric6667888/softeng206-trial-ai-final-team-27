@@ -37,7 +37,9 @@ public class ChatController {
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
-  @FXML private Button btnViewImage;
+  @FXML private Button btnViewEvidence1;
+  @FXML private Button btnViewEvidence2;
+  @FXML private Button btnViewEvidence3;
   @FXML private Label lblTimer;
   @FXML private Label fbLabel;
 
@@ -61,6 +63,24 @@ public class ChatController {
                 session.getRoundTimer().secondsLeftProperty()));
 
     session.getRoundTimer().start();
+
+    txtInput
+        .sceneProperty()
+        .addListener(
+            (observable, oldScene, newScene) -> {
+              if (newScene != null) {
+                newScene.setOnKeyPressed(
+                    e -> {
+                      if (e.getCode().toString().equals("ENTER")) {
+                        try {
+                          onSendMessage();
+                        } catch (ApiProxyException | IOException ex) {
+                          ex.printStackTrace();
+                        }
+                      }
+                    });
+              }
+            });
   }
 
   private static String format(int totalSeconds) {
@@ -173,11 +193,15 @@ public class ChatController {
    * @throws IOException if there is an I/O error
    */
   @FXML
-  private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+  private void onSendMessage() throws ApiProxyException, IOException {
+    GameSession session = GameStateContext.getSession();
     String message = txtInput.getText().trim();
     if (message.isEmpty()) {
       return;
     }
+
+    int pid = session.getCurrentMemoryPid();
+    session.setInteractedWithPerson(pid); // mark as interacted
 
     txtInput.clear();
     ChatMessage msg = new ChatMessage("user", message);
@@ -236,13 +260,34 @@ public class ChatController {
 
   @FXML
   private void onViewEvidence(ActionEvent event) {
+    Button sourceButton = (Button) event.getSource();
+    String buttonId = sourceButton.getId();
     try {
 
       Stage imageStage = new Stage();
       imageStage.setTitle("Evidence");
       imageStage.initModality(Modality.APPLICATION_MODAL);
+      Image image = null;
 
-      Image image = new Image(getClass().getResourceAsStream("/images/evidence.png"));
+      switch (buttonId) {
+        case "btnViewEvidence1": // rectPerson1, AI defendant, chat.fxml
+          image = new Image(getClass().getResourceAsStream("/images/evidence1.png"));
+          break;
+        case "btnViewEvidence2": // rectPerson2, AI witness, AIWitnessChat.fxml
+          image = new Image(getClass().getResourceAsStream("/images/evidence2.png"));
+          break;
+        case "btnViewEvidence3": // rectPerson3, Human witness, HumanChat.fxml
+          image = new Image(getClass().getResourceAsStream("/images/evidence3.png"));
+          break;
+        default:
+          break;
+      }
+
+      if (image == null) {
+        System.err.println("No image found for button ID: " + buttonId);
+        return;
+      }
+
       ImageView imageView = new ImageView(image);
       imageView.setFitWidth(400);
       imageView.setFitHeight(300);

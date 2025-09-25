@@ -17,6 +17,7 @@ import nz.ac.auckland.se206.controllers.ChatController;
 public class App extends Application {
 
   private static Scene scene;
+  private static Stage primaryStage;
 
   /**
    * The main method that launches the JavaFX application.
@@ -82,7 +83,13 @@ public class App extends Application {
     ChatController chatController = loader.getController();
     chatController.setProfession(profession);
 
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    Stage stage;
+    if (event == null) {
+      stage = App.getPrimaryStage();
+    } else {
+      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    }
+
     scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
@@ -96,10 +103,15 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
+    primaryStage = stage;
     Parent root = loadFxml("landing");
     scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
     root.requestFocus();
+  }
+
+  public static Stage getPrimaryStage() {
+    return primaryStage;
   }
 }
