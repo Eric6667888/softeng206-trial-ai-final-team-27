@@ -7,14 +7,19 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DecisionController">
    <children>
-      <Button layoutX="437.0" layoutY="325.0" mnemonicParsing="false" onAction="#onReturnClicked" text="Return">
+      <Button layoutX="436.0" layoutY="533.0" mnemonicParsing="false" onAction="#onReturnClicked" text="Return">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Label layoutX="225.0" layoutY="185.0" text="You are CORRECT">
+      <Label fx:id="result" layoutX="223.0" layoutY="55.0" text="You are CORRECT">
          <font>
             <Font size="70.0" />
+         </font>
+      </Label>
+      <Label fx:id="gptFeedback" alignment="TOP_LEFT" layoutX="270.0" layoutY="182.0" prefHeight="323.0" prefWidth="451.0" text="Label">
+         <font>
+            <Font size="20.0" />
          </font>
       </Label>
    </children>

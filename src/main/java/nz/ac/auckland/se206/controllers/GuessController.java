@@ -1,22 +1,61 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
+import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest.Model;
+import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
+import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
+import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
 
-public class GuessController {
+public class GuessController implements Initializable {
   @FXML private Label lblTimer;
+  @FXML private ChoiceBox<String> choiceBox;
+  @FXML private TextArea textField;
+  private String decision;
+
+  // Static field to store GPT feedback for the DecisionController
+  private static String gptFeedbackResponse = "Analyzing your decision...";
+
+  // Static field to store user's decision for the DecisionController
+  private static String userDecision = "";
+
+  // Getter method for the GPT feedback
+  public static String getGptFeedback() {
+    return gptFeedbackResponse;
+  }
+
+  // Getter method for the user's decision
+  public static String getUserDecision() {
+    return userDecision;
+  }
+
+  private String[] options = {"Guilty", "Not Guilty"};
+
   private GameSession session = GameStateContext.getSession();
 
   @FXML
-  public void initialize() throws ApiProxyException {
+  public void initialize(URL arg0, ResourceBundle arg1) {
     GameSession session = GameStateContext.getSession();
+
+    choiceBox.getItems().addAll(options);
+    choiceBox.setOnAction(this::getOptions);
 
     if (session.getVerdictTimer() == null) {
       session.startVerdictWindow(
@@ -38,6 +77,126 @@ public class GuessController {
             Bindings.createStringBinding(
                 () -> format(session.getVerdictTimer().getSecondsLeft()),
                 session.getVerdictTimer().secondsLeftProperty()));
+  }
+
+  public void getOptions(ActionEvent event) {
+    this.decision = choiceBox.getValue();
+  }
+
+  public void submit(ActionEvent event) {
+    String rationale = textField.getText();
+    String guess = this.decision;
+
+    // Store the user's decision for the DecisionController
+    userDecision = guess;
+
+    System.out.println("Sending to GPT - Guess: " + guess + ", Rationale: " + rationale);
+
+    // Send to GPT for analysis
+    sendToGpt(rationale, guess);
+
+    // Navigate to guilty page after submitting
+    try {
+      session.getVerdictTimer().stop();
+      App.setRoot("Guilty");
+    } catch (IOException e) {
+      System.err.println("Error navigating to Guilty page: " + e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+  private void sendToGpt(String rationale, String guess) {
+    try {
+      // Use ConversationManager to access previous conversations
+      ConversationManager manager = ConversationManager.getInstance();
+      ChatCompletionRequest chatCompletionRequest = manager.getChatRequest("analysis");
+
+      chatCompletionRequest.setMaxTokens(900);
+      chatCompletionRequest.setModel(Model.GPT_4_1_MINI);
+
+      // Read the feedback prompt from the file
+      String feedbackPrompt = "";
+      try (InputStream inputStream =
+          getClass().getClassLoader().getResourceAsStream("prompts/feedback.txt")) {
+        if (inputStream != null) {
+          feedbackPrompt = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+        // Fallback prompt if file reading fails
+        feedbackPrompt = "Please provide feedback on the user's reasoning for their decision.";
+      }
+
+      // Create analysis message with current decision and rationale
+      String userDecision = (guess != null ? guess : "No decision made");
+      String userReasoning =
+          (rationale != null && !rationale.trim().isEmpty() ? rationale : "No reasoning provided");
+
+      // Determine if user chose AI to be guilty or not guilty
+      String aiVerdict = "";
+      if (userDecision.toLowerCase().contains("guilty")) {
+        aiVerdict = "The user chose that the AI is GUILTY.";
+      } else {
+        aiVerdict = "The user chose that the AI is NOT GUILTY.";
+      }
+
+      String analysisMessage =
+          feedbackPrompt
+              + "\n\n"
+              + aiVerdict
+              + "\n"
+              + "User's Full Decision: "
+              + userDecision
+              + "\n"
+              + "User's Reasoning: "
+              + userReasoning;
+
+      ChatMessage userMessage = new ChatMessage("user", analysisMessage);
+      chatCompletionRequest.addMessage(userMessage);
+
+      // Create task for GPT call
+      Task<ChatMessage> gptTask =
+          new Task<ChatMessage>() {
+            @Override
+            protected ChatMessage call() throws Exception {
+              ChatCompletionResult result = chatCompletionRequest.execute();
+              Choice choice = result.getChoices().iterator().next();
+              return choice.getChatMessage();
+            }
+
+            @Override
+            protected void succeeded() {
+              Platform.runLater(
+                  () -> {
+                    ChatMessage response = getValue();
+
+                    // Store GPT feedback for the DecisionController
+                    gptFeedbackResponse = response.getContent();
+
+                    // Update the DecisionController if it's loaded
+                    DecisionController.updateGptFeedback(response.getContent());
+                  });
+            }
+
+            @Override
+            protected void failed() {
+              Platform.runLater(
+                  () -> {
+                    System.err.println("GPT analysis failed: " + getException().getMessage());
+                    getException().printStackTrace();
+                  });
+            }
+          };
+
+      // Start the task in a daemon thread
+      Thread thread = new Thread(gptTask);
+      thread.setDaemon(true);
+      thread.start();
+
+    } catch (ApiProxyException e) {
+      System.err.println("Error setting up GPT analysis: " + e.getMessage());
+      e.printStackTrace();
+    }
   }
 
   @FXML
