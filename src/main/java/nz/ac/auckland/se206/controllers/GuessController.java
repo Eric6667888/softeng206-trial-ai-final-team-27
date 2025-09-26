@@ -29,12 +29,13 @@ public class GuessController implements Initializable {
   @FXML private ChoiceBox<String> choiceBox;
   @FXML private TextArea textField;
   private String decision;
+  private static boolean noDecision = false;
 
   // Static field to store GPT feedback for the DecisionController
   private static String gptFeedbackResponse = "Analyzing your decision...";
 
   // Static field to store user's decision for the DecisionController
-  private static String userDecision = "";
+  private static String userDecision = null;
 
   // Getter method for the GPT feedback
   public static String getGptFeedback() {
@@ -46,10 +47,15 @@ public class GuessController implements Initializable {
     return userDecision;
   }
 
+  public static boolean isNoDecision() {
+    return noDecision;
+  }
+
   // Reset static fields for new games
   public static void resetForNewGame() {
     gptFeedbackResponse = "Analyzing your decision...";
-    userDecision = "";
+    userDecision = null;
+    noDecision = false;
   }
 
   private String[] options = {"Guilty", "Not Guilty"};
@@ -60,21 +66,9 @@ public class GuessController implements Initializable {
   public void initialize(URL arg0, ResourceBundle arg1) {
     GameSession session = GameStateContext.getSession();
 
-    choiceBox.getItems().addAll(options);
+    choiceBox.getItems().setAll(options);
+    choiceBox.getSelectionModel().clearSelection();
     choiceBox.setOnAction(this::getOptions);
-
-    if (session.getVerdictTimer() == null) {
-      session.startVerdictWindow(
-          () ->
-              Platform.runLater(
-                  () -> {
-                    try {
-                      App.setRoot("GameOver");
-                    } catch (IOException e) {
-                      e.printStackTrace();
-                    }
-                  }));
-    }
 
     lblTimer.textProperty().unbind();
     lblTimer
@@ -83,13 +77,33 @@ public class GuessController implements Initializable {
             Bindings.createStringBinding(
                 () -> format(session.getVerdictTimer().getSecondsLeft()),
                 session.getVerdictTimer().secondsLeftProperty()));
+
+    session.setAutoSubmitAction(
+        () -> {
+          Platform.runLater(
+              () -> {
+                try {
+                  System.out.println("[AutoSubmit] decision due to timer expiry.");
+                  getOptions(null); // Ensure decision is captured
+                  submit(null);
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+              });
+        });
   }
 
   public void getOptions(ActionEvent event) {
     this.decision = choiceBox.getValue();
+    if (this.decision == null || this.decision.isEmpty()) {
+      noDecision = true;
+    } else {
+      noDecision = false;
+    }
   }
 
   public void submit(ActionEvent event) {
+    getOptions(null); // Ensure we have the latest decision
     String rationale = textField.getText();
     String guess = this.decision;
 
@@ -99,7 +113,16 @@ public class GuessController implements Initializable {
     System.out.println("Sending to GPT - Guess: " + guess + ", Rationale: " + rationale);
 
     // Send to GPT for analysis
-    sendToGpt(rationale, guess);
+    new Thread(
+            () -> {
+              try {
+                sendToGpt(rationale, guess);
+              } catch (Exception e) {
+                System.err.println("Error sending to GPT: " + e.getMessage());
+                e.printStackTrace();
+              }
+            })
+        .start();
 
     // Navigate to guilty page after submitting
     try {
