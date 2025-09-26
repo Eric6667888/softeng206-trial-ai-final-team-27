@@ -45,6 +45,10 @@ public class ChatController {
 
   private ChatCompletionRequest chatCompletionRequest;
   private String profession;
+  private boolean firstViewEvidPerson1 =
+      true; // Track if it's the first time viewing evidence, for AI defendant
+  private boolean firstViewEvidPerson2 = true; // for AI witness
+  private boolean firstViewEvidPerson3 = true; // for Human witness
 
   /**
    * Initializes the chat view.
@@ -279,19 +283,37 @@ public class ChatController {
       switch (buttonId) {
         case "btnViewEvidence1": // rectPerson1, AI defendant, chat.fxml
           image = new Image(getClass().getResourceAsStream("/images/evidence1.png"));
-          txtaChat.appendText("assistant: This is the substance provided by my owner.\n\n");
+          // If first time viewing evidence
+          if (firstViewEvidPerson1) {
+            txtaChat.appendText("assistant: This is the substance provided by my owner.\n\n");
+            firstViewEvidPerson1 = false;
+          } else {
+            // Second or more times viewing evidence
+            txtaChat.appendText("assistant: Sir, do you have questions about the substance?\n\n");
+          }
           break;
         case "btnViewEvidence2": // rectPerson2, AI witness, AIWitnessChat.fxml
           image = new Image(getClass().getResourceAsStream("/images/evidence2.png"));
-          txtaChat.appendText(
-              "assistant: I have checked the footage, and it clearly shows who tampered with the"
-                  + " food.\n\n");
+          if (firstViewEvidPerson2) {
+            txtaChat.appendText(
+                "assistant: This is the security footage I retrieved, and it clearly shows who"
+                    + " tampered with the food.\n\n");
+            firstViewEvidPerson2 = false;
+          } else {
+            txtaChat.appendText(
+                "assistant: Sir, do you have any questions relevant to the footage?\n\n");
+          }
           break;
         case "btnViewEvidence3": // rectPerson3, Human witness, HumanChat.fxml
           image = new Image(getClass().getResourceAsStream("/images/evidence3.png"));
-          txtaChat.appendText(
-              "assistant: I can't imagine who would do such a thing, what do they want from"
-                  + " me?\n\n");
+          if (firstViewEvidPerson3) {
+            txtaChat.appendText(
+                "assistant: I can't imagine who would do such a thing, what do they want from"
+                    + " me?\n\n");
+            firstViewEvidPerson3 = false;
+          } else {
+            txtaChat.appendText("assistant: Why is my AI meeting someone I don't recognize?\n\n");
+          }
           break;
         default:
           break;
