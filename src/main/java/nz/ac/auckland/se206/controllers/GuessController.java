@@ -28,6 +28,9 @@ public class GuessController implements Initializable {
   // Static field to store user's decision for the DecisionController
   private static String userDecision = null;
 
+  // Static field to store GPT feedback for the DecisionController
+  private static String gptFeedbackResponse = "Analyzing your decision...";
+
   // Reset static fields for new games
   public static void resetForNewGame() {
     gptFeedbackResponse = "Analyzing your decision...";
@@ -36,9 +39,6 @@ public class GuessController implements Initializable {
   }
 
   private static boolean noDecision = false;
-
-  // Static field to store GPT feedback for the DecisionController
-  private static String gptFeedbackResponse = "Analyzing your decision...";
 
   // Getter method for the GPT feedback
   public static String getGptFeedback() {
