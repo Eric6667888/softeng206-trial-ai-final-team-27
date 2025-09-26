@@ -19,9 +19,21 @@ import nz.ac.auckland.se206.GameStateContext;
  * flashback slides.
  */
 public final class FlashbackController {
+  // Set definitions of labels/buttons in scene
+  // Format timer
+  private static String format(int totalSeconds) {
+    int minutes = totalSeconds / 60;
+    int seconds = totalSeconds % 60;
+    return String.format("%02d:%02d", minutes, seconds);
+  }
+
   @FXML private ImageView imageView;
-  @FXML private Button btnNext, btnPrevious, btnExit;
-  @FXML private Label lblCaption, lblProgress, lblTimer;
+  @FXML private Button btnNext;
+  @FXML private Button btnPrevious;
+  @FXML private Button btnExit;
+  @FXML private Label lblCaption;
+  @FXML private Label lblProgress;
+  @FXML private Label lblTimer;
 
   private int pid = -1;
   private int idx = 0; // current slide index
@@ -32,6 +44,7 @@ public final class FlashbackController {
   @FXML
   public void initialize() {
     GameSession session = GameStateContext.getSession();
+    // Set timer label to update of Flashback
     lblTimer.textProperty().unbind();
     lblTimer
         .textProperty()
@@ -44,7 +57,7 @@ public final class FlashbackController {
     this.pid = session.getCurrentFlashbackPid();
     // session.loadFlashbacksIfNeeded();
     this.slides = session.getFlashback(pid);
-
+    // if error occir print out error
     if (slides == null || slides.isEmpty()) {
       System.err.println("[Flashback] no slides for pid=" + pid);
       return;
@@ -64,7 +77,7 @@ public final class FlashbackController {
                         case RIGHT:
                         case ENTER:
                         case SPACE:
-                          onNext();
+                          onNextSlide();
                           break;
                         case LEFT:
                         case UP:
@@ -81,15 +94,10 @@ public final class FlashbackController {
             });
   }
 
-  private static String format(int totalSeconds) {
-    int minutes = totalSeconds / 60;
-    int seconds = totalSeconds % 60;
-    return String.format("%02d:%02d", minutes, seconds);
-  }
-
   // Button handlers
   @FXML
-  private void onNext() {
+  private void onNextSlide() {
+    // Check if can go next slide
     if (idx < slides.size() - 1) {
       show(idx + 1);
     } else {
@@ -97,15 +105,19 @@ public final class FlashbackController {
     }
   }
 
+  // Go to previous slide
   @FXML
+  // Check if can go previous slide
   private void onPrev() {
     if (idx > 0) {
       show(idx - 1);
     }
   }
 
+  // Return to courtroom
   @FXML
   private void onExit() {
+    // Check where to return
     GameSession session = GameStateContext.getSession();
     if (pid >= 0) {
       session.setFlashbackPlayed(pid);
@@ -116,10 +128,12 @@ public final class FlashbackController {
 
   // Navigate to the memory view corresponding to the given person ID
   private void goToMemory(int pid) {
+    // Check if go stright to memory or to flashback
     if (pid < 0) {
       System.err.println("[Flashback] Invalid personId=" + pid);
       return;
     }
+    // go to the person id memory and exception handle for bugs
     GameSession session = GameStateContext.getSession();
     session.setCurrentMemoryPid(pid);
     try {

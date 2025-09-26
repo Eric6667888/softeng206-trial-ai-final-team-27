@@ -70,26 +70,28 @@ public final class GameSession {
   }
 
   public void resetForNewGame(int totalSeconds) {
-
+    // Clear all variables for new game
     stopAll();
     haveAllThreeTalked.set(false);
-
+    // Adjust checks on if user talked with characters
     currentFlashbackPid = -1;
     System.out.println("[GameSession] resetForNewGame");
     Arrays.fill(flashbackPlayed, false);
     Arrays.fill(interactedWithPerson, false);
     allThreeTalked = false;
     verdictStarted = false;
-
+    // Function to reset everything to orignal state
     resetAndStartNewRound(totalSeconds);
   }
 
   public void startVerdictWindow(Runnable onVerdictExpire) {
+    // When timer expire go to verdict window
     if (verdictStarted) {
       return;
     }
     verdictStarted = true;
     roundTimer.stop();
+    // Set up verdict timer to start at 60s
     if (verdictTimer == null) {
       verdictTimer = new VerdictTimer(60);
     } else {
@@ -104,6 +106,8 @@ public final class GameSession {
       return;
     }
     verdictStarted = true;
+    // Change timer to be one minute for verdict, and set actions for once timer expires and where
+    // the make verdict scene is
     roundTimer.stop();
     Platform.runLater(
         () -> {
@@ -115,12 +119,14 @@ public final class GameSession {
             } else {
               verdictTimer.reset(60);
             }
+            // When timer expire auto send whatever user has written and say timer has expired
             verdictTimer.setOnExpire(
                 () -> {
                   System.out.println("[VerdictTimer] expired");
                   triggerAutoSubmit();
                 });
             verdictTimer.start();
+            // Change scene to make verdict scene and handle errors
             App.setRoot("MakeGuess");
           } catch (IOException e) {
             e.printStackTrace();
@@ -199,11 +205,14 @@ public final class GameSession {
     currentFlashbackPid = personId;
   }
 
+  // Get images of flashbacks
   public void loadFlashbacksIfNeeded() {
+    // Check if flashback already played, if so do nothing and go ot memory
     if (!flashbacks.isEmpty()) {
       return;
     }
     // Need new pictures and captions
+    // Flashback images for AI defendant
     flashbacks.put(
         0,
         List.of(
@@ -216,6 +225,7 @@ public final class GameSession {
             new FlashbackSlide(
                 "/images/flashbacks/person0_slide2.png",
                 "Commands from my owner have the highest priority, so I obey without question.")));
+    // Flashback context for AI witness
     flashbacks.put(
         1,
         List.of(
@@ -228,6 +238,7 @@ public final class GameSession {
             new FlashbackSlide(
                 "/images/flashbacks/person1_slide2.png",
                 "I immediately checked the security footage, in case anything was deleted.")));
+    // Flashback context for Human Witness
     flashbacks.put(
         2,
         List.of(

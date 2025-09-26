@@ -37,18 +37,9 @@ public class ChatController {
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
-  @FXML private Button btnViewEvidence1;
-  @FXML private Button btnViewEvidence2;
-  @FXML private Button btnViewEvidence3;
-  @FXML private Label lblTimer;
-  @FXML private Label fbLabel;
 
   private ChatCompletionRequest chatCompletionRequest;
   private String profession;
-  private boolean firstViewEvidPerson1 =
-      true; // Track if it's the first time viewing evidence, for AI defendant
-  private boolean firstViewEvidPerson2 = true; // for AI witness
-  private boolean firstViewEvidPerson3 = true; // for Human witness
 
   /**
    * Initializes the chat view.
@@ -92,6 +83,16 @@ public class ChatController {
     int seconds = totalSeconds % 60;
     return String.format("%02d:%02d", minutes, seconds);
   }
+
+  @FXML private Label fbLabel;
+  @FXML private Label lblTimer;
+  @FXML private Button btnViewEvidence1;
+  @FXML private Button btnViewEvidence2;
+  @FXML private Button btnViewEvidence3;
+  private boolean firstViewEvidPerson1 =
+      true; // Track if it's the first time viewing evidence, for AI defendant
+  private boolean firstViewEvidPerson2 = true; // for AI witness
+  private boolean firstViewEvidPerson3 = true; // for Human witness
 
   /**
    * Generates the system prompt based on the profession.
@@ -156,6 +157,7 @@ public class ChatController {
     chatCompletionRequest.addMessage(msg);
     Task<ChatMessage> gptTask =
         new Task<ChatMessage>() {
+          // Get chat message form user and send to GPT
           @Override
           protected ChatMessage call() throws Exception {
             chatCompletionRequest.addMessage(msg);
@@ -165,6 +167,7 @@ public class ChatController {
             return result.getChatMessage();
           }
 
+          // If succeeded then append response from GPT into chat
           @Override
           protected void succeeded() {
             Platform.runLater(
@@ -174,6 +177,7 @@ public class ChatController {
                 });
           }
 
+          // If failed print on terminal stack trace
           @Override
           protected void failed() {
             Platform.runLater(
@@ -183,7 +187,7 @@ public class ChatController {
                 });
           }
         };
-
+    // Create background thread to run task to increase speed
     Thread thread = new Thread(gptTask);
     thread.setDaemon(true);
     thread.start();
@@ -198,8 +202,10 @@ public class ChatController {
    */
   @FXML
   private void onSendMessage() throws ApiProxyException, IOException {
+    // Send message to GPT
     GameSession session = GameStateContext.getSession();
     String message = txtInput.getText().trim();
+    // If message empty then don't do anything
     if (message.isEmpty()) {
       return;
     }
@@ -219,11 +225,13 @@ public class ChatController {
     Task<ChatMessage> gptTask =
         new Task<ChatMessage>() {
           @Override
+          // Send chat message to GPT
           protected ChatMessage call() throws Exception {
+            // Check if other chat knowledge needed
             if (crossChatContext != null) {
               chatCompletionRequest.addMessage(crossChatContext);
             }
-
+            // Get user response and send to GPT
             chatCompletionRequest.addMessage(msg);
             ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
             Choice result = chatCompletionResult.getChoices().iterator().next();
@@ -233,6 +241,8 @@ public class ChatController {
 
           @Override
           protected void succeeded() {
+            // If GPT response succeeded, append response into chatroom and make send button
+            // unavaiable until GPT response sent
             Platform.runLater(
                 () -> {
                   ChatMessage response = getValue();
@@ -243,6 +253,7 @@ public class ChatController {
 
           @Override
           protected void failed() {
+            // If GPT has failed then print stacktrace onto terminal
             Platform.runLater(
                 () -> {
                   btnSend.setDisable(false);

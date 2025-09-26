@@ -60,15 +60,19 @@ public class App extends Application {
   public static void openChat(MouseEvent event, String profession, String rectangleId)
       throws IOException {
     String sceneName;
+    // Set characters as buttons
     switch (rectangleId) {
+      // AI defendant
       case "rectPerson1":
         sceneName = "chat";
         profession = "AI defendant";
         break;
+      // AI witness - security
       case "rectPerson2":
         sceneName = "AIWitnessChat";
         profession = "AI witness";
         break;
+      // Human witness - mayor
       case "rectPerson3":
         sceneName = "HumanChat";
         profession = "Human witness";
@@ -77,12 +81,13 @@ public class App extends Application {
         sceneName = "chat";
         break;
     }
+    // Load initial scene
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + sceneName + ".fxml"));
     Parent root = loader.load();
 
     ChatController chatController = loader.getController();
     chatController.setProfession(profession);
-
+    // Create stage
     Stage stage;
     if (event == null) {
       stage = App.getPrimaryStage();
@@ -104,13 +109,15 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
     primaryStage = stage;
-    Parent root = loadFxml("landing");
+    Parent root =
+        loadFxml("landing"); // Takes user initially to landing page where they press play to begin
     scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
     root.requestFocus();
   }
 
+  // Get the stage
   public static Stage getPrimaryStage() {
     return primaryStage;
   }

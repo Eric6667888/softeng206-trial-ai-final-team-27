@@ -12,9 +12,9 @@
             <Font size="30.0" />
          </font>
       </Button>
-      <Label fx:id="result" layoutX="223.0" layoutY="55.0" text="You are CORRECT">
+      <Label fx:id="result" layoutX="176.0" layoutY="66.0" prefHeight="86.0" prefWidth="768.0" text="You're verdict is CORRECT" textAlignment="CENTER">
          <font>
-            <Font size="70.0" />
+            <Font size="60.0" />
          </font>
       </Label>
       <Label fx:id="gptFeedback" alignment="TOP_LEFT" layoutX="270.0" layoutY="182.0" prefHeight="323.0" prefWidth="451.0" text="Label">
