@@ -12,11 +12,20 @@ import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
 
 public class DecisionController implements Initializable {
-
-  @FXML private Label result;
-  @FXML private Label gptFeedback;
-
   private static DecisionController currentInstance;
+
+  // Method to update GPT feedback from GuessController
+  public static void updateGptFeedback(String feedback) {
+    if (currentInstance != null) {
+      Platform.runLater(
+          () -> {
+            currentInstance.gptFeedback.setText(feedback);
+          });
+    }
+  }
+
+  @FXML private Label gptFeedback;
+  @FXML private Label result;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -42,27 +51,18 @@ public class DecisionController implements Initializable {
     }
   }
 
-  // Method to update GPT feedback from GuessController
-  public static void updateGptFeedback(String feedback) {
-    if (currentInstance != null) {
-      Platform.runLater(
-          () -> {
-            currentInstance.gptFeedback.setText(feedback);
-          });
-    }
-  }
-
   @FXML
-  public void onReturnClicked() throws IOException {
+  private void onReturnClicked() throws IOException {
+    // When return clicked, go back to landing page to restart
     GameSession s = GameStateContext.getSession();
     if (s != null) {
       s.stopAll();
     }
-
+    // Reset data to be fresh for new game
     ConversationManager.getInstance().clearAllConversations();
 
     GuessController.resetForNewGame();
-
+    // Take user to landing page
     App.setRoot("landing");
   }
 }

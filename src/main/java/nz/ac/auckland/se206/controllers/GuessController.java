@@ -25,6 +25,13 @@ import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
 
 public class GuessController implements Initializable {
+  // Reset static fields for new games
+  public static void resetForNewGame() {
+    gptFeedbackResponse = "Analyzing your decision...";
+    userDecision = null;
+    noDecision = false;
+  }
+
   @FXML private Label lblTimer;
   @FXML private ChoiceBox<String> choiceBox;
   @FXML private TextArea textField;
@@ -51,25 +58,19 @@ public class GuessController implements Initializable {
     return noDecision;
   }
 
-  // Reset static fields for new games
-  public static void resetForNewGame() {
-    gptFeedbackResponse = "Analyzing your decision...";
-    userDecision = null;
-    noDecision = false;
-  }
-
   private String[] options = {"Guilty", "Not Guilty"};
 
   private GameSession session = GameStateContext.getSession();
 
   @FXML
+  @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
     GameSession session = GameStateContext.getSession();
-
+    // Set up choicebox to store user input and setup with guilty or not guilty
     choiceBox.getItems().setAll(options);
     choiceBox.getSelectionModel().clearSelection();
     choiceBox.setOnAction(this::getOptions);
-
+    // Make timer for verdict scene of 1 minute
     lblTimer.textProperty().unbind();
     lblTimer
         .textProperty()
@@ -77,7 +78,7 @@ public class GuessController implements Initializable {
             Bindings.createStringBinding(
                 () -> format(session.getVerdictTimer().getSecondsLeft()),
                 session.getVerdictTimer().secondsLeftProperty()));
-
+    // Auto submit user rationale if timer ran out
     session.setAutoSubmitAction(
         () -> {
           Platform.runLater(
@@ -85,7 +86,7 @@ public class GuessController implements Initializable {
                 try {
                   System.out.println("[AutoSubmit] decision due to timer expiry.");
                   getOptions(null); // Ensure decision is captured
-                  submit(null);
+                  onSubmit(null);
                 } catch (Exception e) {
                   e.printStackTrace();
                 }
@@ -102,7 +103,8 @@ public class GuessController implements Initializable {
     }
   }
 
-  public void submit(ActionEvent event) {
+  @FXML
+  private void onSubmit(ActionEvent event) {
     getOptions(null); // Ensure we have the latest decision
     String rationale = textField.getText();
     String guess = this.decision;
@@ -162,7 +164,7 @@ public class GuessController implements Initializable {
           (rationale != null && !rationale.trim().isEmpty() ? rationale : "No reasoning provided");
 
       // Determine if user chose AI to be guilty or not guilty
-      String aiVerdict = "";
+      String aiVerdict;
       if (userDecision.toLowerCase().contains("not guilty")) {
         aiVerdict = "The user chose that the AI is NOT GUILTY.";
       } else {

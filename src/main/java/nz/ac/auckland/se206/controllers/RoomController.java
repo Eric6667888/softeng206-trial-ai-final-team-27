@@ -24,10 +24,10 @@ public class RoomController {
   @FXML private Rectangle rectPerson2;
   @FXML private Rectangle rectPerson3;
   @FXML private Rectangle rectWaitress;
-  @FXML private Rectangle rectVerdict;
 
   private static boolean isFirstTimeInit = true;
   private static GameStateContext context = new GameStateContext();
+  @FXML private Rectangle rectVerdict;
   @FXML private Label lblTimer;
 
   /**

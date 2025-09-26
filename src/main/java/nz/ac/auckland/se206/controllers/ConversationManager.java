@@ -9,12 +9,6 @@ import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 
 public class ConversationManager {
-  private static ConversationManager instance;
-  // Store conversations in maps
-  private Map<String, ChatCompletionRequest> chatRequests = new HashMap<>();
-  private Map<String, StringBuilder> chatHistories = new HashMap<>();
-  private Map<String, Boolean> introductionStatus = new HashMap<>();
-
   public static ConversationManager getInstance() {
     if (instance == null) {
       instance = new ConversationManager();
@@ -22,8 +16,16 @@ public class ConversationManager {
     return instance;
   }
 
+  private static ConversationManager instance;
+  // Store conversations in maps
+  private Map<String, ChatCompletionRequest> chatRequests = new HashMap<>();
+  private Map<String, StringBuilder> chatHistories = new HashMap<>();
+  private Map<String, Boolean> introductionStatus = new HashMap<>();
+
   public ChatCompletionRequest getChatRequest(String profession) throws ApiProxyException {
+    // Check if chat has been made with character
     if (!chatRequests.containsKey(profession)) {
+      // Configure LLM settings for response
       ApiProxyConfig config = ApiProxyConfig.readConfig();
       ChatCompletionRequest request =
           new ChatCompletionRequest(config)
@@ -32,7 +34,7 @@ public class ConversationManager {
               .setTopP(0.5)
               .setModel(Model.GPT_4_1_MINI)
               .setMaxTokens(100);
-
+      // Get needed data to send to LLM
       chatRequests.put(profession, request);
       chatHistories.put(profession, new StringBuilder());
       introductionStatus.put(profession, false);
@@ -53,18 +55,18 @@ public class ConversationManager {
   // Build context from all other conversations for cross-chat memory
   private String buildCrossChatContext(String currentProfession) {
     StringBuilder contextBuilder = new StringBuilder();
-
+    // Check if previous context required from other chats, if not append to message context
     if (!chatHistories.isEmpty()) {
       contextBuilder.append("PREVIOUS CONVERSATIONS CONTEXT:\n");
       contextBuilder.append(
           "You have access to information from previous conversations with other characters. ");
       contextBuilder.append(
           "Use this context to reference what happened in other chats when asked.\n\n");
-
+      // Go through map to get chat history
       for (Map.Entry<String, StringBuilder> entry : chatHistories.entrySet()) {
         String profession = entry.getKey();
         String history = entry.getValue().toString();
-
+        // Tell LLM who conversation is with so chat history stored with each character
         if (!profession.equals(currentProfession) && !history.trim().isEmpty()) {
           contextBuilder
               .append("=== CONVERSATION WITH ")
