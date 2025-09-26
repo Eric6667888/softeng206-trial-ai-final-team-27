@@ -8,4 +8,4 @@ Security footage shows AI at the scene pouring liquid onto food
 Correct if 2/3 of these points are mentioned in the rationale.
 If 1/3 or less points are mentioned, state what points were missed.
 Finally for your last statement, state whether the rationale is correct or incorrect.
-Be as consise as possible.
+Be as consise as possible. Don't talk about score or what score the user got, simply give feedback and result of correct or incorrect. 
