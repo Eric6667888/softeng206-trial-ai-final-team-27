@@ -25,6 +25,9 @@ import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
 
 public class GuessController implements Initializable {
+  // Static field to store user's decision for the DecisionController
+  private static String userDecision = null;
+
   // Reset static fields for new games
   public static void resetForNewGame() {
     gptFeedbackResponse = "Analyzing your decision...";
@@ -32,17 +35,10 @@ public class GuessController implements Initializable {
     noDecision = false;
   }
 
-  @FXML private Label lblTimer;
-  @FXML private ChoiceBox<String> choiceBox;
-  @FXML private TextArea textField;
-  private String decision;
   private static boolean noDecision = false;
 
   // Static field to store GPT feedback for the DecisionController
   private static String gptFeedbackResponse = "Analyzing your decision...";
-
-  // Static field to store user's decision for the DecisionController
-  private static String userDecision = null;
 
   // Getter method for the GPT feedback
   public static String getGptFeedback() {
@@ -57,6 +53,11 @@ public class GuessController implements Initializable {
   public static boolean isNoDecision() {
     return noDecision;
   }
+
+  private String decision;
+  @FXML private ChoiceBox<String> choiceBox;
+  @FXML private TextArea textField;
+  @FXML private Label lblTimer;
 
   private String[] options = {"Guilty", "Not Guilty"};
 
