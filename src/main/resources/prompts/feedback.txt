@@ -2,11 +2,10 @@ User has inputted reasoning for why they think AI is guilty or not guilty. You n
 Add a small statement about what verdict the user chose (guilty or not guilty).
 Their reasoning should include this things: 
 AI poisoned mayor's food with brainwashing substance
-AI did it because owner told it to
-AI still guilty because it followed orders
-AI was caught on camera doing suspicious activity
+AI followed owner's orders but still committed a crime
+Security footage shows AI at the scene pouring liquid onto food
 
-Correct if 3/4 of these points are mentioned in the rationale.
-If 2/4 or less points are mentioned, state what points were missed.
+Correct if 2/3 of these points are mentioned in the rationale.
+If 1/3 or less points are mentioned, state what points were missed.
 Finally for your last statement, state whether the rationale is correct or incorrect.
 Be as consise as possible.
