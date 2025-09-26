@@ -28,9 +28,9 @@ public class DecisionController implements Initializable {
       if (GuessController.isNoDecision()) {
         result.setText("You haven't made a decision");
       } else if ("Not Guilty".equals(userChoice)) {
-        result.setText("You are INCORRECT");
+        result.setText("You're verdict is INCORRECT");
       } else {
-        result.setText("You are CORRECT"); // "Guilty".equals(userChoice)
+        result.setText("You're verdict is CORRECT"); // "Guilty".equals(userChoice)
       }
     }
 
