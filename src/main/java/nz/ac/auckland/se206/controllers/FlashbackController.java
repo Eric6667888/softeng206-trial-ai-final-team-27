@@ -102,7 +102,7 @@ public final class FlashbackController {
     if (idx < slides.size() - 1) {
       show(idx + 1);
     } else {
-      onExit(); //
+      onExit();
     }
   }
 
