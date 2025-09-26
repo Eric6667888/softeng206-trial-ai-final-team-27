@@ -20,6 +20,9 @@ import nz.ac.auckland.se206.GameStateContext;
  */
 public final class FlashbackController {
   // Set definitions of labels/buttons in scene
+  private static GameStateContext context =
+      new GameStateContext(); // do not use except via goToMemory()
+
   // Format timer
   private static String format(int totalSeconds) {
     int minutes = totalSeconds / 60;
@@ -38,8 +41,6 @@ public final class FlashbackController {
   private int pid = -1;
   private int idx = 0; // current slide index
   private List<FlashbackSlide> slides;
-  private static GameStateContext context =
-      new GameStateContext(); // do not use except via goToMemory()
 
   @FXML
   public void initialize() {
@@ -97,7 +98,7 @@ public final class FlashbackController {
   // Button handlers
   @FXML
   private void onNextSlide() {
-    // Check if can go next slide
+    // Check if there slides to go forward, else go to memory
     if (idx < slides.size() - 1) {
       show(idx + 1);
     } else {
@@ -149,10 +150,11 @@ public final class FlashbackController {
   private void show(int i) {
     this.idx = i;
     FlashbackSlide s = slides.get(idx);
-
+    // Check if image for slide is available
     URL url =
         Objects.requireNonNull(
             App.class.getResource(s.getImagePath()), "Missing resource: " + s.getImagePath());
+    // Set up flashback to show image and text
     imageView.setImage(new Image(url.toExternalForm(), true));
     lblCaption.setText(s.getCaption());
     lblProgress.setText((i + 1) + " / " + slides.size());

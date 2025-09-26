@@ -9,6 +9,9 @@ import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 
 public class ConversationManager {
+
+  private static ConversationManager instance;
+
   public static ConversationManager getInstance() {
     if (instance == null) {
       instance = new ConversationManager();
@@ -16,7 +19,6 @@ public class ConversationManager {
     return instance;
   }
 
-  private static ConversationManager instance;
   // Store conversations in maps
   private Map<String, ChatCompletionRequest> chatRequests = new HashMap<>();
   private Map<String, StringBuilder> chatHistories = new HashMap<>();

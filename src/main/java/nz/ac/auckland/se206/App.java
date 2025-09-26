@@ -87,10 +87,10 @@ public class App extends Application {
 
     ChatController chatController = loader.getController();
     chatController.setProfession(profession);
-    // Create stage
+    // Check if stage can be made and then set as scene
     Stage stage;
     if (event == null) {
-      stage = App.getPrimaryStage();
+      stage = getPrimaryStage();
     } else {
       stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     }
