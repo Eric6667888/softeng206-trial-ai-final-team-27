@@ -26,6 +26,7 @@ import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
+import nz.ac.auckland.se206.PopUpManager;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 
 /**
@@ -284,71 +285,77 @@ public class ChatController {
   private void onViewEvidence(ActionEvent event) {
     Button sourceButton = (Button) event.getSource();
     String buttonId = sourceButton.getId();
-    try {
 
-      Stage imageStage = new Stage();
-      imageStage.setTitle("Evidence");
-      imageStage.initModality(Modality.APPLICATION_MODAL);
-      Image image = null;
+    // temporary if else for testing new interactables
+    if (buttonId.equals("btnViewEvidence2")) {
+      PopUpManager.showPopup("SecurityCamera", "Security Footage");
+    } else {
+      try {
 
-      switch (buttonId) {
-        case "btnViewEvidence1": // rectPerson1, AI defendant, chat.fxml
-          image = new Image(getClass().getResourceAsStream("/images/evidence1.png"));
-          // If first time viewing evidence
-          if (firstViewEvidPerson1) {
-            txtaChat.appendText("assistant: This is the substance provided by my owner.\n\n");
-            firstViewEvidPerson1 = false;
-          } else {
-            // Second or more times viewing evidence
-            txtaChat.appendText("assistant: Sir, do you have questions about the substance?\n\n");
-          }
-          break;
-        case "btnViewEvidence2": // rectPerson2, AI witness, AIWitnessChat.fxml
-          image = new Image(getClass().getResourceAsStream("/images/evidence2.png"));
-          if (firstViewEvidPerson2) {
-            txtaChat.appendText(
-                "assistant: This is the security footage I retrieved, and it clearly shows who"
-                    + " tampered with the food.\n\n");
-            firstViewEvidPerson2 = false;
-          } else {
-            txtaChat.appendText(
-                "assistant: Sir, do you have any questions relevant to the footage?\n\n");
-          }
-          break;
-        case "btnViewEvidence3": // rectPerson3, Human witness, HumanChat.fxml
-          image = new Image(getClass().getResourceAsStream("/images/evidence3.png"));
-          if (firstViewEvidPerson3) {
-            txtaChat.appendText(
-                "assistant: I can't imagine who would do such a thing, what do they want from"
-                    + " me?\n\n");
-            firstViewEvidPerson3 = false;
-          } else {
-            txtaChat.appendText("assistant: Why is my AI meeting someone I don't recognize?\n\n");
-          }
-          break;
-        default:
-          break;
+        Stage imageStage = new Stage();
+        imageStage.setTitle("Evidence");
+        imageStage.initModality(Modality.APPLICATION_MODAL);
+        Image image = null;
+
+        switch (buttonId) {
+          case "btnViewEvidence1": // rectPerson1, AI defendant, chat.fxml
+            image = new Image(getClass().getResourceAsStream("/images/evidence1.png"));
+            // If first time viewing evidence
+            if (firstViewEvidPerson1) {
+              txtaChat.appendText("assistant: This is the substance provided by my owner.\n\n");
+              firstViewEvidPerson1 = false;
+            } else {
+              // Second or more times viewing evidence
+              txtaChat.appendText("assistant: Sir, do you have questions about the substance?\n\n");
+            }
+            break;
+          case "btnViewEvidence2": // rectPerson2, AI witness, AIWitnessChat.fxml
+            image = new Image(getClass().getResourceAsStream("/images/evidence2.png"));
+            if (firstViewEvidPerson2) {
+              txtaChat.appendText(
+                  "assistant: This is the security footage I retrieved, and it clearly shows who"
+                      + " tampered with the food.\n\n");
+              firstViewEvidPerson2 = false;
+            } else {
+              txtaChat.appendText(
+                  "assistant: Sir, do you have any questions relevant to the footage?\n\n");
+            }
+            break;
+          case "btnViewEvidence3": // rectPerson3, Human witness, HumanChat.fxml
+            image = new Image(getClass().getResourceAsStream("/images/evidence3.png"));
+            if (firstViewEvidPerson3) {
+              txtaChat.appendText(
+                  "assistant: I can't imagine who would do such a thing, what do they want from"
+                      + " me?\n\n");
+              firstViewEvidPerson3 = false;
+            } else {
+              txtaChat.appendText("assistant: Why is my AI meeting someone I don't recognize?\n\n");
+            }
+            break;
+          default:
+            break;
+        }
+
+        if (image == null) {
+          System.err.println("No image found for button ID: " + buttonId);
+          return;
+        }
+
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(400);
+        imageView.setFitHeight(300);
+        imageView.setPreserveRatio(true);
+
+        VBox layout = new VBox();
+        layout.getChildren().add(imageView);
+
+        Scene scene = new Scene(layout);
+        imageStage.setScene(scene);
+        imageStage.show();
+
+      } catch (Exception e) {
+        System.err.println("Error showing image: " + e.getMessage());
       }
-
-      if (image == null) {
-        System.err.println("No image found for button ID: " + buttonId);
-        return;
-      }
-
-      ImageView imageView = new ImageView(image);
-      imageView.setFitWidth(400);
-      imageView.setFitHeight(300);
-      imageView.setPreserveRatio(true);
-
-      VBox layout = new VBox();
-      layout.getChildren().add(imageView);
-
-      Scene scene = new Scene(layout);
-      imageStage.setScene(scene);
-      imageStage.show();
-
-    } catch (Exception e) {
-      System.err.println("Error showing image: " + e.getMessage());
     }
   }
 }

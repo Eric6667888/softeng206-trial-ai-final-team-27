@@ -13,17 +13,17 @@ import javafx.scene.layout.BorderPane;
  * camera functionalities during evidence collection.
  */
 public class SecurityCameraController {
-  @FXML private ImageView camera;
-  @FXML private BorderPane backgBorderPane;
-  @FXML private Slider cameraSlider;
+  @FXML private ImageView imgSecurityScreen;
+  @FXML private BorderPane pane;
+  @FXML private Slider sldCameraTime;
 
   /** Initializes the security camera view. */
   @FXML
   private void initialize() {
     // Set initial values for the camera view and slider
-    camera.setImage(new Image("/images/Security_NoAI.png"));
-    cameraSlider.setValue(0);
-    cameraSlider
+    imgSecurityScreen.setImage(new Image("/images/Security_NoAI.png"));
+    sldCameraTime.setValue(0);
+    sldCameraTime
         .valueProperty()
         .addListener(
             new ChangeListener<Number>() {
@@ -32,9 +32,9 @@ public class SecurityCameraController {
                   ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 // Checking if slider is between certain ranges to change the image accordingly
                 if (newValue.doubleValue() >= 55 && newValue.doubleValue() <= 60) {
-                  camera.setImage(new Image("/images/Security_WithAI.png"));
+                  imgSecurityScreen.setImage(new Image("/images/Security_WithAI.png"));
                 } else {
-                  camera.setImage(new Image("/images/Security_NoAI.png"));
+                  imgSecurityScreen.setImage(new Image("/images/Security_NoAI.png"));
                 }
               }
             });
