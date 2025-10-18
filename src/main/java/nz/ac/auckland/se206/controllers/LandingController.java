@@ -1,19 +1,25 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
 
-public class LandingController {
+public class LandingController implements Initializable {
   // nz.ac.auckland.se206.controllers.LandingController
 
   @FXML private Button btnPlay;
+  @FXML private Label titleLabel;
 
   @FXML
   private void onPlay(ActionEvent event) throws ApiProxyException, IOException {
@@ -62,5 +68,23 @@ public class LandingController {
                 }));
 
     App.setRoot("room");
+  }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    // Load the custom font and apply it to the controls
+    Font customFont96 =
+        Font.loadFont(getClass().getResourceAsStream("/fonts/NeonVampire-AnRp.ttf"), 96);
+    Font customFont29 =
+        Font.loadFont(getClass().getResourceAsStream("/fonts/NeonVampire-AnRp.ttf"), 29);
+
+    if (customFont96 != null && titleLabel != null) {
+      titleLabel.setFont(customFont96);
+      titleLabel.setStyle("-fx-text-fill: black;");
+    }
+
+    if (customFont29 != null && btnPlay != null) {
+      btnPlay.setFont(customFont29);
+    }
   }
 }

@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.controllers.ChatController;
 
@@ -109,9 +110,21 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
     primaryStage = stage;
+
+    // Preload the custom font
+    Font customFont =
+        Font.loadFont(getClass().getResourceAsStream("/fonts/NeonVampire-AnRp.ttf"), 12);
+    if (customFont == null) {
+      System.out.println("Warning: Could not load NeonVampire font");
+    } else {
+      System.out.println("Successfully loaded font: " + customFont.getFamily());
+    }
+
     Parent root =
         loadFxml("landing"); // Takes user initially to landing page where they press play to begin
     scene = new Scene(root);
+    // Load the CSS stylesheet
+    scene.getStylesheets().add(getClass().getResource("/css/landing.css").toExternalForm());
     stage.setScene(scene);
     stage.show();
     root.requestFocus();

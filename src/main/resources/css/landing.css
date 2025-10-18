@@ -1,0 +1,21 @@
+/* Style for the main title */
+.title-label {
+  -fx-text-fill: #ffffff;
+  -fx-text-alignment: center;
+}
+
+/* Style for the play button */
+.play-button {
+  -fx-background-color: #4a4a4a;
+  -fx-text-fill: #ffffff;
+  -fx-background-radius: 10px;
+  -fx-border-radius: 10px;
+}
+
+.play-button:hover {
+  -fx-background-color: #666666;
+}
+
+.play-button:pressed {
+  -fx-background-color: #333333;
+}
