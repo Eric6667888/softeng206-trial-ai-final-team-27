@@ -1,5 +1,5 @@
 /* Background for the landing page */
-.root {
+.landing-page {
   -fx-background-image: url("/images/landing.gif");
   -fx-background-size: auto;
   -fx-background-position: center;

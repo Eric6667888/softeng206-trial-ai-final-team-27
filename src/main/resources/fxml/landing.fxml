@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="700.0" maxWidth="1000" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LandingController">
+<Pane maxHeight="700.0" maxWidth="1000" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" styleClass="landing-page" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LandingController">
    <children>
       <Button fx:id="btnPlay" contentDisplay="CENTER" layoutX="365.0" layoutY="320.0" mnemonicParsing="false" onAction="#onPlay" prefHeight="55.0" prefWidth="270.0" styleClass="play-button" text="Play" textAlignment="CENTER" />
       <Label fx:id="titleLabel" layoutX="230.0" layoutY="35.0" styleClass="title-label" text="Trial AI" />
