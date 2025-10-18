@@ -73,14 +73,17 @@ public class LandingController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // Load the custom font and apply it to the controls
-    Font customFont96 =
-        Font.loadFont(getClass().getResourceAsStream("/fonts/NeonVampire-AnRp.ttf"), 96);
+    Font customFont140 =
+        Font.loadFont(getClass().getResourceAsStream("/fonts/NeonVampire-AnRp.ttf"), 140);
     Font customFont29 =
         Font.loadFont(getClass().getResourceAsStream("/fonts/NeonVampire-AnRp.ttf"), 29);
 
-    if (customFont96 != null && titleLabel != null) {
-      titleLabel.setFont(customFont96);
-      titleLabel.setStyle("-fx-text-fill: black;");
+    if (customFont140 != null && titleLabel != null) {
+      titleLabel.setFont(customFont140);
+      // Add stroke/outline programmatically
+      titleLabel.setStyle(
+          "-fx-text-fill: #ffd900; -fx-stroke: black; -fx-stroke-width: 4px; -fx-stroke-type:"
+              + " outside;");
     }
 
     if (customFont29 != null && btnPlay != null) {

@@ -1,7 +1,19 @@
+/* Background for the landing page */
+.root {
+  -fx-background-image: url("/images/landing.gif");
+  -fx-background-size: auto;
+  -fx-background-position: center;
+  -fx-background-repeat: no-repeat;
+}
+
 /* Style for the main title */
 .title-label {
-  -fx-text-fill: #ffffff;
+  -fx-text-fill: #ffd900;
   -fx-text-alignment: center;
+  -fx-stroke: #000000;
+  -fx-stroke-width: 4px;
+  -fx-stroke-type: outside;
+  -fx-effect: dropshadow(gaussian, #52b3d1, 2, 1.0, 1, 1);
 }
 
 /* Style for the play button */
@@ -10,10 +22,11 @@
   -fx-text-fill: #ffffff;
   -fx-background-radius: 10px;
   -fx-border-radius: 10px;
+  -fx-cursor: hand;
 }
 
 .play-button:hover {
-  -fx-background-color: #666666;
+  -fx-background-color: #52b3d1;
 }
 
 .play-button:pressed {
