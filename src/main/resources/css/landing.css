@@ -18,8 +18,8 @@
 
 /* Style for the play button */
 .play-button {
-  -fx-background-color: #4a4a4a;
-  -fx-text-fill: #ffffff;
+  -fx-background-color: #ffd900;
+  -fx-text-fill: #52b3d1;
   -fx-background-radius: 10px;
   -fx-border-radius: 10px;
   -fx-cursor: hand;
@@ -27,6 +27,7 @@
 
 .play-button:hover {
   -fx-background-color: #52b3d1;
+  -fx-text-fill: #ffd900;
 }
 
 .play-button:pressed {
