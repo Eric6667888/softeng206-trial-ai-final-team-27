@@ -49,7 +49,7 @@
             <Image url="@../images/Hammer.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectVerdict" styleClass="verdict-btn" arcHeight="5.0" arcWidth="5.0" fill="#003566" height="158.0" layoutX="329.0" layoutY="469.0" onMouseClicked="#onVerdictClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="328.0">
+      <Rectangle fx:id="rectVerdict" styleClass="verdict-btn" arcHeight="5.0" arcWidth="5.0" fill="#003566" height="158.0" layoutX="329.0" layoutY="469.0" onMouseClicked="#onVerdictClicked" opacity="0.01" stroke="BLACK" strokeType="INSIDE" width="328.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
