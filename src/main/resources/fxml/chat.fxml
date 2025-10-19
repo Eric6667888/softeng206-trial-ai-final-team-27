@@ -9,22 +9,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" styleClass="chat-container-human" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
   <children>
       <ImageView fitHeight="650.0" fitWidth="1006.0" layoutX="-3.0" layoutY="-109.0" pickOnBounds="true">
          <image>
             <Image url="@../images/dinner_resize.png" />
          </image>
       </ImageView>
-    <TextArea fx:id="txtaChat" editable="false" layoutX="-2.0" layoutY="497.0" prefHeight="154.0" prefWidth="1006.0" wrapText="true" />
-    <TextField fx:id="txtInput" layoutX="284.0" layoutY="471.0" prefHeight="26.0" prefWidth="435.0" />
-    <Button fx:id="btnSend" layoutX="727.0" layoutY="472.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
-    <Button layoutX="922.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
-      <Label fx:id="lblTimer" layoutX="14.0" layoutY="18.0" text="Label" textFill="WHITE">
+    <TextArea fx:id="txtaChat" editable="false" layoutX="-2.0" layoutY="497.0" prefHeight="154.0" prefWidth="1006.0" styleClass="chat-display-human" wrapText="true" />
+    <TextField fx:id="txtInput" layoutX="284.0" layoutY="471.0" prefHeight="26.0" prefWidth="435.0" styleClass="chat-input-human" />
+    <Button fx:id="btnSend" layoutX="727.0" layoutY="472.0" mnemonicParsing="false" onAction="#onSendMessage" styleClass="chat-send-button-human" text="Send" />
+    <Button layoutX="922.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBack" styleClass="cyber-back-button-human" text="Go Back" />
+      <Label fx:id="lblTimer" layoutX="14.0" layoutY="18.0" styleClass="cyber-timer-human" text="Label" textFill="WHITE">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Button fx:id="btnViewEvidence1" layoutX="152.0" layoutY="401.0" mnemonicParsing="false" onAction="#onViewEvidence" text="View Evidence" />
+      <Button fx:id="btnViewEvidence1" layoutX="152.0" layoutY="401.0" mnemonicParsing="false" onAction="#onViewEvidence" styleClass="view-evidence-button-human" text="View Evidence" />
   </children>
 </AnchorPane>
