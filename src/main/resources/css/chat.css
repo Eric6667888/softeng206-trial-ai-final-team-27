@@ -30,7 +30,7 @@
 
 /* Chat display area - AI Defendant */
 .chat-display-human {
-  -fx-background-color: rgba(255, 153, 28, 0.6);
+  -fx-background-color: rgba(255, 153, 28, 0.8);
   -fx-text-fill: white !important;
   -fx-border-color: #ff991c;
   -fx-border-width: 2px;
