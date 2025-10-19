@@ -16,10 +16,10 @@
             <Image url="@../images/mayor.png" />
          </image>
       </ImageView>
-    <TextArea fx:id="txtaChat" editable="false" layoutX="425.0" layoutY="55.0" prefHeight="294.0" prefWidth="508.0" styleClass="chat-display" wrapText="true" />
-    <TextField fx:id="txtInput" layoutX="425.0" layoutY="366.0" prefHeight="48.0" prefWidth="399.0" styleClass="chat-input" />
-    <Button fx:id="btnSend" layoutX="843.0" layoutY="375.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="31.0" prefWidth="79.0" styleClass="chat-send-button" text="Send" />
-    <Button layoutX="922.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBack" styleClass="cyber-back-button" text="Go Back" />
+    <TextArea fx:id="txtaChat" editable="false" layoutX="405.0" layoutY="55.0" prefHeight="294.0" prefWidth="488.0" styleClass="chat-display" wrapText="true" />
+    <TextField fx:id="txtInput" layoutX="405.0" layoutY="366.0" prefHeight="37.0" prefWidth="411.0" styleClass="chat-input" />
+    <Button fx:id="btnSend" layoutX="829.0" layoutY="366.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="64.0" styleClass="chat-send-button" text="Send" />
+    <Button layoutX="902.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="37.0" prefWidth="84.0" styleClass="cyber-back-button" text="Go Back" />
       <Label fx:id="lblTimer" layoutX="14.0" layoutY="18.0" styleClass="cyber-timer" text="Label">
          <font>
             <Font size="30.0" />

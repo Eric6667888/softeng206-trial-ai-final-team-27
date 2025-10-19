@@ -30,7 +30,7 @@
 
 /* Chat display area - AI Defendant */
 .chat-display-human {
-  -fx-background-color: rgba(255, 153, 28, 0.2);
+  -fx-background-color: rgba(255, 153, 28, 0.6);
   -fx-text-fill: white !important;
   -fx-border-color: #ff991c;
   -fx-border-width: 2px;
@@ -44,7 +44,7 @@
 
 /* Chat display area - Generic (keeping red for backward compatibility) */
 .chat-display {
-  -fx-background-color: rgba(120, 6, 6, 0.8);
+  -fx-background-color: rgba(120, 6, 6, 0.6);
   -fx-text-fill: white !important;
   -fx-border-color: #780606;
   -fx-border-width: 2px;
@@ -214,9 +214,8 @@
 
 /* Back button cyberpunk style - Generic */
 .cyber-back-button {
-  -fx-background-color: #84838B;
+  -fx-background-color: #ffffff;
   -fx-text-fill: #780606;
-  -fx-border-color: #780606;
   -fx-font-family: "Arial", sans-serif;
   -fx-cursor: hand;
   -fx-effect: dropshadow(gaussian, #780606, 3, 0.4, 0, 0);
@@ -224,21 +223,22 @@
 
 /* Back button cyberpunk style - AI Defendant */
 .cyber-back-button-human {
-  -fx-background-color: #84838B;
+  -fx-background-color: #ffffff;
   -fx-text-fill: #ff991c;
-  -fx-border-color: #ff991c;
   -fx-font-family: "Arial", sans-serif;
   -fx-cursor: hand;
   -fx-effect: dropshadow(gaussian, #ff991c, 3, 0.4, 0, 0);
 }
 
 .cyber-back-button:hover {
-  -fx-background-color: rgba(120, 6, 6, 0.2);
+  -fx-background-color: #780606;
+  -fx-text-fill: #ffffff;
   -fx-effect: dropshadow(gaussian, #780606, 6, 0.7, 0, 0);
 }
 
 .cyber-back-button-human:hover {
-  -fx-background-color: rgba(255, 153, 28, 0.2);
+  -fx-background-color: #ff991c;
+  -fx-text-fill: #ffffff;
   -fx-effect: dropshadow(gaussian, #ff991c, 6, 0.7, 0, 0);
 }
 
@@ -372,16 +372,16 @@
 
 /* Back button cyberpunk style - AI */
 .cyber-back-button-ai {
-  -fx-background-color: #84838B;
+  -fx-background-color: #ffffff;
   -fx-text-fill: #037c6e;
-  -fx-border-color: #037c6e;
   -fx-font-family: "Arial", sans-serif;
   -fx-cursor: hand;
   -fx-effect: dropshadow(gaussian, #037c6e, 3, 0.4, 0, 0);
 }
 
 .cyber-back-button-ai:hover {
-  -fx-background-color: rgba(3, 124, 110, 0.2);
+  -fx-background-color: #037c6e;
+  -fx-text-fill: #ffffff;
   -fx-effect: dropshadow(gaussian, #037c6e, 6, 0.7, 0, 0);
 }
 

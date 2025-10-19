@@ -17,19 +17,14 @@
          </image>
       </ImageView>
     <TextArea fx:id="txtaChat" editable="false" layoutX="446.0" layoutY="135.0" prefHeight="302.0" prefWidth="448.0" styleClass="chat-display-ai" wrapText="true" />
-    <TextField fx:id="txtInput" layoutX="446.0" layoutY="446.0" prefHeight="26.0" prefWidth="374.0" styleClass="chat-input-ai" />
-    <Button fx:id="btnSend" layoutX="847.0" layoutY="447.0" mnemonicParsing="false" onAction="#onSendMessage" styleClass="chat-send-button-ai" text="Send" />
-    <Button layoutX="922.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBack" styleClass="cyber-back-button-ai" text="Go Back" />
+    <TextField fx:id="txtInput" layoutX="446.0" layoutY="446.0" prefHeight="36.0" prefWidth="382.0" styleClass="chat-input-ai" />
+    <Button fx:id="btnSend" layoutX="836.0" layoutY="446.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="36.0" prefWidth="58.0" styleClass="chat-send-button-ai" text="Send" />
+    <Button layoutX="902.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="37.0" prefWidth="84.0" styleClass="cyber-back-button-ai" text="Go Back" />
       <Label fx:id="lblTimer" layoutX="14.0" layoutY="18.0" styleClass="cyber-timer-ai" text="Label" textFill="WHITE">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
       <Button fx:id="btnViewEvidence2" layoutX="711.0" layoutY="570.0" mnemonicParsing="false" onAction="#onViewEvidence" rotate="6.3" styleClass="view-evidence-button-ai" text="View Evidence" />
-      <Label fx:id="fbLabel" layoutX="390.0" layoutY="17.0" styleClass="feedback-label-ai" text="Click the button to view evidence" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
   </children>
 </AnchorPane>
