@@ -19,9 +19,9 @@
 /* Main container - AI Defendant */
 .chat-container-human {
   -fx-background-color: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
-  -fx-border-color: #ff991c;
+  -fx-border-color: #cc5500;
   -fx-border-width: 2px;
-  -fx-effect: dropshadow(gaussian, #ff991c, 15, 0.3, 0, 0);
+  -fx-effect: dropshadow(gaussian, #cc5500, 15, 0.3, 0, 0);
 }
 
 /* =============================================== */
@@ -30,9 +30,9 @@
 
 /* Chat display area - AI Defendant */
 .chat-display-human {
-  -fx-background-color: rgba(255, 153, 28, 0.8);
+  -fx-background-color: rgba(204, 85, 0, 0.8);
   -fx-text-fill: white !important;
-  -fx-border-color: #ff991c;
+  -fx-border-color: #cc5500;
   -fx-border-width: 2px;
   -fx-border-radius: 5px;
   -fx-padding: 10px;
@@ -111,12 +111,12 @@
 
 .chat-display-human .scroll-bar:vertical {
   -fx-background-color: rgba(255, 153, 28, 0.2);
-  -fx-border-color: #ff991c;
+  -fx-border-color: #cc5500;
   -fx-border-width: 1px;
 }
 
 .chat-display-human .scroll-bar .thumb {
-  -fx-background-color: #ff991c;
+  -fx-background-color: #cc5500;
   -fx-background-radius: 3px;
 }
 
@@ -139,14 +139,14 @@
 .chat-input-human {
   -fx-background-color: rgba(25, 15, 0, 0.9);
   -fx-text-fill: #ffffff;
-  -fx-border-color: #ff991c;
+  -fx-border-color: #cc5500;
   -fx-border-width: 2px;
   -fx-background-radius: 3px;
   -fx-border-radius: 3px;
   -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
   -fx-font-size: 14px;
   -fx-font-weight: bold;
-  -fx-effect: dropshadow(gaussian, #ff991c, 5, 0.5, 0, 0);
+  -fx-effect: dropshadow(gaussian, #cc5500, 5, 0.5, 0, 0);
   -fx-prompt-text-fill: rgba(255, 153, 28, 0.6);
 }
 
@@ -156,8 +156,8 @@
 }
 
 .chat-input-human:focused {
-  -fx-border-color: #ffb84d;
-  -fx-effect: dropshadow(gaussian, #ffb84d, 8, 0.7, 0, 0);
+  -fx-border-color: #ee7700;
+  -fx-effect: dropshadow(gaussian, #ee7700, 8, 0.7, 0, 0);
 }
 
 /* Send button - Generic */
@@ -177,9 +177,9 @@
 
 /* Send button - AI Defendant */
 .chat-send-button-human {
-  -fx-background-color: linear-gradient(to bottom, #ff991c, #cc7a16);
+  -fx-background-color: linear-gradient(to bottom, #cc5500, #994400);
   -fx-text-fill: #ffffff;
-  -fx-border-color: #ff991c;
+  -fx-border-color: #cc5500;
   -fx-border-width: 1px;
   -fx-background-radius: 3px;
   -fx-border-radius: 3px;
@@ -187,7 +187,7 @@
   -fx-font-family: "Eurostile", "Arial", sans-serif;
   -fx-font-size: 16px;
   -fx-cursor: hand;
-  -fx-effect: dropshadow(gaussian, #ff991c, 5, 0.6, 0, 0);
+  -fx-effect: dropshadow(gaussian, #cc5500, 5, 0.6, 0, 0);
 }
 
 .chat-send-button:hover {
@@ -197,9 +197,9 @@
 }
 
 .chat-send-button-human:hover {
-  -fx-background-color: linear-gradient(to bottom, #ffb84d, #ff991c);
-  -fx-border-color: #ffb84d;
-  -fx-effect: dropshadow(gaussian, #ffb84d, 8, 0.8, 0, 0);
+  -fx-background-color: linear-gradient(to bottom, #ee7700, #cc5500);
+  -fx-border-color: #ee7700;
+  -fx-effect: dropshadow(gaussian, #ee7700, 8, 0.8, 0, 0);
 }
 
 .chat-send-button:pressed {
@@ -208,8 +208,8 @@
 }
 
 .chat-send-button-human:pressed {
-  -fx-background-color: linear-gradient(to bottom, #cc7a16, #996011);
-  -fx-effect: innershadow(gaussian, #ff991c, 5, 0.5, 0, 0);
+  -fx-background-color: linear-gradient(to bottom, #994400, #662200);
+  -fx-effect: innershadow(gaussian, #cc5500, 5, 0.5, 0, 0);
 }
 
 /* Back button cyberpunk style - Generic */
@@ -226,12 +226,12 @@
 /* Back button cyberpunk style - AI Defendant */
 .cyber-back-button-human {
   -fx-background-color: #ffffff;
-  -fx-text-fill: #ff991c;
+  -fx-text-fill: #cc5500;
   -fx-font-family: "Eurostile", "Arial", sans-serif;
   -fx-font-size: 14px;
   -fx-font-weight: 900;
   -fx-cursor: hand;
-  -fx-effect: dropshadow(gaussian, #ff991c, 3, 0.4, 0, 0);
+  -fx-effect: dropshadow(gaussian, #cc5500, 3, 0.4, 0, 0);
 }
 
 .cyber-back-button:hover {
@@ -241,9 +241,9 @@
 }
 
 .cyber-back-button-human:hover {
-  -fx-background-color: #ff991c;
+  -fx-background-color: #cc5500;
   -fx-text-fill: #ffffff;
-  -fx-effect: dropshadow(gaussian, #ff991c, 6, 0.7, 0, 0);
+  -fx-effect: dropshadow(gaussian, #cc5500, 6, 0.7, 0, 0);
 }
 
 /* Timer label */
@@ -254,9 +254,9 @@
 
 /* View Evidence button - AI Defendant */
 .view-evidence-button-human {
-  -fx-background-color: linear-gradient(to bottom, #ff991c, #cc7a16);
+  -fx-background-color: linear-gradient(to bottom, #cc5500, #994400);
   -fx-text-fill: white;
-  -fx-border-color: #ff991c;
+  -fx-border-color: #cc5500;
   -fx-border-width: 1px;
   -fx-background-radius: 3px;
   -fx-border-radius: 3px;
@@ -268,9 +268,9 @@
 }
 
 .view-evidence-button-human:hover {
-  -fx-background-color: linear-gradient(to bottom, #ffb84d, #ff991c);
-  -fx-border-color: #ffb84d;
-  -fx-effect: dropshadow(gaussian, #ffb84d, 8, 0.8, 0, 0);
+  -fx-background-color: linear-gradient(to bottom, #ee7700, #cc5500);
+  -fx-border-color: #ee7700;
+  -fx-effect: dropshadow(gaussian, #ee7700, 8, 0.8, 0, 0);
 }
 
 /* =============================================== */
