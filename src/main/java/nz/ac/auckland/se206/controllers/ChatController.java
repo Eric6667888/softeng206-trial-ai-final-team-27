@@ -289,6 +289,8 @@ public class ChatController {
     // temporary if else for testing new interactables
     if (buttonId.equals("btnViewEvidence2")) {
       PopUpManager.showPopup("SecurityCamera", "Security Footage");
+    } else if (buttonId.equals("btnViewEvidence1")) {
+      PopUpManager.showPopup("BrainWashBottle", "Brain Wash Bottle");
     } else {
       try {
 
