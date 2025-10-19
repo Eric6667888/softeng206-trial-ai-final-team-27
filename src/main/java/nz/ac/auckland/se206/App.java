@@ -37,6 +37,15 @@ public class App extends Application {
    */
   public static void setRoot(String fxml) throws IOException {
     scene.setRoot(loadFxml(fxml));
+
+    // Clear existing stylesheets
+    scene.getStylesheets().clear();
+
+    // Add appropriate stylesheet based on the FXML file
+    if ("landing".equals(fxml)) {
+      scene.getStylesheets().add(App.class.getResource("/css/landing.css").toExternalForm());
+    }
+    // Add other stylesheets as needed for different scenes
   }
 
   /**
