@@ -15,9 +15,10 @@
             <Image url="@../images/court.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="290.0" layoutX="363.0" layoutY="163.0" onMouseClicked="#handleRectangleClick" opacity="0.0" pickOnBounds="true" stroke="BLACK" strokeType="INSIDE" userData="0" width="259.0" />
-      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="190.0" layoutX="704.0" layoutY="259.0" onMouseClicked="#handleRectangleClick" opacity="0.0" pickOnBounds="true" stroke="BLACK" strokeType="INSIDE" userData="2" width="230.0" />
-      <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="202.0" layoutX="142.0" layoutY="243.0" onMouseClicked="#handleRectangleClick" opacity="0.0" pickOnBounds="true" stroke="BLACK" strokeType="INSIDE" userData="1" width="159.0" />
+      <Rectangle width="1280" height="800" fill="#00000033" />
+      <Rectangle fx:id="rectPerson1" styleClass="hotspot" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="290.0" layoutX="363.0" layoutY="163.0" onMouseClicked="#handleRectangleClick" opacity="0.0" pickOnBounds="true" stroke="BLACK" strokeType="INSIDE" userData="0" width="259.0" />
+      <Rectangle fx:id="rectPerson3" styleClass="hotspot" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="190.0" layoutX="704.0" layoutY="259.0" onMouseClicked="#handleRectangleClick" opacity="0.0" pickOnBounds="true" stroke="BLACK" strokeType="INSIDE" userData="2" width="230.0" />
+      <Rectangle fx:id="rectPerson2" styleClass="hotspot" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="202.0" layoutX="142.0" layoutY="243.0" onMouseClicked="#handleRectangleClick" opacity="0.0" pickOnBounds="true" stroke="BLACK" strokeType="INSIDE" userData="1" width="159.0" />
       <Label layoutX="424.0" layoutY="133.0" text="AI Defendant" textFill="WHITE">
          <font>
             <Font size="25.0" />
@@ -33,7 +34,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Label fx:id="lblTimer" layoutX="20.0" layoutY="14.0" prefHeight="44.0" prefWidth="102.0" text="Label" textFill="WHITE">
+      <Label fx:id="lblTimer" layoutX="20.0" layoutY="14.0" styleClass="timer-label" prefHeight="44.0" prefWidth="102.0" text="Label" textFill="WHITE">
          <font>
             <Font size="37.0" />
          </font>
@@ -48,7 +49,7 @@
             <Image url="@../images/Hammer.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectVerdict" arcHeight="5.0" arcWidth="5.0" fill="#003566" height="158.0" layoutX="329.0" layoutY="469.0" onMouseClicked="#onVerdictClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="328.0">
+      <Rectangle fx:id="rectVerdict" styleClass="verdict-btn" arcHeight="5.0" arcWidth="5.0" fill="#003566" height="158.0" layoutX="329.0" layoutY="469.0" onMouseClicked="#onVerdictClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="328.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
