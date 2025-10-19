@@ -1,0 +1,114 @@
+/* Cyberpunk Dark Red Chat Styling */
+
+/* Main container */
+.chat-container {
+  -fx-background-color: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+  -fx-border-color: #780606;
+  -fx-border-width: 2px;
+  -fx-effect: dropshadow(gaussian, #780606, 15, 0.3, 0, 0);
+}
+
+/* Chat display area */
+.chat-display {
+  -fx-background-color: rgba(0, 0, 0, 0.8);
+  -fx-text-fill: #ffffff;
+  -fx-border-color: #780606;
+  -fx-border-width: 2px;
+  -fx-background-radius: 5px;
+  -fx-border-radius: 5px;
+  -fx-effect: innershadow(gaussian, #780606, 10, 0.3, 0, 0);
+  -fx-font-family: "Courier New", monospace;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+  -fx-padding: 10px;
+  -fx-wrap-text: true;
+}
+
+.chat-display .content {
+  -fx-background-color: transparent;
+}
+
+.chat-display .scroll-pane {
+  -fx-background-color: transparent;
+}
+
+.chat-display .scroll-pane .viewport {
+  -fx-background-color: transparent;
+}
+
+.chat-display .scroll-bar:vertical {
+  -fx-background-color: rgba(120, 6, 6, 0.2);
+  -fx-border-color: #780606;
+  -fx-border-width: 1px;
+}
+
+.chat-display .scroll-bar .thumb {
+  -fx-background-color: #780606;
+  -fx-background-radius: 3px;
+}
+
+/* Input text field */
+.chat-input {
+  -fx-background-color: rgba(20, 0, 0, 0.9);
+  -fx-text-fill: #ffffff;
+  -fx-border-color: #780606;
+  -fx-border-width: 2px;
+  -fx-background-radius: 3px;
+  -fx-border-radius: 3px;
+  -fx-font-family: "Courier New", monospace;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(gaussian, #780606, 5, 0.5, 0, 0);
+  -fx-prompt-text-fill: rgba(120, 6, 6, 0.6);
+}
+
+.chat-input:focused {
+  -fx-border-color: #a00808;
+  -fx-effect: dropshadow(gaussian, #a00808, 8, 0.7, 0, 0);
+}
+
+/* Send button */
+.chat-send-button {
+  -fx-background-color: linear-gradient(to bottom, #780606, #600505);
+  -fx-text-fill: #ffffff;
+  -fx-border-color: #780606;
+  -fx-border-width: 1px;
+  -fx-background-radius: 3px;
+  -fx-border-radius: 3px;
+  -fx-font-weight: bold;
+  -fx-font-family: "Arial", sans-serif;
+  -fx-font-size: 12px;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, #780606, 5, 0.6, 0, 0);
+}
+
+.chat-send-button:hover {
+  -fx-background-color: linear-gradient(to bottom, #a00808, #780606);
+  -fx-border-color: #a00808;
+  -fx-effect: dropshadow(gaussian, #a00808, 8, 0.8, 0, 0);
+}
+
+.chat-send-button:pressed {
+  -fx-background-color: linear-gradient(to bottom, #600505, #400404);
+  -fx-effect: innershadow(gaussian, #780606, 5, 0.5, 0, 0);
+}
+
+/* Back button cyberpunk style */
+.cyber-back-button {
+  -fx-background-color: #84838B;
+  -fx-text-fill: #780606;
+  -fx-border-color: #780606;
+  -fx-font-family: "Arial", sans-serif;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, #780606, 3, 0.4, 0, 0);
+}
+
+.cyber-back-button:hover {
+  -fx-background-color: rgba(120, 6, 6, 0.2);
+  -fx-effect: dropshadow(gaussian, #780606, 6, 0.7, 0, 0);
+}
+
+/* Timer label */
+.cyber-timer {
+  -fx-text-fill: #ffffff;
+}

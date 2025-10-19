@@ -64,6 +64,11 @@ public class ChatController {
         .addListener(
             (observable, oldScene, newScene) -> {
               if (newScene != null) {
+                // Load cyberpunk chat CSS
+                newScene
+                    .getStylesheets()
+                    .add(getClass().getResource("/css/chat.css").toExternalForm());
+
                 newScene.setOnKeyPressed(
                     e -> {
                       if (e.getCode().toString().equals("ENTER")) {
