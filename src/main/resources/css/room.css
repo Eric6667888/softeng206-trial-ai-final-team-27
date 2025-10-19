@@ -1,0 +1,69 @@
+/* CSS for the courtroom scene */
+.courtroom-root {
+  background-color: #1e1e1e;
+  -fx-background-color: #1e1e1e;
+  font-family: "Segoe UI Semibold";
+  -fx-font-family: "Segoe UI Semibold";
+}
+
+/* Style for the timer label */
+.timer-label {
+  -fx-text-fill: #ffffff;
+  font-size: 26px;
+  -fx-font-size: 26px;
+  font-weight: bold;
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(gaussian, black, 4, 0.2, 0, 0);
+}
+
+/* Style for interactive hotspots */
+.hotspot:hover {
+  fill: rgba(255, 255, 255, 0.15);
+  -fx-fill: rgba(255, 255, 255, 0.15);
+  opacity: 1;
+  -fx-opacity: 1;
+  -fx-scale-x: 1.05;
+  -fx-scale-y: 1.05;
+  cursor: hand;
+  -fx-cursor: hand;
+  transition: 0.2s;
+  -fx-transition: 0.2s;
+}
+
+.hotspot:pressed {
+  -fx-scale-x: 0.98;
+  -fx-scale-y: 0.98;
+}
+
+/* Style for the verdict button */
+.verdict-btn {
+  fill: linear-gradient(to bottom, #cdaa7d, #8b6914);
+  -fx-fill: linear-gradient(to bottom, #cdaa7d, #8b6914);
+  -fx-arc-width: 20;
+  -fx-arc-height: 20;
+  -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0.3), 10, 0, 0, 0);
+}
+
+.verdict-btn:hover {
+  fill: rgba(255, 255, 255, 0.15);
+  -fx-fill: rgba(255, 255, 255, 0.15);
+  opacity: 1;
+  -fx-opacity: 1;
+  -fx-scale-x: 1.05;
+  -fx-scale-y: 1.05;
+  cursor: hand;
+  -fx-cursor: hand;
+  -fx-scale-x: 1.05;
+  -fx-scale-y: 1.05;
+  -fx-effect: dropshadow(gaussian, gold, 15, 0.3, 0, 0);
+}
+
+/* Style for the verdict label */
+.verdict-label {
+  -fx-text-fill: white;
+  font-size: 20px;
+  -fx-font-size: 20px;
+  font-weight: bold;
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(gaussian, black, 5, 0, 0, 0);
+}

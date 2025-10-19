@@ -1,9 +1,11 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -36,6 +38,13 @@ public class RoomController {
    */
   @FXML
   public void initialize() {
+    Platform.runLater(
+        () -> {
+          Scene scene = rectPerson1.getScene();
+          if (scene != null) {
+            scene.getStylesheets().add(getClass().getResource("/css/room.css").toExternalForm());
+          }
+        });
     GameSession session = GameStateContext.getSession();
     updateVerdictState(session.haveAllThreeTalked()); // Enable verdict if all three have talked
     lblTimer.textProperty().unbind();
