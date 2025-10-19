@@ -36,7 +36,7 @@
   -fx-border-width: 2px;
   -fx-border-radius: 5px;
   -fx-padding: 10px;
-  -fx-font-family: "Courier New", monospace;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
   -fx-font-size: 14px;
   -fx-font-weight: bold;
   -fx-wrap-text: true;
@@ -50,7 +50,7 @@
   -fx-border-width: 2px;
   -fx-border-radius: 5px;
   -fx-padding: 10px;
-  -fx-font-family: "Courier New", monospace;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
   -fx-font-size: 14px;
   -fx-font-weight: bold;
   -fx-wrap-text: true;
@@ -128,7 +128,7 @@
   -fx-border-width: 2px;
   -fx-background-radius: 3px;
   -fx-border-radius: 3px;
-  -fx-font-family: "Courier New", monospace;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
   -fx-font-size: 14px;
   -fx-font-weight: bold;
   -fx-effect: dropshadow(gaussian, #780606, 5, 0.5, 0, 0);
@@ -143,7 +143,7 @@
   -fx-border-width: 2px;
   -fx-background-radius: 3px;
   -fx-border-radius: 3px;
-  -fx-font-family: "Courier New", monospace;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
   -fx-font-size: 14px;
   -fx-font-weight: bold;
   -fx-effect: dropshadow(gaussian, #ff991c, 5, 0.5, 0, 0);
@@ -168,9 +168,9 @@
   -fx-border-width: 1px;
   -fx-background-radius: 3px;
   -fx-border-radius: 3px;
-  -fx-font-weight: bold;
-  -fx-font-family: "Arial", sans-serif;
-  -fx-font-size: 12px;
+  -fx-font-weight: 900;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 16px;
   -fx-cursor: hand;
   -fx-effect: dropshadow(gaussian, #780606, 5, 0.6, 0, 0);
 }
@@ -183,9 +183,9 @@
   -fx-border-width: 1px;
   -fx-background-radius: 3px;
   -fx-border-radius: 3px;
-  -fx-font-weight: bold;
-  -fx-font-family: "Arial", sans-serif;
-  -fx-font-size: 12px;
+  -fx-font-weight: 900;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 16px;
   -fx-cursor: hand;
   -fx-effect: dropshadow(gaussian, #ff991c, 5, 0.6, 0, 0);
 }
@@ -216,7 +216,9 @@
 .cyber-back-button {
   -fx-background-color: #ffffff;
   -fx-text-fill: #780606;
-  -fx-font-family: "Arial", sans-serif;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: 900;
   -fx-cursor: hand;
   -fx-effect: dropshadow(gaussian, #780606, 3, 0.4, 0, 0);
 }
@@ -225,7 +227,9 @@
 .cyber-back-button-human {
   -fx-background-color: #ffffff;
   -fx-text-fill: #ff991c;
-  -fx-font-family: "Arial", sans-serif;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: 900;
   -fx-cursor: hand;
   -fx-effect: dropshadow(gaussian, #ff991c, 3, 0.4, 0, 0);
 }
@@ -248,19 +252,19 @@
   -fx-text-fill: #ffffff;
 }
 
-/* View Evidence Button - AI Defendant */
+/* View Evidence button - AI Defendant */
 .view-evidence-button-human {
   -fx-background-color: linear-gradient(to bottom, #ff991c, #cc7a16);
-  -fx-text-fill: #ffffff;
+  -fx-text-fill: white;
   -fx-border-color: #ff991c;
   -fx-border-width: 1px;
   -fx-background-radius: 3px;
   -fx-border-radius: 3px;
-  -fx-font-weight: bold;
-  -fx-font-family: "Arial", sans-serif;
-  -fx-font-size: 12px;
+  -fx-font-weight: 900;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 16px;
   -fx-cursor: hand;
-  -fx-effect: dropshadow(gaussian, #ff991c, 5, 0.6, 0, 0);
+  -fx-effect: dropshadow(gaussian, rgba(255, 153, 28, 0.5), 3, 0.4, 0, 0);
 }
 
 .view-evidence-button-human:hover {
@@ -289,7 +293,7 @@
   -fx-border-width: 2px;
   -fx-border-radius: 5px;
   -fx-padding: 10px;
-  -fx-font-family: "Courier New", monospace;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
   -fx-font-size: 14px;
   -fx-font-weight: bold;
   -fx-wrap-text: true;
@@ -332,7 +336,7 @@
   -fx-border-width: 2px;
   -fx-background-radius: 3px;
   -fx-border-radius: 3px;
-  -fx-font-family: "Courier New", monospace;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
   -fx-font-size: 14px;
   -fx-font-weight: bold;
   -fx-effect: dropshadow(gaussian, #037c6e, 5, 0.5, 0, 0);
@@ -344,19 +348,15 @@
   -fx-effect: dropshadow(gaussian, #04a690, 8, 0.7, 0, 0);
 }
 
-/* Send button - AI */
+/* Send Button Style - AI Witness */
 .chat-send-button-ai {
-  -fx-background-color: linear-gradient(to bottom, #037c6e, #025a50);
-  -fx-text-fill: #ffffff;
-  -fx-border-color: #037c6e;
-  -fx-border-width: 1px;
-  -fx-background-radius: 3px;
-  -fx-border-radius: 3px;
-  -fx-font-weight: bold;
-  -fx-font-family: "Arial", sans-serif;
-  -fx-font-size: 12px;
+  -fx-background-color: #037c6e;
+  -fx-text-fill: white;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 16px;
+  -fx-font-weight: 900;
   -fx-cursor: hand;
-  -fx-effect: dropshadow(gaussian, #037c6e, 5, 0.6, 0, 0);
+  -fx-effect: dropshadow(gaussian, rgba(3, 124, 110, 0.6), 3, 0.4, 0, 0);
 }
 
 .chat-send-button-ai:hover {
@@ -370,11 +370,13 @@
   -fx-effect: innershadow(gaussian, #037c6e, 5, 0.5, 0, 0);
 }
 
-/* Back button cyberpunk style - AI */
+/* Back button cyberpunk style - AI Witness */
 .cyber-back-button-ai {
   -fx-background-color: #ffffff;
   -fx-text-fill: #037c6e;
-  -fx-font-family: "Arial", sans-serif;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: 900;
   -fx-cursor: hand;
   -fx-effect: dropshadow(gaussian, #037c6e, 3, 0.4, 0, 0);
 }
@@ -398,9 +400,9 @@
   -fx-border-width: 1px;
   -fx-background-radius: 3px;
   -fx-border-radius: 3px;
-  -fx-font-weight: bold;
-  -fx-font-family: "Arial", sans-serif;
-  -fx-font-size: 12px;
+  -fx-font-weight: 900;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 16px;
   -fx-cursor: hand;
   -fx-effect: dropshadow(gaussian, #037c6e, 5, 0.6, 0, 0);
 }

@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
@@ -64,6 +65,9 @@ public class ChatController {
         .addListener(
             (observable, oldScene, newScene) -> {
               if (newScene != null) {
+                // Load Eurostile font
+                Font.loadFont(getClass().getResourceAsStream("/fonts/eurostile.TTF"), 14);
+
                 // Load cyberpunk chat CSS
                 newScene
                     .getStylesheets()
