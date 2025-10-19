@@ -30,38 +30,46 @@
 
 /* Chat display area - AI Defendant */
 .chat-display-human {
-  -fx-background-color: rgba(0, 0, 0, 0.8);
-  -fx-text-fill: #ffffff;
+  -fx-background-color: rgba(255, 153, 28, 0.2);
+  -fx-text-fill: white !important;
   -fx-border-color: #ff991c;
   -fx-border-width: 2px;
-  -fx-background-radius: 5px;
   -fx-border-radius: 5px;
-  -fx-effect: innershadow(gaussian, #ff991c, 10, 0.3, 0, 0);
-  -fx-font-family: "Courier New", monospace;
-  -fx-font-size: 16px;
-  -fx-font-weight: bold;
   -fx-padding: 10px;
+  -fx-font-family: "Courier New", monospace;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
   -fx-wrap-text: true;
 }
 
 /* Chat display area - Generic (keeping red for backward compatibility) */
 .chat-display {
-  -fx-background-color: rgba(0, 0, 0, 0.8);
-  -fx-text-fill: #ffffff;
+  -fx-background-color: rgba(120, 6, 6, 0.8);
+  -fx-text-fill: white !important;
   -fx-border-color: #780606;
   -fx-border-width: 2px;
-  -fx-background-radius: 5px;
   -fx-border-radius: 5px;
-  -fx-effect: innershadow(gaussian, #780606, 10, 0.3, 0, 0);
-  -fx-font-family: "Courier New", monospace;
-  -fx-font-size: 16px;
-  -fx-font-weight: bold;
   -fx-padding: 10px;
+  -fx-font-family: "Courier New", monospace;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
   -fx-wrap-text: true;
+}
+
+/* Force white text in all TextArea components */
+.chat-display,
+.chat-display-human,
+.chat-display-ai {
+  -fx-text-fill: white !important;
 }
 
 .chat-display .content {
   -fx-background-color: transparent;
+  -fx-text-fill: white !important;
+}
+
+.chat-display .text {
+  -fx-fill: white !important;
 }
 
 .chat-display .scroll-pane {
@@ -86,6 +94,11 @@
 /* AI Defendant chat display internal components */
 .chat-display-human .content {
   -fx-background-color: transparent;
+  -fx-text-fill: white !important;
+}
+
+.chat-display-human .text {
+  -fx-fill: white !important;
 }
 
 .chat-display-human .scroll-pane {
@@ -270,22 +283,26 @@
 
 /* Chat display area - AI */
 .chat-display-ai {
-  -fx-background-color: rgba(0, 0, 0, 0.8);
-  -fx-text-fill: #ffffff;
+  -fx-background-color: rgba(3, 124, 110, 0.4);
+  -fx-text-fill: white !important;
   -fx-border-color: #037c6e;
   -fx-border-width: 2px;
-  -fx-background-radius: 5px;
   -fx-border-radius: 5px;
-  -fx-effect: innershadow(gaussian, #037c6e, 10, 0.3, 0, 0);
-  -fx-font-family: "Courier New", monospace;
-  -fx-font-size: 16px;
-  -fx-font-weight: bold;
   -fx-padding: 10px;
+  -fx-font-family: "Courier New", monospace;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
   -fx-wrap-text: true;
 }
 
+/* AI Witness chat display internal components */
 .chat-display-ai .content {
   -fx-background-color: transparent;
+  -fx-text-fill: white !important;
+}
+
+.chat-display-ai .text {
+  -fx-fill: white !important;
 }
 
 .chat-display-ai .scroll-pane {
@@ -309,7 +326,7 @@
 
 /* Input text field - AI */
 .chat-input-ai {
-  -fx-background-color: rgba(3, 20, 18, 0.9);
+  -fx-background-color: rgba(3, 20, 18, 0.6);
   -fx-text-fill: #ffffff;
   -fx-border-color: #037c6e;
   -fx-border-width: 2px;
