@@ -589,13 +589,14 @@
 .user-message-bubble {
   -fx-background-color: linear-gradient(to bottom, #780606, #600505);
   -fx-background-radius: 15px;
-  -fx-padding: 10px 15px;
+  -fx-padding: 12px 18px;
   -fx-text-fill: white;
   -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
-  -fx-font-size: 14px;
+  -fx-font-size: 16px;
   -fx-font-weight: bold;
   -fx-wrap-text: true;
-  -fx-max-width: 280px;
+  -fx-max-width: 320px;
+  -fx-line-spacing: 2px;
   -fx-effect: dropshadow(gaussian, #780606, 5, 0.3, 2, 2);
 }
 
@@ -603,13 +604,14 @@
 .ai-message-bubble {
   -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
   -fx-background-radius: 15px;
-  -fx-padding: 10px 15px;
+  -fx-padding: 12px 18px;
   -fx-text-fill: white;
   -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
-  -fx-font-size: 14px;
+  -fx-font-size: 16px;
   -fx-font-weight: bold;
   -fx-wrap-text: true;
-  -fx-max-width: 280px;
+  -fx-max-width: 320px;
+  -fx-line-spacing: 2px;
   -fx-border-color: #780606;
   -fx-border-width: 1px;
   -fx-border-radius: 15px;
@@ -620,13 +622,14 @@
 .ai-message-bubble-human {
   -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
   -fx-background-radius: 15px;
-  -fx-padding: 10px 15px;
+  -fx-padding: 12px 18px;
   -fx-text-fill: white;
   -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
-  -fx-font-size: 14px;
+  -fx-font-size: 16px;
   -fx-font-weight: bold;
   -fx-wrap-text: true;
-  -fx-max-width: 280px;
+  -fx-max-width: 320px;
+  -fx-line-spacing: 2px;
   -fx-border-color: #cc5500;
   -fx-border-width: 1px;
   -fx-border-radius: 15px;
@@ -636,13 +639,14 @@
 .user-message-bubble-human {
   -fx-background-color: linear-gradient(to bottom, #cc5500, #996011);
   -fx-background-radius: 15px;
-  -fx-padding: 10px 15px;
+  -fx-padding: 12px 18px;
   -fx-text-fill: white;
   -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
-  -fx-font-size: 14px;
+  -fx-font-size: 16px;
   -fx-font-weight: bold;
   -fx-wrap-text: true;
-  -fx-max-width: 280px;
+  -fx-max-width: 320px;
+  -fx-line-spacing: 2px;
   -fx-effect: dropshadow(gaussian, #cc5500, 5, 0.3, 2, 2);
 }
 
@@ -650,13 +654,14 @@
 .ai-message-bubble-ai {
   -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
   -fx-background-radius: 15px;
-  -fx-padding: 10px 15px;
+  -fx-padding: 12px 18px;
   -fx-text-fill: white;
   -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
-  -fx-font-size: 14px;
+  -fx-font-size: 16px;
   -fx-font-weight: bold;
   -fx-wrap-text: true;
-  -fx-max-width: 280px;
+  -fx-max-width: 320px;
+  -fx-line-spacing: 2px;
   -fx-border-color: #037c6e;
   -fx-border-width: 1px;
   -fx-border-radius: 15px;
@@ -666,12 +671,13 @@
 .user-message-bubble-ai {
   -fx-background-color: linear-gradient(to bottom, #037c6e, #025a52);
   -fx-background-radius: 15px;
-  -fx-padding: 10px 15px;
+  -fx-padding: 12px 18px;
   -fx-text-fill: white;
   -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
-  -fx-font-size: 14px;
+  -fx-font-size: 16px;
   -fx-font-weight: bold;
   -fx-wrap-text: true;
-  -fx-max-width: 280px;
+  -fx-max-width: 320px;
+  -fx-line-spacing: 2px;
   -fx-effect: dropshadow(gaussian, #037c6e, 5, 0.3, 2, 2);
 }
