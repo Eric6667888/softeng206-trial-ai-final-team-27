@@ -2,7 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,7 +18,11 @@
             <Image url="@../images/mayor.png" />
          </image>
       </ImageView>
-    <TextArea fx:id="txtaChat" editable="false" layoutX="405.0" layoutY="55.0" prefHeight="294.0" prefWidth="488.0" styleClass="chat-display" wrapText="true" />
+    <ScrollPane fx:id="chatScrollPane" layoutX="405.0" layoutY="55.0" prefHeight="294.0" prefWidth="488.0" styleClass="chat-scroll-pane">
+      <content>
+        <VBox fx:id="chatContainer" spacing="10.0" styleClass="chat-container-vbox" />
+      </content>
+    </ScrollPane>
     <TextField fx:id="txtInput" layoutX="405.0" layoutY="366.0" prefHeight="37.0" prefWidth="411.0" styleClass="chat-input" />
     <Button fx:id="btnSend" layoutX="829.0" layoutY="366.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="64.0" styleClass="chat-send-button" text="Send" />
     <Button layoutX="902.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="37.0" prefWidth="84.0" styleClass="cyber-back-button" text="Go Back" />

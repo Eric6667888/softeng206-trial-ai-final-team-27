@@ -441,3 +441,215 @@
   -fx-text-fill: #05d4bd;
   -fx-effect: dropshadow(gaussian, #037c6e, 2, 0.3, 0, 0);
 }
+
+/* =============================================== */
+/* CHAT BUBBLE SYSTEM */
+/* =============================================== */
+
+/* Chat scroll pane - Default (Human Witness) */
+.chat-scroll-pane {
+  -fx-background-color: rgba(0, 0, 0, 0.4);
+  -fx-border-color: transparent;
+  -fx-background-radius: 10px;
+  -fx-border-radius: 10px;
+  -fx-hbar-policy: never;
+  -fx-vbar-policy: as-needed;
+  -fx-fit-to-width: true;
+}
+
+/* Chat scroll pane - AI Defendant (Orange) */
+.chat-scroll-pane-defendant {
+  -fx-background-color: rgba(204, 85, 0, 0.2);
+  -fx-border-color: transparent;
+  -fx-background-radius: 10px;
+  -fx-border-radius: 10px;
+  -fx-hbar-policy: never;
+  -fx-vbar-policy: as-needed;
+  -fx-fit-to-width: true;
+}
+
+/* Chat scroll pane - AI Witness (Teal) */
+.chat-scroll-pane-witness {
+  -fx-background-color: rgba(3, 124, 110, 0.2);
+  -fx-border-color: transparent;
+  -fx-background-radius: 10px;
+  -fx-border-radius: 10px;
+  -fx-hbar-policy: never;
+  -fx-vbar-policy: as-needed;
+  -fx-fit-to-width: true;
+}
+
+.chat-scroll-pane .viewport {
+  -fx-background-color: transparent;
+  -fx-background-radius: 10px;
+}
+
+.chat-scroll-pane .content {
+  -fx-background-color: transparent;
+}
+
+.chat-scroll-pane-defendant .viewport {
+  -fx-background-color: transparent;
+  -fx-background-radius: 10px;
+}
+
+.chat-scroll-pane-defendant .content {
+  -fx-background-color: transparent;
+}
+
+.chat-scroll-pane-witness .viewport {
+  -fx-background-color: transparent;
+  -fx-background-radius: 10px;
+}
+
+.chat-scroll-pane-witness .content {
+  -fx-background-color: transparent;
+}
+
+.chat-scroll-pane .scroll-bar:horizontal {
+  -fx-opacity: 0;
+  -fx-max-height: 0;
+  -fx-pref-height: 0;
+}
+
+.chat-scroll-pane .scroll-bar:vertical {
+  -fx-background-color: transparent;
+  -fx-opacity: 0.7;
+}
+
+.chat-scroll-pane .scroll-bar:vertical .track {
+  -fx-background-color: rgba(120, 6, 6, 0.3);
+  -fx-border-radius: 10px;
+  -fx-background-radius: 10px;
+}
+
+.chat-scroll-pane .scroll-bar:vertical .thumb {
+  -fx-background-color: rgba(120, 6, 6, 0.8);
+  -fx-border-radius: 10px;
+  -fx-background-radius: 10px;
+}
+
+/* Defendant theme scroll bars */
+.chat-scroll-pane-defendant .scroll-bar:vertical .track {
+  -fx-background-color: rgba(204, 85, 0, 0.3);
+  -fx-border-radius: 10px;
+  -fx-background-radius: 10px;
+}
+
+.chat-scroll-pane-defendant .scroll-bar:vertical .thumb {
+  -fx-background-color: rgba(204, 85, 0, 0.8);
+  -fx-border-radius: 10px;
+  -fx-background-radius: 10px;
+}
+
+/* Witness theme scroll bars */
+.chat-scroll-pane-witness .scroll-bar:vertical .track {
+  -fx-background-color: rgba(3, 124, 110, 0.3);
+  -fx-border-radius: 10px;
+  -fx-background-radius: 10px;
+}
+
+.chat-scroll-pane-witness .scroll-bar:vertical .thumb {
+  -fx-background-color: rgba(3, 124, 110, 0.8);
+  -fx-border-radius: 10px;
+  -fx-background-radius: 10px;
+}
+
+/* Chat container VBox */
+.chat-container-vbox {
+  -fx-background-color: transparent;
+  -fx-padding: 10px;
+  -fx-fit-to-width: true;
+  -fx-pref-width: 100%;
+}
+
+/* User message bubble (right-aligned) */
+.user-message-bubble {
+  -fx-background-color: linear-gradient(to bottom, #780606, #600505);
+  -fx-background-radius: 15px;
+  -fx-padding: 10px 15px;
+  -fx-text-fill: white;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-wrap-text: true;
+  -fx-max-width: 280px;
+  -fx-effect: dropshadow(gaussian, #780606, 5, 0.3, 2, 2);
+}
+
+/* AI message bubble (left-aligned) */
+.ai-message-bubble {
+  -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+  -fx-background-radius: 15px;
+  -fx-padding: 10px 15px;
+  -fx-text-fill: white;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-wrap-text: true;
+  -fx-max-width: 280px;
+  -fx-border-color: #780606;
+  -fx-border-width: 1px;
+  -fx-border-radius: 15px;
+  -fx-effect: dropshadow(gaussian, #780606, 5, 0.3, -2, 2);
+}
+
+/* AI Defendant theme bubbles */
+.ai-message-bubble-human {
+  -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+  -fx-background-radius: 15px;
+  -fx-padding: 10px 15px;
+  -fx-text-fill: white;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-wrap-text: true;
+  -fx-max-width: 280px;
+  -fx-border-color: #cc5500;
+  -fx-border-width: 1px;
+  -fx-border-radius: 15px;
+  -fx-effect: dropshadow(gaussian, #cc5500, 5, 0.3, -2, 2);
+}
+
+.user-message-bubble-human {
+  -fx-background-color: linear-gradient(to bottom, #cc5500, #996011);
+  -fx-background-radius: 15px;
+  -fx-padding: 10px 15px;
+  -fx-text-fill: white;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-wrap-text: true;
+  -fx-max-width: 280px;
+  -fx-effect: dropshadow(gaussian, #cc5500, 5, 0.3, 2, 2);
+}
+
+/* AI Witness theme bubbles */
+.ai-message-bubble-ai {
+  -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+  -fx-background-radius: 15px;
+  -fx-padding: 10px 15px;
+  -fx-text-fill: white;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-wrap-text: true;
+  -fx-max-width: 280px;
+  -fx-border-color: #037c6e;
+  -fx-border-width: 1px;
+  -fx-border-radius: 15px;
+  -fx-effect: dropshadow(gaussian, #037c6e, 5, 0.3, -2, 2);
+}
+
+.user-message-bubble-ai {
+  -fx-background-color: linear-gradient(to bottom, #037c6e, #025a52);
+  -fx-background-radius: 15px;
+  -fx-padding: 10px 15px;
+  -fx-text-fill: white;
+  -fx-font-family: "Eurostile", "Eurostile LT", "Arial", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-wrap-text: true;
+  -fx-max-width: 280px;
+  -fx-effect: dropshadow(gaussian, #037c6e, 5, 0.3, 2, 2);
+}
