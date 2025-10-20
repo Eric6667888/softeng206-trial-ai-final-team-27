@@ -1,9 +1,10 @@
 /* Verdict Application CSS */
 .root {
-  -fx-background-color: linear-gradient(to bottom, #003566, #001845);
+  -fx-background-color: linear-gradient(to bottom, #003363, #000919);
   -fx-font-family: "Segoe UI Semibold";
 }
 
+/* Text area styling */
 .text-area {
   -fx-background-color: transparent;
   -fx-control-inner-background: transparent;
@@ -13,6 +14,7 @@
   -fx-font-size: 16px;
 }
 
+/* Make the scroll pane and content transparent */
 .text-area .scroll-pane,
 .text-area .viewport,
 .text-area .content {
@@ -31,10 +33,12 @@
   -fx-stroke: #ffd60a;
 }
 
+/* Button styling */
 .button {
   -fx-background-color: #ffd60a;
   -fx-text-fill: #001233;
   -fx-font-weight: bold;
+  -fx-font-size: 28px;
   -fx-background-radius: 8;
   -fx-padding: 10 25;
   -fx-cursor: hand;
@@ -45,16 +49,25 @@
   -fx-effect: dropshadow(gaussian, rgba(255, 214, 10, 0.5), 10, 0.5, 0, 0);
 }
 
+/* Verdict screen specific styles */
 .verdict-title {
   -fx-font-size: 42px;
   -fx-text-fill: #ffd60a;
   -fx-font-weight: bold;
 }
 
+/* Subtitle styles */
+.verdict-subtitle {
+  -fx-font-size: 28px;
+  -fx-text-fill: #ffd60a;
+}
+
+/* Verdict result styles */
 .verdict-result {
   -fx-font-size: 28px;
 }
 
+/* Feedback text styles */
 .verdict-feedback {
   -fx-font-size: 18px;
   -fx-text-fill: rgba(255, 255, 255, 0.85);
@@ -62,10 +75,11 @@
   -fx-max-width: 500;
 }
 
+/* Verdict button styles */
 .verdict-btn {
   -fx-background-color: #ffd60a;
   -fx-text-fill: #001233;
-  -fx-font-size: 16px;
+  -fx-font-size: 28px;
   -fx-background-radius: 6;
   -fx-padding: 10 20;
 }
@@ -74,8 +88,60 @@
   -fx-background-color: #ffc300;
 }
 
+/* Failed page styles */
 .verdict-label {
   -fx-font-size: 32px;
   -fx-text-fill: #ff5c5c;
   -fx-font-weight: bold;
+}
+
+/* ChoiceBox styling */
+.choice-box {
+  -fx-background-color: transparent;
+  -fx-border-color: #ffd60a;
+  -fx-border-radius: 6;
+  -fx-background-radius: 6;
+  -fx-mark-color: #ffd60a;
+  -fx-font-size: 16px;
+  -fx-text-fill: white;
+  -fx-padding: 4 8;
+}
+
+/* ChoiceBox label styles */
+.choice-box .label {
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+}
+
+.choice-box:focused .label {
+  -fx-text-fill: white;
+}
+
+.choice-box:hover .label {
+  -fx-text-fill: #ffd60a;
+}
+
+.choice-box:hover {
+  -fx-background-color: rgba(255, 214, 10, 0.1);
+  -fx-border-color: #ffc300;
+}
+
+/* Context menu styles */
+.choice-box .context-menu {
+  -fx-background-color: rgba(0, 0, 30, 0.9);
+  -fx-text-fill: white;
+  -fx-border-color: #ffd60a;
+  -fx-border-radius: 6;
+}
+
+
+.choice-box .menu-item {
+  -fx-background-color: transparent;
+  -fx-text-fill: white;
+}
+
+/* Menu item hover styles */
+.choice-box .menu-item:hover {
+  -fx-background-color: rgba(255, 214, 10, 0.2);
+  -fx-text-fill: #ffd60a;
 }

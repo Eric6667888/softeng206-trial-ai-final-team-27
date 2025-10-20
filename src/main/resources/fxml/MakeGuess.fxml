@@ -19,13 +19,13 @@
             <Font size="70.0" />
          </font>
       </Label>
-      <Label layoutX="230.0" layoutY="237.0" prefHeight="43.0" prefWidth="165.0" text="Rationale" textFill="WHITE">
+      <Label layoutX="230.0" layoutY="237.0" prefHeight="43.0" prefWidth="165.0" text="Rationale" textFill="WHITE" styleClass="verdict-subtitle">
          <font>
             <Font size="33.0" />
          </font>
       </Label>
       <TextArea fx:id="textField" layoutX="230.0" layoutY="277.0" prefHeight="128.0" prefWidth="558.0" styleClass="text-area" wrapText="true" />
-      <Button layoutX="465.0" layoutY="422.0" mnemonicParsing="false" onAction="#onSubmit" styleClass="button" text="Submit" />
-      <ChoiceBox fx:id="choiceBox" layoutX="312.0" layoutY="167.0" prefHeight="40.0" prefWidth="377.0" />
+      <Button layoutX="439.0" layoutY="415.0" mnemonicParsing="false" onAction="#onSubmit" styleClass="button" text="Submit" />
+      <ChoiceBox fx:id="choiceBox" layoutX="312.0" layoutY="167.0" prefHeight="40.0" prefWidth="377.0" styleClass="choice-box" />
    </children>
 </Pane>

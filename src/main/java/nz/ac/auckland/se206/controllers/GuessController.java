@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.paint.Color;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest.Model;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
@@ -243,9 +244,15 @@ public class GuessController implements Initializable {
     App.setRoot("NotGuilty");
   }
 
+  // Format timer display as mm:ss
   private String format(int totalSeconds) {
     int minutes = totalSeconds / 60;
     int seconds = totalSeconds % 60;
+    // Change color to red if less than 10 seconds
+    if (totalSeconds < 10) {
+      lblTimer.setTextFill(Color.RED);
+    }
+
     return String.format("%02d:%02d", minutes, seconds);
   }
 }
