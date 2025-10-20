@@ -249,7 +249,18 @@
 /* Timer label */
 .cyber-timer,
 .cyber-timer-human {
-  -fx-text-fill: #ffffff;
+  -fx-text-fill: #ffffff !important;
+  -fx-font-family: "Eurostile" !important;
+  -fx-font-size: 18px !important;
+  -fx-font-weight: bold !important;
+  -fx-background-color: rgba(0, 0, 0, 0.85);
+  -fx-background-radius: 8px;
+  -fx-border-color: rgba(255, 255, 255, 0.3);
+  -fx-border-width: 1px;
+  -fx-border-radius: 8px;
+  -fx-padding: 8px 15px;
+  -fx-alignment: center;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.9), 6, 0, 0, 3);
 }
 
 /* View Evidence button - AI Defendant */
@@ -389,7 +400,18 @@
 
 /* Timer label - AI */
 .cyber-timer-ai {
-  -fx-text-fill: #ffffff;
+  -fx-text-fill: #ffffff !important;
+  -fx-font-family: "Eurostile" !important;
+  -fx-font-size: 18px !important;
+  -fx-font-weight: bold !important;
+  -fx-background-color: rgba(0, 0, 0, 0.85);
+  -fx-background-radius: 8px;
+  -fx-border-color: rgba(255, 255, 255, 0.3);
+  -fx-border-width: 1px;
+  -fx-border-radius: 8px;
+  -fx-padding: 8px 15px;
+  -fx-alignment: center;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.9), 6, 0, 0, 3);
 }
 
 /* View Evidence Button - AI */
