@@ -44,6 +44,8 @@ public class App extends Application {
     // Add appropriate stylesheet based on the FXML file
     if ("landing".equals(fxml)) {
       scene.getStylesheets().add(App.class.getResource("/css/landing.css").toExternalForm());
+    } else if ("Flashback".equals(fxml)) {
+      scene.getStylesheets().add(App.class.getResource("/css/flashback.css").toExternalForm());
     }
     // Add other stylesheets as needed for different scenes
   }

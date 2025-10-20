@@ -1,0 +1,93 @@
+/* Flashback Scene Styling */
+/* Improved text readability with backdrop borders and shadows */
+
+/* Main caption text with strong backdrop */
+#lblCaption {
+  -fx-text-fill: #ffffff;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+  -fx-background-color: rgba(0, 0, 0, 0.9);
+  -fx-background-radius: 10px;
+  -fx-border-color: rgba(255, 255, 255, 0.4);
+  -fx-border-width: 2px;
+  -fx-border-radius: 10px;
+  -fx-padding: 15px 20px;
+  -fx-alignment: center;
+  -fx-text-alignment: center;
+  -fx-wrap-text: true;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.95), 12, 0, 0, 4);
+}
+
+/* Progress label with backdrop */
+#lblProgress {
+  -fx-text-fill: #ffffff;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-background-color: rgba(0, 0, 0, 0.85);
+  -fx-background-radius: 8px;
+  -fx-border-color: rgba(255, 255, 255, 0.3);
+  -fx-border-width: 1px;
+  -fx-border-radius: 8px;
+  -fx-padding: 8px 15px;
+  -fx-alignment: center;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.9), 6, 0, 0, 3);
+}
+
+/* Timer label with backdrop */
+#lblTimer {
+  -fx-text-fill: #ffffff;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-weight: bold;
+  -fx-background-color: rgba(0, 0, 0, 0.85);
+  -fx-background-radius: 8px;
+  -fx-border-color: rgba(255, 255, 255, 0.3);
+  -fx-border-width: 1px;
+  -fx-border-radius: 8px;
+  -fx-padding: 8px 15px;
+  -fx-alignment: center;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.9), 6, 0, 0, 3);
+}
+
+/* Button styling with enhanced backdrop */
+#btnExit,
+#btnPrevious,
+#btnNext {
+  -fx-background-color: linear-gradient(to bottom, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.9));
+  -fx-text-fill: #ffffff;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 12px;
+  -fx-font-weight: bold;
+  -fx-border-color: rgba(255, 255, 255, 0.3);
+  -fx-border-width: 1px;
+  -fx-border-radius: 6px;
+  -fx-background-radius: 6px;
+  -fx-padding: 8px 16px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 6, 0, 0, 2);
+}
+
+#btnExit:hover,
+#btnPrevious:hover,
+#btnNext:hover {
+  -fx-background-color: linear-gradient(to bottom, rgba(60, 60, 60, 0.9), rgba(40, 40, 40, 0.9));
+  -fx-border-color: rgba(255, 255, 255, 0.4);
+  -fx-text-fill: #f0f0f0;
+}
+
+#btnExit:pressed,
+#btnPrevious:pressed,
+#btnNext:pressed {
+  -fx-background-color: linear-gradient(to bottom, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.9));
+  -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.9), 3, 0, 0, 1);
+}
+
+/* Container background for better contrast */
+.root {
+  -fx-background-color: #000000;
+}
+
+/* Image enhancement for better text contrast */
+#imageView {
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 15, 0, 0, 0);
+}
