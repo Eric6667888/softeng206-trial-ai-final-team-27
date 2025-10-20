@@ -5,19 +5,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DecisionController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" stylesheets="@../css/verdict.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DecisionController">
    <children>
-      <Button layoutX="438.0" layoutY="395.0" mnemonicParsing="false" onAction="#onReturnClicked" text="Return">
+      <Button layoutX="456.0" layoutY="470.0" mnemonicParsing="false" onAction="#onReturnClicked" styleClass="verdict-btn" text="Return">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Label layoutX="245.0" layoutY="137.0" text="You have FAILED">
+      <Label layoutX="378.0" layoutY="119.0" styleClass="verdict-label" text="You have FAILED">
          <font>
             <Font size="70.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="312.0" layoutY="277.0" prefHeight="96.0" prefWidth="407.0" text="You have not chatted with all three participants thus impossible to come to a verdict." textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+      <Label alignment="TOP_LEFT" layoutX="297.0" layoutY="277.0" prefHeight="96.0" prefWidth="407.0" text="You have not chatted with all three participants thus impossible to come to a verdict." textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
