@@ -1,0 +1,41 @@
+/* Verdict Application CSS */
+.root {
+  -fx-background-color: linear-gradient(to bottom, #003566, #001845);
+  -fx-font-family: "Segoe UI Semibold";
+}
+
+.text-area {
+  -fx-border-color: #ffd60a;
+  -fx-border-radius: 8;
+  -fx-background-color: transparent;
+  -fx-text-fill: white;
+  -fx-font-size: 16px;
+  -fx-padding: 10;
+}
+
+.text-area .content {
+  -fx-background-color: transparent;
+}
+
+
+.text-area .prompt-text {
+  -fx-fill: rgba(255, 255, 255, 0.6);
+}
+
+.text-area .caret {
+  -fx-stroke: #ffd60a;
+}
+
+.button {
+  -fx-background-color: #ffd60a;
+  -fx-text-fill: #001233;
+  -fx-font-weight: bold;
+  -fx-background-radius: 8;
+  -fx-padding: 10 25;
+  -fx-cursor: hand;
+}
+
+.button:hover {
+  -fx-background-color: #ffc300;
+  -fx-effect: dropshadow(gaussian, rgba(255, 214, 10, 0.5), 10, 0.5, 0, 0);
+}

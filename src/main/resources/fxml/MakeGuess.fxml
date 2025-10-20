@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GuessController">
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GuessController" stylesheets="@../css/verdict.css">
    <children>
       <Label layoutX="312.0" layoutY="50.0" text="Is the AI guilty?" textAlignment="CENTER" underline="true">
          <font>
@@ -24,8 +24,8 @@
             <Font size="33.0" />
          </font>
       </Label>
-      <TextArea fx:id="textField" layoutX="230.0" layoutY="277.0" prefHeight="128.0" prefWidth="558.0" wrapText="true" />
-      <Button layoutX="481.0" layoutY="422.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
+      <TextArea fx:id="textField" layoutX="230.0" layoutY="277.0" prefHeight="128.0" prefWidth="558.0" wrapText="true" styleClass="text-area"/>
+      <Button layoutX="481.0" layoutY="422.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" styleClass="button"/>
       <ChoiceBox fx:id="choiceBox" layoutX="312.0" layoutY="167.0" prefHeight="40.0" prefWidth="377.0" />
    </children>
 </Pane>
