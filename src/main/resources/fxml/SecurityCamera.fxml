@@ -6,15 +6,15 @@
 <?import javafx.scene.layout.BorderPane?>
 
 
-<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SecurityCameraController">
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="border-pane" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SecurityCameraController">
    <center>
-      <ImageView fx:id="imgSecurityScreen" fitHeight="303.0" fitWidth="546.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fx:id="imgSecurityScreen" fitHeight="303.0" fitWidth="546.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view" BorderPane.alignment="CENTER">
          <image>
             <Image url="@../images/Security_NoAI.png" />
          </image>
       </ImageView>
    </center>
    <bottom>
-      <Slider fx:id="sldCameraTime" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="521.0" BorderPane.alignment="CENTER" />
+      <Slider fx:id="sldCameraTime" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="521.0" styleClass="slider" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>
