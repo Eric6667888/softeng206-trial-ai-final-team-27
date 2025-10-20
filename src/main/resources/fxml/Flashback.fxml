@@ -31,10 +31,6 @@
       <!-- Subtle reflection effect -->
       <Pane layoutX="350" layoutY="150" mouseTransparent="true" prefHeight="100" prefWidth="100" styleClass="eye-reflection" />
       <Button fx:id="btnExit" layoutX="940.0" layoutY="13.0" mnemonicParsing="false" onAction="#onExit" styleClass="flashback-button" text="Exit" />
-      <Label fx:id="lblTimer" layoutX="38.0" layoutY="26.0" prefHeight="23.0" prefWidth="86.0" styleClass="flashback-timer" text="Label" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      <Label fx:id="lblTimer" layoutX="38.0" layoutY="26.0" prefHeight="23.0" prefWidth="86.0" styleClass="flashback-timer" text="Label" textAlignment="CENTER" />
    </children>
 </Pane>

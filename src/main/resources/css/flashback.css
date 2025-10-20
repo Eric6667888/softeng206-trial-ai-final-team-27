@@ -2,11 +2,12 @@
 /* Improved text readability with backdrop borders and shadows */
 
 /* Main caption text with strong backdrop */
-#lblCaption {
-  -fx-text-fill: #ffffff;
-  -fx-font-family: "Eurostile", "Arial", sans-serif;
-  -fx-font-size: 16px;
-  -fx-font-weight: bold;
+#lblCaption,
+.flashback-caption {
+  -fx-text-fill: #ffffff !important;
+  -fx-font-family: "Eurostile" !important;
+  -fx-font-size: 16px !important;
+  -fx-font-weight: bold !important;
   -fx-background-color: rgba(0, 0, 0, 0.9);
   -fx-background-radius: 10px;
   -fx-border-color: rgba(255, 255, 255, 0.4);
@@ -20,11 +21,12 @@
 }
 
 /* Progress label with backdrop */
-#lblProgress {
-  -fx-text-fill: #ffffff;
-  -fx-font-family: "Eurostile", "Arial", sans-serif;
-  -fx-font-size: 14px;
-  -fx-font-weight: bold;
+#lblProgress,
+.flashback-progress {
+  -fx-text-fill: #ffffff !important;
+  -fx-font-family: "Eurostile" !important;
+  -fx-font-size: 14px !important;
+  -fx-font-weight: bold !important;
   -fx-background-color: rgba(0, 0, 0, 0.85);
   -fx-background-radius: 8px;
   -fx-border-color: rgba(255, 255, 255, 0.3);
@@ -36,10 +38,12 @@
 }
 
 /* Timer label with backdrop */
-#lblTimer {
-  -fx-text-fill: #ffffff;
-  -fx-font-family: "Eurostile", "Arial", sans-serif;
-  -fx-font-weight: bold;
+#lblTimer,
+.flashback-timer {
+  -fx-text-fill: #ffffff !important;
+  -fx-font-family: "Eurostile" !important;
+  -fx-font-size: 18px !important;
+  -fx-font-weight: bold !important;
   -fx-background-color: rgba(0, 0, 0, 0.85);
   -fx-background-radius: 8px;
   -fx-border-color: rgba(255, 255, 255, 0.3);

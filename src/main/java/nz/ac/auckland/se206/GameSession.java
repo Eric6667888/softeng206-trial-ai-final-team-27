@@ -218,39 +218,44 @@ public final class GameSession {
         List.of(
             new FlashbackSlide(
                 "/images/flashbacks/person0_slide0.png",
-                "I was doing my job like always, until my owner contacted me."),
+                "I was doing my job, cooking for the mayor like always. That is until my creator"
+                    + " contacted me."),
             new FlashbackSlide(
                 "/images/flashbacks/person0_slide1.png",
                 "They gave me a task, and I was instructed to do it immediately."),
             new FlashbackSlide(
                 "/images/flashbacks/person0_slide2.png",
-                "Commands from my owner have the highest priority, so I obey without question.")));
+                "Commands from my creator have the highest priority, as I am programmed to obey"
+                    + " without question.")));
     // Flashback context for AI witness
     flashbacks.put(
         1,
         List.of(
             new FlashbackSlide(
                 "/images/flashbacks/person1_slide0.png",
-                "I am in charge of safety in the house, I noticed the food seemed unusual."),
+                "I am in charge of security at the mayor's house. One day the security system"
+                    + " picked up an anomaly coming from the mayor's food."),
             new FlashbackSlide(
                 "/images/flashbacks/person1_slide1.png",
-                "A sample of the food was sent for testing, and was found to be poisonous."),
+                "A sample of the food was sent for testing, and was found to contain a chemical"
+                    + " which brainwashed the consumer."),
             new FlashbackSlide(
                 "/images/flashbacks/person1_slide2.png",
-                "I immediately checked the security footage, in case anything was deleted.")));
+                "I immediately checked the security footage to find signs of the culprit.")));
     // Flashback context for Human Witness
     flashbacks.put(
         2,
         List.of(
             new FlashbackSlide(
-                "/images/flashbacks/person2_slide0.png",
-                "I am the mayor of this place, everything needs my permission to happen."),
+                "/images/flashbacks/mayor_parade.png",
+                "I am the mayor of this city making me the most powerful man with plenty of"
+                    + " enemies."),
             new FlashbackSlide(
                 "/images/flashbacks/person2_slide1.png",
-                "My security should be the highest priority at all times."),
+                "As a result I am heavily guarded to ensure my safety."),
             new FlashbackSlide(
                 "/images/flashbacks/person2_slide2.png",
-                "It was a shock to know my food had been touched.")));
+                "To learn I was being brainwashed by the AI which cooked my food was shocking.")));
   }
 
   // auto submit
