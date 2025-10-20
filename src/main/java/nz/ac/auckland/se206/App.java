@@ -44,6 +44,8 @@ public class App extends Application {
     // Add appropriate stylesheet based on the FXML file
     if ("landing".equals(fxml)) {
       scene.getStylesheets().add(App.class.getResource("/css/landing.css").toExternalForm());
+    } else if ("Flashback".equals(fxml)) {
+      scene.getStylesheets().add(App.class.getResource("/css/flashback.css").toExternalForm());
     }
     // Add other stylesheets as needed for different scenes
   }
@@ -120,13 +122,21 @@ public class App extends Application {
   public void start(final Stage stage) throws IOException {
     primaryStage = stage;
 
-    // Preload the custom font
+    // Preload the custom fonts
     Font customFont =
         Font.loadFont(getClass().getResourceAsStream("/fonts/NeonVampire-AnRp.ttf"), 12);
     if (customFont == null) {
       System.out.println("Warning: Could not load NeonVampire font");
     } else {
       System.out.println("Successfully loaded font: " + customFont.getFamily());
+    }
+
+    // Preload Eurostile font for consistent use across all scenes
+    Font eurostileFont = Font.loadFont(getClass().getResourceAsStream("/fonts/eurostile.TTF"), 18);
+    if (eurostileFont == null) {
+      System.out.println("Warning: Could not load Eurostile font");
+    } else {
+      System.out.println("Successfully loaded font: " + eurostileFont.getFamily());
     }
 
     Parent root =

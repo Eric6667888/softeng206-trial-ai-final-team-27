@@ -92,7 +92,17 @@ public class ChatController {
             (observable, oldScene, newScene) -> {
               if (newScene != null) {
                 // Load Eurostile font
-                Font.loadFont(getClass().getResourceAsStream("/fonts/eurostile.TTF"), 14);
+                try {
+                  Font eurostileFont =
+                      Font.loadFont(getClass().getResourceAsStream("/fonts/eurostile.TTF"), 14);
+                  if (eurostileFont != null) {
+                    System.out.println("Eurostile font loaded successfully for chat");
+                  } else {
+                    System.out.println("Failed to load Eurostile font for chat");
+                  }
+                } catch (Exception e) {
+                  System.out.println("Error loading Eurostile font for chat: " + e.getMessage());
+                }
 
                 // Load cyberpunk chat CSS
                 newScene

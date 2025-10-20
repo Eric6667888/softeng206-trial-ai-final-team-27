@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.FlashbackSlide;
 import nz.ac.auckland.se206.GameSession;
@@ -44,6 +45,14 @@ public final class FlashbackController {
 
   @FXML
   public void initialize() {
+    // Load Eurostile font for flashback text
+    try {
+      Font.loadFont(getClass().getResourceAsStream("/fonts/eurostile.TTF"), 14);
+      System.out.println("Eurostile font loaded successfully for flashback");
+    } catch (Exception e) {
+      System.err.println("Failed to load Eurostile font for flashback: " + e.getMessage());
+    }
+
     GameSession session = GameStateContext.getSession();
     // Set timer label to update of Flashback
     lblTimer.textProperty().unbind();
