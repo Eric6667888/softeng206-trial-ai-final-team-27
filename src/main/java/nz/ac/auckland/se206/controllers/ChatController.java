@@ -34,6 +34,13 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
  */
 public class ChatController {
 
+  // Helper method to format seconds into MM:SS
+  private static String format(int totalSeconds) {
+    int minutes = totalSeconds / 60;
+    int seconds = totalSeconds % 60;
+    return String.format("%02d:%02d", minutes, seconds);
+  }
+
   @FXML private ScrollPane chatScrollPane;
   @FXML private VBox chatContainer;
   @FXML private TextField txtInput;
@@ -116,12 +123,6 @@ public class ChatController {
                     });
               }
             });
-  }
-
-  private static String format(int totalSeconds) {
-    int minutes = totalSeconds / 60;
-    int seconds = totalSeconds % 60;
-    return String.format("%02d:%02d", minutes, seconds);
   }
 
   @FXML private Label fbLabel;
@@ -249,6 +250,7 @@ public class ChatController {
    * @return HBox containing the styled message bubble
    */
   private HBox createChatBubble(String text, boolean isUser) {
+    // Create label for message text
     Label label = new Label(text);
     label.setWrapText(true);
     label.setMinWidth(150);
@@ -266,6 +268,7 @@ public class ChatController {
       } else {
         styleClass = "user-message-bubble";
       }
+      // User message styling
     } else {
       if ("AI defendant".equals(profession)) {
         styleClass = "ai-message-bubble-human";
@@ -276,6 +279,7 @@ public class ChatController {
       }
     }
 
+    // Apply style class to label
     label.getStyleClass().add(styleClass);
 
     HBox messageContainer = new HBox(label);

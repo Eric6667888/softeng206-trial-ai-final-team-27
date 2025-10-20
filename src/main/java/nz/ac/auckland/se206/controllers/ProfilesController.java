@@ -9,15 +9,17 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AIProfilesController {
+// Controller class for the AI Profiles view
+public class ProfilesController {
 
-  @FXML Rectangle rectUnknown;
+  @FXML private Rectangle rectUnknown;
 
   @FXML
   private void initialize() {
     // Initialization is not required for this controller as of now
   }
 
+  // Method to handle click event on the unknown profile rectangle
   @FXML
   private void onUnknownClicked() {
     Stage imageStage = new Stage();
@@ -29,6 +31,7 @@ public class AIProfilesController {
     imageView.setFitHeight(300);
     imageView.setPreserveRatio(true);
 
+    // Create a layout to hold the image
     VBox layout = new VBox();
     layout.getChildren().add(imageView);
 
