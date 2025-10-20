@@ -212,6 +212,32 @@
   -fx-effect: innershadow(gaussian, #cc5500, 5, 0.5, 0, 0);
 }
 
+/* Evidence button - Generic (Human Chat) */
+.evidence-button {
+  -fx-background-color: linear-gradient(to bottom, #780606, #600505);
+  -fx-text-fill: #ffffff;
+  -fx-border-color: #780606;
+  -fx-border-width: 1px;
+  -fx-background-radius: 3px;
+  -fx-border-radius: 3px;
+  -fx-font-weight: 900;
+  -fx-font-family: "Eurostile", "Arial", sans-serif;
+  -fx-font-size: 13px;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, #780606, 5, 0.6, 0, 0);
+}
+
+.evidence-button:hover {
+  -fx-background-color: linear-gradient(to bottom, #990808, #780606);
+  -fx-border-color: #990808;
+  -fx-effect: dropshadow(gaussian, #990808, 8, 0.8, 0, 0);
+}
+
+.evidence-button:pressed {
+  -fx-background-color: linear-gradient(to bottom, #600505, #400404);
+  -fx-effect: innershadow(gaussian, #780606, 5, 0.5, 0, 0);
+}
+
 /* Back button cyberpunk style - Generic */
 .cyber-back-button {
   -fx-background-color: #ffffff;
@@ -252,25 +278,22 @@
   -fx-text-fill: #ffffff;
 }
 
-/* View Evidence button - AI Defendant */
-.view-evidence-button-human {
-  -fx-background-color: linear-gradient(to bottom, #cc5500, #994400);
-  -fx-text-fill: white;
-  -fx-border-color: #cc5500;
-  -fx-border-width: 1px;
-  -fx-background-radius: 3px;
-  -fx-border-radius: 3px;
-  -fx-font-weight: 900;
-  -fx-font-family: "Eurostile", "Arial", sans-serif;
-  -fx-font-size: 16px;
+/* Folder Icon button - AI Defendant */
+.folder-icon-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: #D2B48C;
+  -fx-border-color: transparent;
+  -fx-border-width: 0px;
+  -fx-background-radius: 5px;
+  -fx-border-radius: 5px;
   -fx-cursor: hand;
-  -fx-effect: dropshadow(gaussian, rgba(255, 153, 28, 0.5), 3, 0.4, 0, 0);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 2, 0.3, 0, 0);
 }
 
-.view-evidence-button-human:hover {
-  -fx-background-color: linear-gradient(to bottom, #ee7700, #cc5500);
-  -fx-border-color: #ee7700;
-  -fx-effect: dropshadow(gaussian, #ee7700, 8, 0.8, 0, 0);
+.folder-icon-button:hover {
+  -fx-background-color: rgba(255, 255, 255, 0.1);
+  -fx-border-color: transparent;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0.5, 0, 0);
 }
 
 /* =============================================== */
@@ -394,23 +417,23 @@
 
 /* View Evidence Button - AI */
 .view-evidence-button-ai {
-  -fx-background-color: linear-gradient(to bottom, #037c6e, #025a50);
+  -fx-background-color: linear-gradient(to bottom, #8B0000, #660000);
   -fx-text-fill: #ffffff;
-  -fx-border-color: #037c6e;
+  -fx-border-color: #8B0000;
   -fx-border-width: 1px;
   -fx-background-radius: 3px;
   -fx-border-radius: 3px;
   -fx-font-weight: 900;
   -fx-font-family: "Eurostile", "Arial", sans-serif;
-  -fx-font-size: 16px;
+  -fx-font-size: 13px;
   -fx-cursor: hand;
-  -fx-effect: dropshadow(gaussian, #037c6e, 5, 0.6, 0, 0);
+  -fx-effect: dropshadow(gaussian, #8B0000, 5, 0.6, 0, 0);
 }
 
 .view-evidence-button-ai:hover {
-  -fx-background-color: linear-gradient(to bottom, #04a690, #037c6e);
-  -fx-border-color: #04a690;
-  -fx-effect: dropshadow(gaussian, #04a690, 8, 0.8, 0, 0);
+  -fx-background-color: linear-gradient(to bottom, #B22222, #8B0000);
+  -fx-border-color: #B22222;
+  -fx-effect: dropshadow(gaussian, #B22222, 8, 0.8, 0, 0);
 }
 
 /* Feedback Label - AI */
