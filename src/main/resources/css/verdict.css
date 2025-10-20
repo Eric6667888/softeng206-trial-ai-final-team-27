@@ -5,18 +5,23 @@
 }
 
 .text-area {
+  -fx-background-color: transparent;
+  -fx-control-inner-background: transparent;
   -fx-border-color: #ffd60a;
   -fx-border-radius: 8;
-  -fx-background-color: transparent;
   -fx-text-fill: white;
   -fx-font-size: 16px;
-  -fx-padding: 10;
 }
 
+.text-area .scroll-pane,
+.text-area .viewport,
 .text-area .content {
-  -fx-background-color: transparent;
+  -fx-background-color: transparent !important;
 }
 
+.text-area .text {
+  -fx-fill: white;
+}
 
 .text-area .prompt-text {
   -fx-fill: rgba(255, 255, 255, 0.6);
