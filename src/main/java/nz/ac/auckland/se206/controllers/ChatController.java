@@ -10,18 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -478,86 +473,56 @@ public class ChatController {
     Button sourceButton = (Button) event.getSource();
     String buttonId = sourceButton.getId();
 
-    // temporary if else for testing new interactables
-    if (buttonId.equals("btnViewEvidence2")) {
-      PopUpManager.showPopup("SecurityCamera", "Security Footage");
-    } else if (buttonId.equals("btnViewEvidence1")) {
-      PopUpManager.showPopup("BrainWashBottle", "Brain Wash Bottle");
-    } else {
-      try {
+    try {
 
-        Stage imageStage = new Stage();
-        imageStage.setTitle("Evidence");
-        imageStage.initModality(Modality.APPLICATION_MODAL);
-        Image image = null;
-
-        switch (buttonId) {
-          case "btnViewEvidence1": // rectPerson1, AI defendant, chat.fxml
-            image = new Image(getClass().getResourceAsStream("/images/evidence1.png"));
-            // If first time viewing evidence
-            if (firstViewEvidPerson1) {
-              appendChatMessage(
-                  new ChatMessage("assistant", "This is the substance provided by my owner."));
-              firstViewEvidPerson1 = false;
-            } else {
-              // Second or more times viewing evidence
-              appendChatMessage(
-                  new ChatMessage("assistant", "Sir, do you have questions about the substance?"));
-            }
-            break;
-          case "btnViewEvidence2": // rectPerson2, AI witness, AIWitnessChat.fxml
-            image = new Image(getClass().getResourceAsStream("/images/evidence2.png"));
-            if (firstViewEvidPerson2) {
-              appendChatMessage(
-                  new ChatMessage(
-                      "assistant",
-                      "This is the security footage I retrieved, and it clearly shows who"
-                          + " tampered with the food."));
-              firstViewEvidPerson2 = false;
-            } else {
-              appendChatMessage(
-                  new ChatMessage(
-                      "assistant", "Sir, do you have any questions relevant to the footage?"));
-            }
-            break;
-          case "btnViewEvidence3": // rectPerson3, Human witness, HumanChat.fxml
-            image = new Image(getClass().getResourceAsStream("/images/evidence3.png"));
-            if (firstViewEvidPerson3) {
-              appendChatMessage(
-                  new ChatMessage(
-                      "assistant",
-                      "I can't imagine who would do such a thing, what do they want from"
-                          + " me?"));
-              firstViewEvidPerson3 = false;
-            } else {
-              appendChatMessage(
-                  new ChatMessage("assistant", "Why is my AI meeting someone I don't recognize?"));
-            }
-            break;
-          default:
-            break;
-        }
-
-        if (image == null) {
-          System.err.println("No image found for button ID: " + buttonId);
-          return;
-        }
-
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(400);
-        imageView.setFitHeight(300);
-        imageView.setPreserveRatio(true);
-
-        VBox layout = new VBox();
-        layout.getChildren().add(imageView);
-
-        Scene scene = new Scene(layout);
-        imageStage.setScene(scene);
-        imageStage.show();
-
-      } catch (Exception e) {
-        System.err.println("Error showing image: " + e.getMessage());
+      switch (buttonId) {
+        case "btnViewEvidence1": // rectPerson1, AI defendant, chat.fxml
+          PopUpManager.showPopup("BrainWashBottle", "Brain Wash Bottle");
+          // If first time viewing evidence
+          if (firstViewEvidPerson1) {
+            appendChatMessage(
+                new ChatMessage("assistant", "This is the substance provided by my owner."));
+            firstViewEvidPerson1 = false;
+          } else {
+            // Second or more times viewing evidence
+            appendChatMessage(
+                new ChatMessage("assistant", "Sir, do you have questions about the substance?"));
+          }
+          break;
+        case "btnViewEvidence2": // rectPerson2, AI witness, AIWitnessChat.fxml
+          PopUpManager.showPopup("SecurityCamera", "Security Footage");
+          if (firstViewEvidPerson2) {
+            appendChatMessage(
+                new ChatMessage(
+                    "assistant",
+                    "This is the security footage I retrieved, and it clearly shows who"
+                        + " tampered with the food."));
+            firstViewEvidPerson2 = false;
+          } else {
+            appendChatMessage(
+                new ChatMessage(
+                    "assistant", "Sir, do you have any questions relevant to the footage?"));
+          }
+          break;
+        case "btnViewEvidence3": // rectPerson3, Human witness, HumanChat.fxml
+          PopUpManager.showPopup("AIProfiles", "AI Profiles");
+          if (firstViewEvidPerson3) {
+            appendChatMessage(
+                new ChatMessage(
+                    "assistant",
+                    "I can't imagine who would do such a thing, what do they want from" + " me?"));
+            firstViewEvidPerson3 = false;
+          } else {
+            appendChatMessage(
+                new ChatMessage("assistant", "Why is my AI meeting someone I don't recognize?"));
+          }
+          break;
+        default:
+          break;
       }
+
+    } catch (Exception e) {
+      System.err.println("Error showing image: " + e.getMessage());
     }
   }
 }
