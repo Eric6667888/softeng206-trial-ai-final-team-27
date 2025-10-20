@@ -558,6 +558,9 @@ public class ChatController {
       } catch (Exception e) {
         System.err.println("Error showing image: " + e.getMessage());
       }
+
+    } catch (Exception e) {
+      System.err.println("Error showing image: " + e.getMessage());
     }
   }
 }
