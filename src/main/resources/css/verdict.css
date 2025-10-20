@@ -73,3 +73,9 @@
 .verdict-btn:hover {
   -fx-background-color: #ffc300;
 }
+
+.verdict-label {
+  -fx-font-size: 32px;
+  -fx-text-fill: #ff5c5c;
+  -fx-font-weight: bold;
+}

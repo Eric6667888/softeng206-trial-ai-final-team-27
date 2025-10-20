@@ -14,7 +14,7 @@
             <Font size="60.0" />
          </font>
       </Label>
-      <Label fx:id="lblTimer" layoutX="430.0" layoutY="475.0" prefHeight="86.0" prefWidth="272.0" text="Label" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="lblTimer" layoutX="418.0" layoutY="475.0" prefHeight="86.0" prefWidth="272.0" text="Label" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="70.0" />
          </font>
@@ -25,7 +25,7 @@
          </font>
       </Label>
       <TextArea fx:id="textField" layoutX="230.0" layoutY="277.0" prefHeight="128.0" prefWidth="558.0" styleClass="text-area" wrapText="true" />
-      <Button layoutX="481.0" layoutY="422.0" mnemonicParsing="false" onAction="#onSubmit" styleClass="button" text="Submit" />
+      <Button layoutX="465.0" layoutY="422.0" mnemonicParsing="false" onAction="#onSubmit" styleClass="button" text="Submit" />
       <ChoiceBox fx:id="choiceBox" layoutX="312.0" layoutY="167.0" prefHeight="40.0" prefWidth="377.0" />
    </children>
 </Pane>
