@@ -30,6 +30,7 @@ public class BrainWashBottleController {
 
   @FXML
   private void handleUnscrewCap() {
+    // Change to bird's eye view image of unscrewing cap
     imgBrainWashBottle.setImage(new Image("/images/BirdsEyeView.png"));
     imgUnscrewCap.setDisable(true);
     imgTurnBottle.setDisable(true);
@@ -43,6 +44,7 @@ public class BrainWashBottleController {
 
   @FXML
   private void handleTurnBottle() {
+    // Change to side view image
     imgBrainWashBottle.setImage(new Image("/images/SideView.png"));
     imgUnscrewCap.setDisable(true);
     imgTurnBottle.setDisable(true);
@@ -56,6 +58,7 @@ public class BrainWashBottleController {
 
   @FXML
   private void handleFlipBottle() {
+    // Change to bottom view image
     imgBrainWashBottle.setImage(new Image("/images/BottomView.png"));
     imgUnscrewCap.setDisable(true);
     imgTurnBottle.setDisable(true);
