@@ -3,10 +3,13 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
@@ -34,12 +37,19 @@ public class DecisionController implements Initializable {
     // Set the result label based on user's decision
     String userChoice = GuessController.getUserDecision();
     if (result != null) {
+      FadeTransition fade = new FadeTransition(Duration.seconds(1), result);
+      fade.setFromValue(0);
+      fade.setToValue(1);
+      fade.play();
       if (GuessController.isNoDecision()) {
         result.setText("You haven't made a decision");
+        result.setTextFill(Color.SALMON);
       } else if ("Not Guilty".equals(userChoice)) {
         result.setText("You're verdict is INCORRECT");
+        result.setTextFill(Color.SALMON);
       } else {
         result.setText("You're verdict is CORRECT"); // "Guilty".equals(userChoice)
+        result.setTextFill(Color.LIGHTGREEN);
       }
     }
 
