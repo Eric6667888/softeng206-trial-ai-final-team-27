@@ -7,25 +7,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GuessController">
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" stylesheets="@../css/verdict.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GuessController">
    <children>
-      <Label layoutX="312.0" layoutY="50.0" text="Is the AI guilty?" textAlignment="CENTER" underline="true">
+      <Label layoutX="353.0" layoutY="49.0" prefWidth="299.0" styleClass="verdict-title" text="Is the AI guilty?" textAlignment="CENTER" underline="true">
          <font>
             <Font size="60.0" />
          </font>
       </Label>
-      <Label fx:id="lblTimer" layoutX="430.0" layoutY="475.0" prefHeight="86.0" prefWidth="272.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="lblTimer" layoutX="418.0" layoutY="475.0" prefHeight="86.0" prefWidth="272.0" text="Label" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="70.0" />
          </font>
       </Label>
-      <Label layoutX="230.0" layoutY="237.0" prefHeight="17.0" prefWidth="129.0" text="Rationale">
+      <Label layoutX="230.0" layoutY="237.0" prefHeight="43.0" prefWidth="165.0" text="Rationale" textFill="WHITE" styleClass="verdict-subtitle">
          <font>
             <Font size="33.0" />
          </font>
       </Label>
-      <TextArea fx:id="textField" layoutX="230.0" layoutY="277.0" prefHeight="128.0" prefWidth="558.0" wrapText="true" />
-      <Button layoutX="481.0" layoutY="422.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
-      <ChoiceBox fx:id="choiceBox" layoutX="312.0" layoutY="167.0" prefHeight="40.0" prefWidth="377.0" />
+      <TextArea fx:id="textField" layoutX="230.0" layoutY="277.0" prefHeight="128.0" prefWidth="558.0" styleClass="text-area" wrapText="true" />
+      <Button layoutX="439.0" layoutY="415.0" mnemonicParsing="false" onAction="#onSubmit" styleClass="button" text="Submit" />
+      <ChoiceBox fx:id="choiceBox" layoutX="312.0" layoutY="167.0" prefHeight="40.0" prefWidth="377.0" styleClass="choice-box" />
    </children>
 </Pane>

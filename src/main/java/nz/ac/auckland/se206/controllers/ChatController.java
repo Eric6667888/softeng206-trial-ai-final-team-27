@@ -8,10 +8,20 @@ import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -29,7 +39,8 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
  */
 public class ChatController {
 
-  @FXML private TextArea txtaChat;
+  @FXML private ScrollPane chatScrollPane;
+  @FXML private VBox chatContainer;
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
 
@@ -54,11 +65,50 @@ public class ChatController {
 
     session.getRoundTimer().start();
 
+    // Set up scroll pane and chat container properties
+    if (chatScrollPane != null && chatContainer != null) {
+      // Configure ScrollPane
+      chatScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+      chatScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+      chatScrollPane.setFitToWidth(true);
+
+      // Configure VBox
+      chatContainer.setFillWidth(true);
+      chatContainer.setMaxWidth(Double.MAX_VALUE);
+      chatContainer.setPrefWidth(Double.MAX_VALUE);
+
+      // Add listener to auto-scroll when content height changes
+      chatContainer
+          .heightProperty()
+          .addListener(
+              (observable, oldValue, newValue) -> {
+                Platform.runLater(() -> chatScrollPane.setVvalue(1.0));
+              });
+    }
+
     txtInput
         .sceneProperty()
         .addListener(
             (observable, oldScene, newScene) -> {
               if (newScene != null) {
+                // Load Eurostile font
+                try {
+                  Font eurostileFont =
+                      Font.loadFont(getClass().getResourceAsStream("/fonts/eurostile.TTF"), 14);
+                  if (eurostileFont != null) {
+                    System.out.println("Eurostile font loaded successfully for chat");
+                  } else {
+                    System.out.println("Failed to load Eurostile font for chat");
+                  }
+                } catch (Exception e) {
+                  System.out.println("Error loading Eurostile font for chat: " + e.getMessage());
+                }
+
+                // Load cyberpunk chat CSS
+                newScene
+                    .getStylesheets()
+                    .add(getClass().getResource("/css/chat.css").toExternalForm());
+
                 newScene.setOnKeyPressed(
                     e -> {
                       if (e.getCode().toString().equals("ENTER")) {
@@ -100,6 +150,27 @@ public class ChatController {
     return PromptEngineering.getPrompt("chat.txt", map);
   }
 
+  /** Applies the appropriate theme styling based on the current profession. */
+  private void applyTheme() {
+    if (chatScrollPane == null) {
+      return;
+    }
+
+    // Clear existing style classes
+    chatScrollPane
+        .getStyleClass()
+        .removeAll("chat-scroll-pane", "chat-scroll-pane-defendant", "chat-scroll-pane-witness");
+
+    // Apply theme-specific style class
+    if ("AI defendant".equals(profession)) {
+      chatScrollPane.getStyleClass().add("chat-scroll-pane-defendant");
+    } else if ("AI witness".equals(profession)) {
+      chatScrollPane.getStyleClass().add("chat-scroll-pane-witness");
+    } else {
+      chatScrollPane.getStyleClass().add("chat-scroll-pane");
+    }
+  }
+
   /**
    * Sets the profession for the chat context and initializes the ChatCompletionRequest.
    *
@@ -108,6 +179,9 @@ public class ChatController {
   public void setProfession(String profession) {
     this.profession = profession;
 
+    // Apply theme-specific styling to scroll pane
+    applyTheme();
+
     try {
       ConversationManager manager = ConversationManager.getInstance();
 
@@ -115,7 +189,7 @@ public class ChatController {
       chatCompletionRequest = manager.getChatRequest(profession);
 
       // Restore chat history to UI
-      txtaChat.setText(manager.getChatHistory(profession));
+      loadChatHistory(manager.getChatHistory(profession));
 
       // Send introduction only if first time
       if (!manager.hasIntroduced(profession)) {
@@ -129,16 +203,140 @@ public class ChatController {
   }
 
   /**
-   * Appends a chat message to the chat text area.
+   * Loads chat history from a string and displays it as bubbles.
+   *
+   * @param chatHistory the chat history string
+   */
+  private void loadChatHistory(String chatHistory) {
+    if (chatHistory == null || chatHistory.trim().isEmpty()) {
+      return;
+    }
+
+    // Clear existing chat bubbles
+    chatContainer.getChildren().clear();
+
+    // Set up VBox properties to prevent horizontal scrolling
+    chatContainer.setFillWidth(true);
+    chatContainer.setMaxWidth(Double.MAX_VALUE);
+    chatContainer.setPrefWidth(Double.MAX_VALUE);
+
+    // Parse the chat history and create bubbles
+    String[] messages = chatHistory.split("\n\n");
+    for (String message : messages) {
+      if (message.trim().isEmpty()) {
+        continue;
+      }
+
+      // Parse role and content
+      if (message.startsWith("user: ")) {
+        String content = message.substring(6);
+        HBox userBubble = createChatBubble(content, true);
+        chatContainer.getChildren().add(userBubble);
+      } else if (message.startsWith("assistant: ")) {
+        String content = message.substring(11);
+        HBox aiBubble = createChatBubble(content, false);
+        chatContainer.getChildren().add(aiBubble);
+      }
+    }
+
+    // Auto-scroll to bottom
+    Platform.runLater(
+        () -> {
+          scrollToBottom();
+        });
+  }
+
+  /**
+   * Creates a chat bubble for displaying messages.
+   *
+   * @param text the message text
+   * @param isUser true if the message is from the user, false if from AI
+   * @return HBox containing the styled message bubble
+   */
+  private HBox createChatBubble(String text, boolean isUser) {
+    Label label = new Label(text);
+    label.setWrapText(true);
+    label.setMinWidth(150);
+    label.setPrefWidth(200);
+    label.setMaxWidth(280);
+    label.setPadding(new Insets(5));
+
+    // Determine styling based on profession and message type
+    String styleClass;
+    if (isUser) {
+      if ("AI defendant".equals(profession)) {
+        styleClass = "user-message-bubble-human";
+      } else if ("AI witness".equals(profession)) {
+        styleClass = "user-message-bubble-ai";
+      } else {
+        styleClass = "user-message-bubble";
+      }
+    } else {
+      if ("AI defendant".equals(profession)) {
+        styleClass = "ai-message-bubble-human";
+      } else if ("AI witness".equals(profession)) {
+        styleClass = "ai-message-bubble-ai";
+      } else {
+        styleClass = "ai-message-bubble";
+      }
+    }
+
+    label.getStyleClass().add(styleClass);
+
+    HBox messageContainer = new HBox(label);
+    messageContainer.setAlignment(isUser ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
+    messageContainer.setPadding(new Insets(5, 10, 5, 10));
+    messageContainer.setMaxWidth(Double.MAX_VALUE);
+    messageContainer.setPrefWidth(Double.MAX_VALUE);
+    messageContainer.setFillHeight(false);
+
+    return messageContainer;
+  }
+
+  /**
+   * Appends a chat message to the chat container.
    *
    * @param msg the chat message to append
    */
   private void appendChatMessage(ChatMessage msg) {
-    String messageText = msg.getRole() + ": " + msg.getContent() + "\n\n";
-    txtaChat.appendText(messageText);
+    boolean isUser = "user".equals(msg.getRole());
+    HBox messageBubble = createChatBubble(msg.getContent(), isUser);
+
+    Platform.runLater(
+        () -> {
+          chatContainer.getChildren().add(messageBubble);
+          // Force immediate scroll to bottom with multiple attempts
+          scrollToBottom();
+        });
 
     // Store in conversation manager
+    String messageText = msg.getRole() + ": " + msg.getContent() + "\n\n";
     ConversationManager.getInstance().appendToHistory(profession, messageText);
+  }
+
+  /** Scrolls the chat to the bottom with multiple attempts to ensure it works. */
+  private void scrollToBottom() {
+    // Immediate attempt
+    chatScrollPane.setVvalue(1.0);
+
+    // Force layout and try again
+    chatContainer.applyCss();
+    chatContainer.layout();
+    chatScrollPane.setVvalue(1.0);
+
+    // Final attempt with delay
+    Platform.runLater(
+        () -> {
+          chatScrollPane.applyCss();
+          chatScrollPane.layout();
+          chatScrollPane.setVvalue(1.0);
+
+          // One more attempt with slight delay
+          Platform.runLater(
+              () -> {
+                chatScrollPane.setVvalue(1.0);
+              });
+        });
   }
 
   /**
@@ -280,45 +478,85 @@ public class ChatController {
     Button sourceButton = (Button) event.getSource();
     String buttonId = sourceButton.getId();
 
-    try {
+    // temporary if else for testing new interactables
+    if (buttonId.equals("btnViewEvidence2")) {
+      PopUpManager.showPopup("SecurityCamera", "Security Footage");
+    } else if (buttonId.equals("btnViewEvidence1")) {
+      PopUpManager.showPopup("BrainWashBottle", "Brain Wash Bottle");
+    } else {
+      try {
 
-      switch (buttonId) {
-        case "btnViewEvidence1": // rectPerson1, AI defendant, chat.fxml
-          PopUpManager.showPopup("BrainWashBottle", "Brain Wash Bottle");
-          // If first time viewing evidence
-          if (firstViewEvidPerson1) {
-            txtaChat.appendText("assistant: This is the substance provided by my owner.\n\n");
-            firstViewEvidPerson1 = false;
-          } else {
-            // Second or more times viewing evidence
-            txtaChat.appendText("assistant: Sir, do you have questions?\n\n");
-          }
-          break;
-        case "btnViewEvidence2": // rectPerson2, AI witness, AIWitnessChat.fxml
-          PopUpManager.showPopup("SecurityCamera", "Security Footage");
-          if (firstViewEvidPerson2) {
-            txtaChat.appendText(
-                "assistant: This is the security footage I retrieved, and it clearly shows who"
-                    + " tampered with the food.\n\n");
-            firstViewEvidPerson2 = false;
-          } else {
-            txtaChat.appendText(
-                "assistant: Sir, do you have any questions relevant to the footage?\n\n");
-          }
-          break;
-        case "btnViewEvidence3": // rectPerson3, Human witness, HumanChat.fxml
-          PopUpManager.showPopup("AIProfiles", "Evidence Image");
-          if (firstViewEvidPerson3) {
-            txtaChat.appendText("assistant: Here are all the AI profiles I have on file:\n\n");
-            firstViewEvidPerson3 = false;
-          } else {
-            txtaChat.appendText(
-                "assistant: I can't imagine who would do such a thing, what do they want from"
-                    + " me?\n\n");
-          }
-          break;
-        default:
-          break;
+        Stage imageStage = new Stage();
+        imageStage.setTitle("Evidence");
+        imageStage.initModality(Modality.APPLICATION_MODAL);
+        Image image = null;
+
+        switch (buttonId) {
+          case "btnViewEvidence1": // rectPerson1, AI defendant, chat.fxml
+            image = new Image(getClass().getResourceAsStream("/images/evidence1.png"));
+            // If first time viewing evidence
+            if (firstViewEvidPerson1) {
+              appendChatMessage(
+                  new ChatMessage("assistant", "This is the substance provided by my owner."));
+              firstViewEvidPerson1 = false;
+            } else {
+              // Second or more times viewing evidence
+              appendChatMessage(
+                  new ChatMessage("assistant", "Sir, do you have questions about the substance?"));
+            }
+            break;
+          case "btnViewEvidence2": // rectPerson2, AI witness, AIWitnessChat.fxml
+            image = new Image(getClass().getResourceAsStream("/images/evidence2.png"));
+            if (firstViewEvidPerson2) {
+              appendChatMessage(
+                  new ChatMessage(
+                      "assistant",
+                      "This is the security footage I retrieved, and it clearly shows who"
+                          + " tampered with the food."));
+              firstViewEvidPerson2 = false;
+            } else {
+              appendChatMessage(
+                  new ChatMessage(
+                      "assistant", "Sir, do you have any questions relevant to the footage?"));
+            }
+            break;
+          case "btnViewEvidence3": // rectPerson3, Human witness, HumanChat.fxml
+            image = new Image(getClass().getResourceAsStream("/images/evidence3.png"));
+            if (firstViewEvidPerson3) {
+              appendChatMessage(
+                  new ChatMessage(
+                      "assistant",
+                      "I can't imagine who would do such a thing, what do they want from"
+                          + " me?"));
+              firstViewEvidPerson3 = false;
+            } else {
+              appendChatMessage(
+                  new ChatMessage("assistant", "Why is my AI meeting someone I don't recognize?"));
+            }
+            break;
+          default:
+            break;
+        }
+
+        if (image == null) {
+          System.err.println("No image found for button ID: " + buttonId);
+          return;
+        }
+
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(400);
+        imageView.setFitHeight(300);
+        imageView.setPreserveRatio(true);
+
+        VBox layout = new VBox();
+        layout.getChildren().add(imageView);
+
+        Scene scene = new Scene(layout);
+        imageStage.setScene(scene);
+        imageStage.show();
+
+      } catch (Exception e) {
+        System.err.println("Error showing image: " + e.getMessage());
       }
 
     } catch (Exception e) {

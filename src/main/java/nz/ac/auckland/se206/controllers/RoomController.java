@@ -1,13 +1,16 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameSession;
 import nz.ac.auckland.se206.GameStateContext;
@@ -36,6 +39,26 @@ public class RoomController {
    */
   @FXML
   public void initialize() {
+    // Load Eurostile font for timer
+    try {
+      Font eurostileFont =
+          Font.loadFont(getClass().getResourceAsStream("/fonts/eurostile.TTF"), 18);
+      if (eurostileFont != null) {
+        System.out.println("Eurostile font loaded successfully for room");
+      } else {
+        System.out.println("Failed to load Eurostile font for room");
+      }
+    } catch (Exception e) {
+      System.out.println("Error loading Eurostile font for room: " + e.getMessage());
+    }
+
+    Platform.runLater(
+        () -> {
+          Scene scene = rectPerson1.getScene();
+          if (scene != null) {
+            scene.getStylesheets().add(getClass().getResource("/css/room.css").toExternalForm());
+          }
+        });
     GameSession session = GameStateContext.getSession();
     updateVerdictState(session.haveAllThreeTalked()); // Enable verdict if all three have talked
     lblTimer.textProperty().unbind();

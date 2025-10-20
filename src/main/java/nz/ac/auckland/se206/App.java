@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.controllers.ChatController;
 
@@ -36,6 +37,17 @@ public class App extends Application {
    */
   public static void setRoot(String fxml) throws IOException {
     scene.setRoot(loadFxml(fxml));
+
+    // Clear existing stylesheets
+    scene.getStylesheets().clear();
+
+    // Add appropriate stylesheet based on the FXML file
+    if ("landing".equals(fxml)) {
+      scene.getStylesheets().add(App.class.getResource("/css/landing.css").toExternalForm());
+    } else if ("Flashback".equals(fxml)) {
+      scene.getStylesheets().add(App.class.getResource("/css/flashback.css").toExternalForm());
+    }
+    // Add other stylesheets as needed for different scenes
   }
 
   /**
@@ -109,9 +121,29 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
     primaryStage = stage;
+
+    // Preload the custom fonts
+    Font customFont =
+        Font.loadFont(getClass().getResourceAsStream("/fonts/NeonVampire-AnRp.ttf"), 12);
+    if (customFont == null) {
+      System.out.println("Warning: Could not load NeonVampire font");
+    } else {
+      System.out.println("Successfully loaded font: " + customFont.getFamily());
+    }
+
+    // Preload Eurostile font for consistent use across all scenes
+    Font eurostileFont = Font.loadFont(getClass().getResourceAsStream("/fonts/eurostile.TTF"), 18);
+    if (eurostileFont == null) {
+      System.out.println("Warning: Could not load Eurostile font");
+    } else {
+      System.out.println("Successfully loaded font: " + eurostileFont.getFamily());
+    }
+
     Parent root =
         loadFxml("landing"); // Takes user initially to landing page where they press play to begin
     scene = new Scene(root);
+    // Load the CSS stylesheet
+    scene.getStylesheets().add(getClass().getResource("/css/landing.css").toExternalForm());
     stage.setScene(scene);
     stage.show();
     root.requestFocus();

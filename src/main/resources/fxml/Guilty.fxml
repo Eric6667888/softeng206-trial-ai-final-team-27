@@ -5,19 +5,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DecisionController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" stylesheets="@../css/verdict.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DecisionController">
    <children>
-      <Button layoutX="436.0" layoutY="533.0" mnemonicParsing="false" onAction="#onReturnClicked" text="Return">
+      <Button layoutX="436.0" layoutY="533.0" mnemonicParsing="false" onAction="#onReturnClicked" styleClass="verdict-btn" text="Return">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Label fx:id="result" layoutX="176.0" layoutY="66.0" prefHeight="86.0" prefWidth="768.0" text="You're verdict is CORRECT" textAlignment="CENTER">
+      <Label fx:id="result" layoutX="176.0" layoutY="66.0" prefHeight="86.0" prefWidth="768.0" styleClass="verdict-result" text="You're verdict is CORRECT" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="60.0" />
          </font>
       </Label>
-      <Label fx:id="gptFeedback" alignment="TOP_LEFT" layoutX="270.0" layoutY="182.0" prefHeight="323.0" prefWidth="451.0" text="Label">
+      <Label fx:id="gptFeedback" alignment="TOP_LEFT" layoutX="270.0" layoutY="182.0" prefHeight="323.0" prefWidth="451.0" styleClass="verdict-feedback" text="Label">
          <font>
             <Font size="20.0" />
          </font>
