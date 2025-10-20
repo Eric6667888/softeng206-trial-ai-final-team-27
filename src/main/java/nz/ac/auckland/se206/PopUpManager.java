@@ -24,7 +24,18 @@ public class PopUpManager {
             new FXMLLoader(App.class.getResource("/fxml/" + fxmlName + ".fxml"));
         Parent root = fxmlLoader.load();
         final Stage newStage = new Stage();
-        newStage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+
+        // Load appropriate CSS based on the FXML name
+        if ("AIProfiles".equals(fxmlName)) {
+          scene.getStylesheets().add(App.class.getResource("/css/profiles.css").toExternalForm());
+        } else if ("SecurityCamera".equals(fxmlName)) {
+          scene.getStylesheets().add(App.class.getResource("/css/security.css").toExternalForm());
+        } else if ("BrainWashBottle".equals(fxmlName)) {
+          scene.getStylesheets().add(App.class.getResource("/css/evidence.css").toExternalForm());
+        }
+
+        newStage.setScene(scene);
         newStage.setTitle(title);
         newStage.initModality(Modality.APPLICATION_MODAL);
 

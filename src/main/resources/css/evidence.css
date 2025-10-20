@@ -1,0 +1,33 @@
+/* BrainWash Bottle Interactive Styling */
+
+/* Main container styling */
+.anchor-pane {
+  -fx-background-color: #1a1a1a;
+}
+
+/* Back button styling - Evidence theme */
+.back-button {
+  -fx-background-color: linear-gradient(to bottom, #4a4a4a, #2a2a2a);
+  -fx-text-fill: #ffffff;
+  -fx-border-color: #666666;
+  -fx-border-width: 1px;
+  -fx-border-radius: 6px;
+  -fx-background-radius: 6px;
+  -fx-font-weight: bold;
+  -fx-font-size: 12px;
+  -fx-padding: 8px 16px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 4, 0, 0, 2);
+}
+
+.back-button:hover {
+  -fx-background-color: linear-gradient(to bottom, #5a5a5a, #3a3a3a);
+  -fx-border-color: #888888;
+  -fx-text-fill: #f0f0f0;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 6, 0, 0, 3);
+}
+
+.back-button:pressed {
+  -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+  -fx-border-color: #444444;
+  -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.8), 3, 0, 0, 1);
+}

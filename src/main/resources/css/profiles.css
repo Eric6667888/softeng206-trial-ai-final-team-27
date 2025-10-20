@@ -1,0 +1,112 @@
+/* AI Profiles Accordion Styling - Folder Theme */
+
+/* Main accordion container */
+.accordion {
+  -fx-background-color: #8a3119;
+  -fx-border-color: #5c210f;
+  -fx-border-width: 2px;
+  -fx-border-radius: 8px;
+  -fx-background-radius: 8px;
+}
+
+/* Titled pane styling - folder tab appearance */
+.titled-pane {
+  -fx-background-color: linear-gradient(to bottom, #a64829, #8a3119);
+  -fx-border-color: #5c210f;
+  -fx-border-width: 1px;
+  -fx-border-radius: 6px 6px 0px 0px;
+  -fx-background-radius: 6px 6px 0px 0px;
+}
+
+.titled-pane:expanded {
+  -fx-background-color: linear-gradient(to bottom, #c25439, #8a3119);
+}
+
+/* Title area - the clickable header */
+.titled-pane>.title {
+  -fx-background-color: linear-gradient(to bottom, #a64829, #8a3119);
+  -fx-border-color: #6b2815;
+  -fx-border-width: 0px 0px 1px 0px;
+  -fx-background-radius: 6px 6px 0px 0px;
+  -fx-padding: 8px 15px;
+  -fx-text-fill: #ffffff;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 3, 0, 0, 1);
+}
+
+.titled-pane>.title:hover {
+  -fx-background-color: linear-gradient(to bottom, #c25439, #a64829);
+  -fx-cursor: hand;
+}
+
+.titled-pane:expanded>.title {
+  -fx-background-color: linear-gradient(to bottom, #c25439, #a64829);
+  -fx-border-color: #6b2815;
+}
+
+/* Arrow button styling */
+.titled-pane>.title>.arrow-button {
+  -fx-background-color: transparent;
+  -fx-padding: 0px;
+}
+
+.titled-pane>.title>.arrow-button>.arrow {
+  -fx-background-color: #ffffff;
+  -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+  -fx-scale-shape: false;
+  -fx-padding: 3px;
+}
+
+.titled-pane:expanded>.title>.arrow-button>.arrow {
+  -fx-rotate: 180;
+}
+
+/* Content area */
+.titled-pane>.content {
+  -fx-background-color: #f5f5f5;
+  -fx-border-color: #5c210f;
+  -fx-border-width: 0px 1px 1px 1px;
+  -fx-background-radius: 0px 0px 6px 6px;
+  -fx-border-radius: 0px 0px 6px 6px;
+  -fx-padding: 0px;
+}
+
+/* Tab pane inside accordion content */
+.tab-pane {
+  -fx-background-color: #f0e8e4;
+  -fx-border-color: #a64829;
+  -fx-border-width: 1px;
+  -fx-background-radius: 4px;
+  -fx-border-radius: 4px;
+}
+
+.tab-pane .tab-header-area {
+  -fx-background-color: linear-gradient(to bottom, #d4b8aa, #a64829);
+  -fx-border-color: #8a3119;
+  -fx-border-width: 0px 0px 1px 0px;
+}
+
+.tab-pane .tab {
+  -fx-background-color: linear-gradient(to bottom, #a64829, #8a3119);
+  -fx-border-color: #6b2815;
+  -fx-border-width: 1px 1px 0px 1px;
+  -fx-background-radius: 4px 4px 0px 0px;
+  -fx-border-radius: 4px 4px 0px 0px;
+  -fx-text-fill: #ffffff;
+  -fx-font-weight: bold;
+  -fx-padding: 6px 12px;
+}
+
+.tab-pane .tab:selected {
+  -fx-background-color: linear-gradient(to bottom, #d4b8aa, #c25439);
+  -fx-text-fill: #ffffff;
+}
+
+.tab-pane .tab:hover {
+  -fx-background-color: linear-gradient(to bottom, #c25439, #a64829);
+}
+
+.tab-pane .tab-content-area {
+  -fx-background-color: #f0e8e4;
+}
