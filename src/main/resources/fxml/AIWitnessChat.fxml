@@ -2,7 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,7 +18,11 @@
             <Image url="@../images/aiwit.png" />
          </image>
       </ImageView>
-    <TextArea fx:id="txtaChat" editable="false" layoutX="446.0" layoutY="135.0" prefHeight="302.0" prefWidth="448.0" styleClass="chat-display-ai" wrapText="true" />
+    <ScrollPane fx:id="chatScrollPane" layoutX="446.0" layoutY="135.0" prefHeight="302.0" prefWidth="448.0" styleClass="chat-scroll-pane">
+      <content>
+        <VBox fx:id="chatContainer" spacing="10.0" styleClass="chat-container-vbox" />
+      </content>
+    </ScrollPane>
     <TextField fx:id="txtInput" layoutX="446.0" layoutY="446.0" prefHeight="36.0" prefWidth="382.0" styleClass="chat-input-ai" />
     <Button fx:id="btnSend" layoutX="836.0" layoutY="446.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="36.0" prefWidth="58.0" styleClass="chat-send-button-ai" text="Send" />
     <Button layoutX="902.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="37.0" prefWidth="84.0" styleClass="cyber-back-button-ai" text="Go Back" />
@@ -25,6 +31,9 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Button fx:id="btnViewEvidence2" layoutX="711.0" layoutY="570.0" mnemonicParsing="false" onAction="#onViewEvidence" rotate="6.3" styleClass="view-evidence-button-ai" text="View Evidence" />
+      <Button fx:id="btnViewEvidence2" layoutX="706.0" layoutY="587.0" mnemonicParsing="false" onAction="#onViewEvidence" rotate="6.3" styleClass="view-evidence-button-ai" text="View Recording">
+         <font>
+            <Font size="11.0" />
+         </font></Button>
   </children>
 </AnchorPane>
