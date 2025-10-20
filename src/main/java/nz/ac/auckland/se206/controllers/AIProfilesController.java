@@ -19,7 +19,7 @@ public class AIProfilesController {
   }
 
   @FXML
-  private void handleUnknownProfile() {
+  private void onUnknownClicked() {
     Stage imageStage = new Stage();
     imageStage.setTitle("Evidence");
     imageStage.initModality(Modality.APPLICATION_MODAL);

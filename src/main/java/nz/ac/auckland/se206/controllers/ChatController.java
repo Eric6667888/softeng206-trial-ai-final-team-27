@@ -291,6 +291,9 @@ public class ChatController {
       PopUpManager.showPopup("SecurityCamera", "Security Footage");
     } else if (buttonId.equals("btnViewEvidence1")) {
       PopUpManager.showPopup("BrainWashBottle", "Brain Wash Bottle");
+    } else if (buttonId.equals("btnViewEvidence3")) {
+      PopUpManager.showPopup("AIProfiles", "Evidence Image");
+
     } else {
       try {
 

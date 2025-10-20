@@ -63,9 +63,7 @@
                                           <Image url="@../images/AIDefendantProfile.png" />
                                        </image>
                                     </ImageView>
-                                    <Rectangle fx:id="rectOppoCompany" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="40.0" layoutX="209.0" layoutY="235.0" onMouseClicked="#onOppoCompanyClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="249.0" />
                                     <Rectangle fx:id="rectUnknown" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="35.0" layoutX="257.0" layoutY="269.0" onMouseClicked="#onUnknownClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="149.0" />
-                                    <Rectangle fx:id="rectPriority" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="37.0" layoutX="222.0" layoutY="107.0" onMouseClicked="#onPriorityClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="332.0" />
                                  </children>
                               </AnchorPane>
                         </content>
