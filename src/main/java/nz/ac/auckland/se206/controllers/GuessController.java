@@ -32,14 +32,14 @@ public class GuessController implements Initializable {
   // Static field to store GPT feedback for the DecisionController
   private static String gptFeedbackResponse = "Analyzing your decision...";
 
+  private static boolean noDecision = false;
+
   // Reset static fields for new games
   public static void resetForNewGame() {
     gptFeedbackResponse = "Analyzing your decision...";
     userDecision = null;
     noDecision = false;
   }
-
-  private static boolean noDecision = false;
 
   // Getter method for the GPT feedback
   public static String getGptFeedback() {
@@ -232,6 +232,7 @@ public class GuessController implements Initializable {
     }
   }
 
+  // Handle user clicking "Yes" button
   @FXML
   private void onYesClicking() throws IOException {
     session.getRoundTimer().stop();
