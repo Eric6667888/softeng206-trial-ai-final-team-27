@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Accordion maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/24.0.1" fx:controller="nz.ac.auckland.se206.controllers.AIProfilesController">
+  <panes>
+    <TitledPane animated="false" text="AI Security">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TabPane layoutX="10.0" prefHeight="337.0" prefWidth="574.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Security AI 1">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="314.0" fitWidth="575.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/AIWitnessProfile.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Security AI ...">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="314.0" fitWidth="575.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/AISecurityProfile.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children></AnchorPane>
+      </content>
+    </TitledPane>
+    <TitledPane animated="false" text="Other AIs">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TabPane layoutX="15.0" prefHeight="332.0" prefWidth="571.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="AI Undefined">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="314.0" fitWidth="575.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/AIDefendantProfile.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Rectangle fx:id="rectOppoCompany" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="40.0" layoutX="209.0" layoutY="235.0" onMouseClicked="#onOppoCompanyClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="249.0" />
+                                    <Rectangle fx:id="rectUnknown" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="35.0" layoutX="257.0" layoutY="269.0" onMouseClicked="#onUnknownClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="149.0" />
+                                    <Rectangle fx:id="rectPriority" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="37.0" layoutX="222.0" layoutY="107.0" onMouseClicked="#onPriorityClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="332.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Other AIs ...">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="314.0" fitWidth="575.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/AIOthersProfile.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children></AnchorPane>
+      </content>
+    </TitledPane>
+  </panes>
+</Accordion>
